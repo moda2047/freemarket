@@ -19,9 +19,9 @@ function ReportMySearchList() {
     console.log("fetchData 함수가 실행됩니다.");
     console.log(typeof cookies.token);
     axios
-      .get(mailAuthAPI, null, headers)
+      .get(mailAuthAPI, headers)
       .then((response) => {
-        if (response.result) {
+        if (response.data.result) {
           setReports(response.data.found);
           console.log("성공적으로 됐");
         } else {
@@ -34,6 +34,7 @@ function ReportMySearchList() {
         console.error("Error data: ", error.response.data);
       });
   };
+
   useEffect(() => {
     fetchData();
   }, []);
