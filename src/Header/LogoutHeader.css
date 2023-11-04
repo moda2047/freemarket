@@ -1,0 +1,118 @@
+.logoutHeader {
+  margin: 0 20%;
+  min-width: 820px;
+}
+
+.logoutHeader a {
+  text-decoration-line: none;
+  font-size: 10px;
+  text-align: center;
+}
+
+.logoutHeader-top {
+  display: flex;
+  height: 30px;
+  background: rgb(255, 255, 255);
+  float: right;
+}
+
+.logoutHeader-top-container {
+  display: flex;
+  width: 100%;
+}
+
+.logoutHeader-top-button button {
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.logoutHeader-middle {
+  display: flex;
+  width: 100%;
+  padding: 25px 0;
+  border-top: 1px solid rgb(128, 128, 128);
+  border-bottom: 1px solid rgb(128, 128, 128);
+  justify-content: space-around;
+}
+
+.logoutHeader-middle-container {
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.logoutHeader-middle-left {
+  width: 135px;
+}
+
+.logoutHeader-middle-left-logo img{
+  width: 135px;
+  height: 65px;
+}
+
+.logoutHeader-middle-center {
+  width: 400px;
+  height: 30px;
+  display: flex;
+  border: 5px solid #2d51c5;
+}
+
+.logoutHeader-searchbox {
+  width: 100%;
+  display: flex;
+}
+
+.logoutHeader-middle-center input {
+  border: none;
+  padding-left: 2%;
+  flex-grow: 1;
+}
+
+.logoutHeader-middle-center input:focus {
+  outline: none;
+}
+
+.logoutHeader-middle-center button {
+  border: 0;
+  outline: transparent;
+  flex-grow: 0;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.logoutHeader-middle-center button > img {
+  width: 24px;
+  height: 24px;
+}
+
+.logoutHeader-middle-right {
+  display: flex;
+  width: 200px;
+  margin: 0 20px;
+}
+
+.logoutHeader-wishlist {
+  height: 65px;
+  flex-direction: column;
+}
+
+.logoutHeader-mypage {
+  flex-direction: column;
+}
+
+.logoutHeader-chatting {
+  height: 100%;
+}
+
+.logoutHeader-middle-right img {
+  width: 65px;
+  height: 70px;
+}
+
+.logoutHeader-bottom {
+  margin: 0;
+  height: 30%;
+  padding: 0 10%;
+}
+  

@@ -1,0 +1,45 @@
+.MyReportWriteContainer {
+  max-width: 600px;
+  min-height: 350px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff; /* 배경색을 변경하려면 여기에 원하는 색상을 설정하세요 */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin-top: 60px;
+}
+
+.MyReportWriteLabel {
+  display: block;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.MyReportWriteTextarea {
+  width: 90%;
+  height: 100px;
+  resize: none;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.MyReportWriteSubmit-Button {
+  margin-top: 10px;
+  float: right;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.MyReportWriteInput {
+  width: 70%; /* 원하는 폭으로 조절 */
+  height: 5px; /* 원하는 높이로 조절 */
+  padding: 5px;
+  font-size: 16px;
+}

@@ -1,0 +1,142 @@
+.AdminMListWrap {
+  margin-top: 20px;
+  height: 600px;
+}
+.AdminMListWrapDiv {
+  clear: both;
+  padding-bottom: 10px;
+  margin-top: 50px;
+}
+.AdminMListWrapDiv > h3 {
+  position: relative;
+  height: 25px;
+  margin-top: 20px;
+  padding-left: 12px;
+}
+.AdminMListWrapDiv > h3 > img {
+  vertical-align: middle;
+}
+hr {
+  margin: 0px;
+}
+.AdminMListMainWrap {
+  width: 100%;
+  min-height: 470px;
+  border: 1px solid #b1b1b1;
+  margin: 0 auto;
+  margin-top: 20px;
+  overflow: auto;
+}
+
+.AdminMListMainIntro {
+  width: 100%;
+  height: 100px;
+  border-bottom: 1px solid #b1b1b1;
+  text-align: center;
+  font-size: 17px;
+  line-height: 100px;
+  background-color: #f3f3f3;
+}
+.AdminMListMainIntroImgDiv {
+  position: absolute;
+  margin-left: 390px;
+}
+.AdminMListMainIntroImgDiv > img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+.AdminMListMainIntroSpan {
+  color: #0f297e;
+  font-weight: bold;
+  margin-left: 20px;
+}
+.AdminMemberListSearchButton {
+  margin: 0;
+  height: 1vh;
+}
+.AdminMemberListSearchInput[type="text"] {
+  padding: 1%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 2% 0;
+
+  box-sizing: border-box;
+  float: right;
+}
+
+.AdminMemberListSearchCheck {
+  border: none;
+  padding: 1% 2%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.6%;
+  box-sizing: border-box;
+  float: right;
+  width: 10%;
+  margin: 2% 0;
+}
+.AdminMListSearchTable {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 40px;
+  border-collapse: collapse;
+  font-size: 15px;
+  border-bottom: 2px solid #0f297e;
+}
+
+.AdminMListSearchTable > tr > th {
+  border-top: 2px solid #0f297e;
+  border-bottom: 2px solid #0f297e;
+  height: 40px;
+}
+.AdminMListSearchTable > tr > td {
+  text-align: center;
+  border: 1px solid #a7a7a7;
+  font-size: 13px;
+  height: 36px;
+}
+.AdminMListSearchTable > tr > td:first-child {
+  border-left: 0px;
+}
+.AdminMListSearchTable > tr > td:last-child {
+  border-right: 0px;
+}
+
+.AdminMemberListpagination {
+  display: flex;
+  justify-content: center;
+  margin: 2% 0;
+}
+
+.AdminMemberListpagination button {
+  background-color: #ebecf0;
+  color: white;
+  border: none;
+  padding: 0.5% 1%;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 2%;
+}
+
+.AdminMemberListbutton:hover {
+  background-color: #ebecf0;
+}
+
+.AdminRSListPagination {
+  margin-top: 20px;
+  text-align: center;
+}
+.AdminRSListPagination > span {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.AdminRSListPagination > button {
+  background-color: #ebecf0;
+  box-shadow: inset 0 0 8px #a9aaad;
+  border-radius: 5px;
+  font-size: 15px;
+  border: 0px;
+  font-weight: bold;
+  cursor: pointer;
+}

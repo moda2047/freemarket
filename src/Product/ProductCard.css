@@ -1,0 +1,71 @@
+/*********************************//*********************************//*********************************//*********************************/
+/* ProductCard.js */
+
+.productCard {
+    display: flex;
+    margin: 0 10px;
+    height: 100%;
+    flex-direction: column;
+  }
+  
+  .productCard-img {
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+  }
+  
+  .productCard-img img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border: 1px solid #000;
+  }
+  
+  .productCard-name, .productCard-price {
+    padding-left: 5px;
+    margin-bottom: 5px;
+    height: 30px;
+  }
+  
+  .productCard-name > h4 {
+    margin: 0;
+    line-height: 30px;
+  }
+  
+  .productCard-price > h5 {
+    margin: 0;
+    line-height: 30px;
+  }
+
+  .productCard-button {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .productCard-button > a {
+    width: 80px;
+    height: 40px;
+    line-height: 40px;
+    font-size: small;
+    font-weight: bold;
+    text-align: center;
+    color: #000;
+    text-decoration-line: none;
+    border: 1px solid #000;
+    border-radius: 5px;
+    box-shadow: inset 0 0 8px #a9aaad;
+    background-color: #ebecf0;
+  }
+
+  .productCard-button > button {
+    font-size: small;
+    font-weight: bold;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 5px;
+    box-shadow: inset 0 0 8px #a9aaad;
+    background-color: #ebecf0;
+    cursor: pointer;
+  }

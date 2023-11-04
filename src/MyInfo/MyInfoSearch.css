@@ -1,0 +1,108 @@
+.MyInfoSearchWrap {
+  margin-top: 20px;
+  height: 630px;
+}
+.MyInfoSearchWrapDiv {
+  clear: both;
+  padding-bottom: 10px;
+  margin-top: 50px;
+}
+.MyInfoSearchWrapDiv > h3 {
+  position: relative;
+  height: 25px;
+  margin-top: 20px;
+  padding-left: 12px;
+}
+.MyInfoSearchWrapDiv > h3 > img {
+  vertical-align: middle;
+}
+hr {
+  margin: 0px;
+}
+.MyInfoSearchMainWrap {
+  width: 100%;
+  height: 400px;
+  border: 1px solid #b1b1b1;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.MyInfoSearchMainIntro {
+  width: 100%;
+  height: 100px;
+  border-bottom: 1px solid #b1b1b1;
+  text-align: center;
+  font-size: 17px;
+  line-height: 100px;
+  background-color: #f3f3f3;
+}
+.MyInfoSearchMainIntroImgDiv {
+  position: absolute;
+  margin-left: 360px;
+}
+.MyInfoSearchMainIntroImgDiv > img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+.MyInfoSearchMainIntroSpan {
+  color: #0f297e;
+  font-weight: bold;
+  margin-left: 20px;
+}
+.MyInfoSearchMainContentsWrap > table {
+  margin: 0 auto;
+  width: 70%;
+  margin-top: 50px;
+}
+.MyInfoSearchMainContentsWrap > table > tr {
+  height: 50px;
+}
+
+.MyInfoSearchMainContentsWrap > table > tr > td:first-child {
+  width: 50%;
+  color: #0f297e;
+  font-weight: bold;
+}
+.MyInfoSearchMainContentsWrap > table > tr > td:last-child {
+  width: 50%;
+}
+.MyInfoSearchBtnWrap {
+  width: 100%;
+  height: 100px;
+  margin-top: 20px;
+}
+.MyInfoSearchBtnGoUpdate {
+  width: 49%;
+  height: 100px;
+  float: left;
+}
+.MyInfoSearchBtnGoExit {
+  width: 49%;
+  height: 100px;
+  float: right;
+}
+
+.MyInfoSearchBtnGoUpdate > button {
+  width: 100%;
+  margin: 10% auto;
+  height: 50px;
+  background-color: #ebecf0;
+  box-shadow: inset 0 0 8px #a9aaad;
+  border-radius: 5px;
+  font-size: 15px;
+  border: 0px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.MyInfoSearchBtnGoExit > button {
+  width: 100%;
+  margin: 10% auto;
+  height: 50px;
+  background-color: #ebecf0;
+  box-shadow: inset 0 0 8px #a9aaad;
+  border-radius: 5px;
+  font-size: 15px;
+  border: 0px;
+  font-weight: bold;
+  cursor: pointer;
+}

@@ -1,0 +1,91 @@
+.MyInfoUpdateWrap {
+  margin-top: 20px;
+  height: 600px;
+}
+.MyInfoUpdateWrapDiv {
+  clear: both;
+  margin-top: 50px;
+}
+.MyInfoUpdateWrapDiv > h3 {
+  position: relative;
+  height: 25px;
+  margin-top: 20px;
+  padding-left: 12px;
+}
+.MyInfoUpdateWrapDiv > h3 > img {
+  vertical-align: middle;
+}
+hr {
+  margin: 0px;
+}
+.MyInfoUpdateMainWrap {
+  width: 100%;
+  height: 450px;
+  border: 1px solid #b1b1b1;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.MyInfoUpdateMainIntro {
+  width: 100%;
+  height: 100px;
+  border-bottom: 1px solid #b1b1b1;
+  text-align: center;
+  font-size: 17px;
+  line-height: 100px;
+  background-color: #f3f3f3;
+}
+.MyInfoUpdateMainIntroImgDiv {
+  position: absolute;
+  margin-left: 360px;
+}
+.MyInfoUpdateMainIntroImgDiv > img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+.MyInfoUpdateMainIntroSpan {
+  color: #0f297e;
+  font-weight: bold;
+  margin-left: 20px;
+}
+.MyInfoUpdateMainContentsWrap > table {
+  margin: 0 auto;
+  width: 70%;
+  margin-top: 50px;
+}
+.MyInfoUpdateMainContentsWrap > table > tr {
+  height: 50px;
+}
+.MyInfoUpdateMainContentsWrap > table > tr > td > input {
+  width: 100%;
+  height: 30px;
+}
+
+.MyInfoUpdateMainContentsWrap > table > tr > td:first-child {
+  width: 50%;
+  color: #0f297e;
+  font-weight: bold;
+}
+.MyInfoUpdateMainContentsWrap > table > tr > td:last-child {
+  width: 50%;
+}
+.MyInfoUpdateBtnWrap {
+  width: 100%;
+  height: 100px;
+}
+.MyInfoUpdateBtnGoUpdate {
+  width: 100%;
+  float: left;
+  margin-top: 20px;
+}
+.MyInfoUpdateBtnGoUpdate > button {
+  width: 100%;
+  height: 50px;
+  background-color: #ebecf0;
+  box-shadow: inset 0 0 8px #a9aaad;
+  border-radius: 5px;
+  font-size: 15px;
+  border: 0px;
+  font-weight: bold;
+  cursor: pointer;
+}

@@ -1,0 +1,19 @@
+.ChatMainWrap {
+  margin: 0 20%;
+  height: 100vh;
+}
+.ChatHeader {
+  height: 80px;
+}
+.ChatMainSidebar {
+  width: 50%;
+  box-sizing: border-box;
+  float: left;
+  height: 89%;
+}
+.ChatMainMajorWrap {
+  width: 50%;
+  box-sizing: border-box;
+  height: 89%;
+  float: right;
+}

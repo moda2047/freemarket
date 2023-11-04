@@ -1,0 +1,19 @@
+.MyInfoMainWrap{
+    margin: 0 20%;
+    height: 100vh;
+}
+.MyInfoHeader{
+    height: 80px;
+}
+.MyInfoMainSidebarContainer{
+    width: 180px;
+    box-sizing: border-box;
+    float: left;
+    height: 89%;
+}
+.MyInfoMainMajorWrap{
+    width: 78%;
+    box-sizing: border-box;
+    height: 89%;
+    float: right;
+}

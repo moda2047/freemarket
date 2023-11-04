@@ -1,0 +1,92 @@
+.ChatDetailContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.ChatDetailProductInfo {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.ChatDetailProductInfo h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.ChatDetailProductInfo p {
+  margin: 5px 0;
+}
+
+/* 메시지 스타일 */
+.ChatDetailmessages {
+  width: 100%; /* 원하는 너비로 조정 */
+  height: 400px; /* 원하는 높이로 조정 */
+
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.ChatDetailmessages .messages-container {
+  flex: 1;
+  overflow-y: scroll;
+}
+.message {
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px;
+  max-width: 70%;
+}
+
+.sent {
+  align-self: flex-end;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.received {
+  align-self: flex-start;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.ChatDetailmessage-text {
+  font-size: 16px;
+}
+
+.ChatDetailmessage-timestamp {
+  font-size: 12px;
+  color: #888;
+}
+
+/* 채팅 입력 스타일 */
+.ChatDetail-input {
+  display: flex;
+  align-items: center;
+}
+
+.ChatDetail-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.ChatDetail-input button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.ChatDetail-input button:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,119 @@
+.adminHeader {
+    margin: 0 20%;
+    min-width: 820px;
+  }
+  
+  .adminHeader a {
+    text-decoration-line: none;
+    font-size: 10px;
+    text-align: center;
+  }
+  
+  .adminHeader-top {
+    display: flex;
+    height: 30px;
+    background: rgb(255, 255, 255);
+    float: right;
+  }
+  
+  .adminHeader-top-container {
+    display: flex;
+    width: 100%;
+  }
+  
+  .adminHeader-top-button button {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  
+  .adminHeader-middle {
+    display: flex;
+    width: 100%;
+    padding: 25px 0;
+    border-top: 1px solid rgb(128, 128, 128);
+    border-bottom: 1px solid rgb(128, 128, 128);
+    justify-content: space-around;
+  }
+  
+  .adminHeader-middle-container {
+    display: flex;
+    align-items: center;
+    height: 40px;
+  }
+  
+  .adminHeader-middle-left {
+    width: 135px;
+  }
+  
+  .adminHeader-middle-left-logo img{
+    width: 135px;
+    height: 65px;
+  }
+  
+  .adminHeader-middle-center {
+    width: 400px;
+    height: 30px;
+    display: flex;
+    border: 5px solid #2d51c5;
+  }
+  
+  .adminHeader-searchbox {
+    width: 100%;
+    display: flex;
+  }
+  
+  .adminHeader-middle-center input {
+    border: none;
+    padding-left: 2%;
+    flex-grow: 1;
+  }
+  
+  .adminHeader-middle-center input:focus {
+    outline: none;
+  }
+  
+  .adminHeader-middle-center button {
+    border: 0;
+    outline: transparent;
+    flex-grow: 0;
+    cursor: pointer;
+    background-color: #fff;
+  }
+  
+  .adminHeader-middle-center button > img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .adminHeader-middle-right {
+    display: flex;
+    width: 200px;
+    margin: 0 20px;
+  }
+  
+  .adminHeader-wishlist {
+    height: 65px;
+    flex-direction: column;
+  }
+  
+  .adminHeader-mypage {
+    flex-direction: column;
+  }
+  
+  .adminHeader-chatting {
+    height: 100%;
+  }
+  
+  .adminHeader-middle-right img {
+    width: 65px;
+    height: 70px;
+  }
+  
+  .adminHeader-bottom {
+    margin: 0;
+    height: 30%;
+    padding: 0 10%;
+  }
+    
+  

@@ -1,0 +1,15 @@
+/*********************************//*********************************//*********************************//*********************************/
+/* ProductListSearch.js */
+
+.productListSearch {
+    /* margin: 0 20%; */
+  }
+  
+  .productListSearch .productListSearch-container {
+    width: 100%;
+  }
+  
+  .productListSearch::-webkit-scrollbar {
+    display: none;
+  }
+  

@@ -1,0 +1,78 @@
+/*********************************//*********************************//*********************************//*********************************/
+/* Wish.js */
+
+.wish {
+  display: flex;
+  width: 700px;
+  height: 128px;
+  margin-top: 15px;
+  background-color: #ffffff;
+  border: 1px solid #000;
+}
+
+.wish .wish-left {
+  width: 128px;
+  height: 128px;
+}
+
+.wish .wish-left .wish-image {
+  width: 100%;
+  height: 100%;
+}
+
+.wish .wish-middle {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+.wish .wish-middle .wish-product {
+  padding: 4px;
+  height: 64px;
+  font-weight: bold;
+}
+
+.wish .wish-middle .wish-price {
+  padding: 4px;
+  height: 64px;
+  font-weight: bold;
+}
+
+.wish .wish-right {
+  float: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 80px;
+  padding: 6px;
+}
+
+.wish .wish-right .close {
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+}
+
+.wish .wish-right .close:after {
+  display: inline-block;
+  content: "\00d7"; 
+  font-size: 45pt;
+  line-height: 35px;
+}
+
+.wish .wish-right .wish-chatting {
+
+}
+
+.wish .wish-right .wish-chatting button {
+  width: 80px;
+  height: 30px;
+  background-color: #ebecf0;
+  box-shadow: inset 0 0 8px #a9aaad;
+  border-radius: 5px;
+  font-size: 15px;
+  border: 0px;
+  font-weight: bold;
+  cursor: pointer;
+}

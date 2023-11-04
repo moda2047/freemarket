@@ -1,0 +1,118 @@
+.AdminRSListWrap {
+  margin-top: 20px;
+  height: 600px;
+}
+.AdminRSListWrapDiv {
+  clear: both;
+  padding-bottom: 10px;
+  margin-top: 50px;
+}
+.AdminRSListWrapDiv > h3 {
+  position: relative;
+  height: 25px;
+  margin-top: 20px;
+  padding-left: 12px;
+}
+.AdminRSListWrapDiv > h3 > img {
+  vertical-align: middle;
+}
+hr {
+  margin: 0px;
+}
+.AdminRSListMainWrap {
+  width: 100%;
+  min-height: 470px;
+  border: 1px solid #b1b1b1;
+  margin: 0 auto;
+  margin-top: 20px;
+  overflow: auto;
+}
+
+.AdminRSListMainIntro {
+  width: 100%;
+  height: 100px;
+  border-bottom: 1px solid #b1b1b1;
+  text-align: center;
+  font-size: 17px;
+  line-height: 100px;
+  background-color: #f3f3f3;
+}
+.AdminRSListMainIntroImgDiv {
+  position: absolute;
+  margin-left: 370px;
+}
+.AdminRSListMainIntroImgDiv > img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+.AdminRSListMainIntroSpan {
+  color: #0f297e;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+.AdminRSListSearch {
+  height: 380px;
+}
+.AdminRSListSearchTable {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 40px;
+  border-collapse: collapse;
+  font-size: 15px;
+  border-bottom: 2px solid #0f297e;
+}
+
+.AdminRSListSearchTable > tr > th {
+  border-top: 2px solid #0f297e;
+  border-bottom: 2px solid #0f297e;
+  height: 40px;
+}
+.AdminRSListSearchTable > tr > td {
+  text-align: center;
+  border: 1px solid #a7a7a7;
+  font-size: 13px;
+  height: 36px;
+}
+.AdminRSListSearchTable > tr > td:first-child {
+  border-left: 0px;
+}
+.AdminRSListSearchTable > tr > td:last-child {
+  border-right: 0px;
+}
+.AdminRSListPagination {
+  margin-top: 20px;
+  text-align: center;
+}
+.AdminRSListPagination > span {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.AdminRSListPagination > button {
+  background-color: #ebecf0;
+  box-shadow: inset 0 0 8px #a9aaad;
+  border-radius: 5px;
+  font-size: 15px;
+  border: 0px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.MyBuyListPagination {
+  margin-top: 20px;
+  text-align: center;
+}
+.MyBuyListPagination > span {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.MyBuyListPagination > button {
+  background-color: #ebecf0;
+  box-shadow: inset 0 0 8px #a9aaad;
+  border-radius: 5px;
+  font-size: 15px;
+  border: 0px;
+  font-weight: bold;
+  cursor: pointer;
+}

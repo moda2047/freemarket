@@ -1,0 +1,73 @@
+/*********************************//*********************************//*********************************//*********************************/
+/* ReviewCreate.js */
+.reviewCreate {
+    position: relative;
+    width: 100%;
+    border-top: 1px solid #000;
+  }
+  
+  .reviewCreate-container {
+    display: flex;
+    flex-grow: 1;
+    padding-top: 5%;
+    margin: 0 15%;
+  }
+  
+  .reviewCreate-image {
+    display: inline-block;
+    width: 256px;
+    height: 256px;
+    flex-grow: 0;
+    align-items: center;
+  }
+  
+  .reviewCreate-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2%;
+  }
+  
+  .reviewCreate-info:nth-child(n) {
+    flex-grow: 1;
+    padding: 0 2%;
+  
+  }
+  
+  .reviewCreate-info .reviewCreate-product-name {
+    height: 45px;
+    font-size: 1.5rem;
+  }
+  
+  .reviewCreate-info .reviewCreate-reviewer {
+    margin-bottom: 20px;
+    height: 20px;
+  }
+  
+  .reviewCreate-info textarea {
+    width: 100%;
+    height: 150px;
+    padding: 2%;
+    font-size: 1rem;
+    resize: none;
+  }
+  
+  .reviewCreate-info .reviewCreate-submit {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+  }
+  
+  .reviewCreate-info .reviewCreate-submit button {
+    width: 100px;
+    height: 30px;
+    padding: 1% 0;
+    color: #fff;
+    background-color: #0062ff;
+    border: none;
+  }
+  
+  .reviewCreate-info .reviewCreate-submit button:hover {
+    background-color: #2d51c5;
+    cursor: pointer;
+  }

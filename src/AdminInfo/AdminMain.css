@@ -1,0 +1,19 @@
+.AdminMainWrap{
+    margin: 0 20%;
+    height: 100vh;
+}
+.AdminHeader{
+    height: 80px;
+}
+.AdminMainSidebar{
+    width: 22%;
+    box-sizing: border-box;
+    float: left;
+    height: 89%;
+}
+.AdminMainMajorWrap{
+    width: 78%;
+    box-sizing: border-box;
+    height: 89%;
+    float: right;
+}

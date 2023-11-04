@@ -1,0 +1,37 @@
+/*********************************//*********************************//*********************************//*********************************/
+/* ProductMain.js */
+.productMain {
+  height: auto;
+}
+
+.productMain .productMain-sidebar {
+  width: 20%;
+  height: 100%;
+  box-sizing: border-box;
+  float: left;
+  height: 100%;
+  
+}
+
+.productMain .productMain-container {
+  width: 60%;
+  min-width: 800px;
+  box-sizing: border-box;
+  height: 100%;
+  float: left;
+}
+
+.productRow-container {
+  margin-top: 15px;
+}
+
+.productRow-category {
+  text-align: left;
+  color: #0f297e;
+}
+
+.productMain-empty {
+  width: 20%;
+  float: right;
+  height: 100%;
+}

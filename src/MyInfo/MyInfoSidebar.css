@@ -1,0 +1,115 @@
+.MyInfoSidebarWrap{
+    position: relative;
+    float: left;
+    width: 180px;
+    z-index: 2;
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    color: #33333b;
+    margin-top: 20px;
+}
+h3{
+    margin-top: 0;
+}
+.MyInfoSidebarMyInfoWrap{
+    width: 180px;
+    position: relative;
+    z-index: 1;
+    margin: 0 0 15px 0;
+    border: 2px solid #b1b1b1;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+}
+.MyInfoSidebarMyInfoWrap{
+    display: inline-block;
+    vertical-align: top;
+}
+.MyInfoSidebarImg{
+    margin: 14px 9px 0px 9px;
+    vertical-align: top;
+    width: 162px;
+    height: 52px;
+}
+
+.MyInfoSidebarLevel{
+    text-align: center !important;
+    padding-top: 7px;
+    margin: 0 5px;
+    clear: both;
+    width: 170px;
+    word-break: break-all;
+    margin-bottom: 5px;
+}
+.MyInfoSidebarText{
+    font-size: 12px;
+    border: 0;
+    color: #555;
+    padding: 0;
+    text-align: center;
+}
+.MyInfoSidebarTextName{
+    font-weight: bold;
+}
+.MyInfoSidebarTextTransNum{
+    font-weight: bold;
+    color: red;
+}
+.MyInfoSidebarPointBox{
+    margin: 0 9px;
+    display: inline-block;
+    vertical-align: top;
+    width: 162px;
+    height: 32px;
+    background-color: white;
+    margin-bottom: 10px;
+}
+.MyInfoSidebarPointBox > ul{
+    margin: 0 8px;
+    width: 146px;
+    list-style: none;
+    padding: 0px;
+}
+.MyInfoSidebarPointBox > ul > li{
+    width: 146px;
+    float: left;
+}
+.MyInfoSidebarPointBoxDiv{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 10px 0px;
+}
+.MyInfoSidebarPointTitle{
+    width: 39px;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+.MyInfoSidebarInWrap{
+    width: 180px;
+    height: 430px;
+    border: 2px solid #b1b1b1;
+    border-radius: 5px;
+    margin-top: 20px;
+    position: absolute;
+    background-color: #f7f7f7;
+}
+.MyInfoSidebarInWrapDiv{
+    padding: 15px 0 5px 10px;
+    border-bottom: 1px solid #f6f6f6;
+}
+.MyInfoSidebarInWrapDiv > h3{
+    height: 19px;
+    padding-left: 15px;
+    margin-bottom: 5px;
+}
+.MyInfoSidebarInWrapDiv > ul{
+    padding-left: 15px;
+    margin-top: 0px;
+}
+.MyInfoSidebarInWrapDiv > ul > li{
+    cursor: pointer;
+}

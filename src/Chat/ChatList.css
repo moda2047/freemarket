@@ -1,0 +1,64 @@
+/* ChatList.css */
+.chat-list-container {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc; /* 보더 설정 */
+  border-radius: 8px; /* 깔끔한 둥근 모서리 */
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .chat-room-link {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd; /* 보더 설정 */
+    border-radius: 4px; /* 깔끔한 둥근 모서리 */
+
+    h2 {
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+}
+/* ChatList.css */
+.chat-list-item {
+  list-style-type: none;
+  border: 1px solid #ddd; /* Border 스타일 설정 */
+  background-color: #f0f0f0; /* 배경색 설정 */
+  padding: 10px; /* 내부 패딩 추가 */
+  margin: 5px; /* 항목 간의 간격 설정 */
+  cursor: pointer; /* 커서를 포인터로 변경하여 클릭 가능한 것을 나타냅니다 */
+}
+
+.chat-list-item:hover {
+  background-color: #e0e0e0; /* 마우스 호버 시 배경색 변경 */
+}
+
+.chat-list-item a {
+  text-decoration: none; /* 링크의 기본 밑줄 제거 */
+  color: #333; /* 링크 텍스트 색상 설정 */
+}
+
+.chat-list-item h2 {
+  margin: 0; /* 제목의 위아래 여백 제거 */
+}
+
+.chat-list-item p {
+  margin: 0; /* 부제목의 위아래 여백 제거 */
+}
+
+/* 이하 ChatDetail.js와 같은 방식으로 스타일을 추가할 수 있습니다. */

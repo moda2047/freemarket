@@ -1,0 +1,50 @@
+.AdminReportAnswerpage-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.AdminReportAnswerlabel {
+  font-weight: bold;
+  text-align: left;
+}
+
+.AdminReportAnswertextarea {
+  width: 90%;
+  height: 150px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+.AdminReportAnswerbutton-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.AdminReportAnswerbutton {
+  flex: 1;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.AdminReportAnswercancel-button {
+  background-color: #ccc;
+}
+
+.AdminReportAnswercancel-button:hover {
+  background-color: #999;
+}
