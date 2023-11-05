@@ -4,9 +4,8 @@ import "./AdminReportSearch.css";
 function AdminReportSearch({ reporterId, reportTitle, reportContent, status }) {
   const [replyContent, setReplyContent] = useState("");
 
-  const handleReplyClick = () => {
-    // 답변 쓰러 가는 기능을 구현할 부분
-    // 예를 들어, 다른 페이지로 이동하는 방식으로 구현할 수 있습니다.
+  const openNewPage = () => {
+    window.open("/AdminReportAnswer", "_blank");
   };
 
   return (
@@ -27,7 +26,7 @@ function AdminReportSearch({ reporterId, reportTitle, reportContent, status }) {
       ) : (
         <div>
           <button
-            onClick={handleReplyClick}
+            onClick={openNewPage}
             className="AdminReportSearchreply-button"
           >
             답변 쓰러 가기
