@@ -50,7 +50,7 @@ function ReportWrite() {
     <div className="MyReportMSListWrap">
       <div className="MyReportMSListWrapDiv">
         <h3>
-          <img src="./image/MyInfoReviewIwImg.png" alt="nono" />
+          <img src="./image/MyInfoReportWriter.png" alt="nono" />
         </h3>
       </div>
       <hr />
