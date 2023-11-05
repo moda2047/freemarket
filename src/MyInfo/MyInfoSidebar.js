@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./MyInfoSidebar.css";
+import { useCookies } from "react-cookie";
 
 const MyInfoSidebar = (props) => {
   const { activeTab, onTabClick } = props;
+  const [cookies] = useCookies(["token", "author", "userid"]);
 
+  const token = cookies.token;
+  const author = cookies.author;
+  const userid = cookies.userid;
   const handleTabClick = (index) => {
     onTabClick(index);
   };
@@ -27,7 +32,7 @@ const MyInfoSidebar = (props) => {
           </h3>
           <div className="MyInfoSidebarLevel">
             <div className="MyInfoSidebarText">
-              <span className="MyInfoSidebarTextName">이우찬</span>
+              <span className="MyInfoSidebarTextName">{userid}</span>
               님의 거래건수는
               <br />
               <span className="MyInfoSidebarTextTransNum">0</span>건 입니다.

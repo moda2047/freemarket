@@ -21,6 +21,10 @@ const PasswordChange = (props) => {
     setPasswordMatch(password === newConfirmPassword);
   };
 
+  const handleTokenVerification = () => {
+    //메일 토큰 인증 코드 작성부분
+  };
+
   const handleFormSubmit = () => {
     // 폼 제출 시 호출되는 함수
     if (password !== confirmPassword) {
@@ -28,12 +32,29 @@ const PasswordChange = (props) => {
       console.log("비밀번호가 일치하지 않습니다.");
       return;
     }
-    //서버에 아이디 확인 코드 작성 부분
-    //폼 제출시 아이디인증, 이메일인증, 토큰 인증까지 완료됐으면 전송하는 코드 추가부분
-  };
 
-  const handleTokenVerification = () => {
-    //메일 토큰 인증 코드 작성부분
+    // 데이터를 서버로 전송
+    fetch("http://localhost:8000/member/changePw", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        id: id,
+        password: password,
+      }),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          // 서버 응답이 성공인 경우
+          console.log("비밀번호 변경이 완료되었습니다.");
+        } else {
+          console.error("서버 응답이 실패했습니다.");
+        }
+      })
+      .catch((error) => {
+        console.error("요청 중 오류 발생:", error);
+      });
   };
 
   return (
@@ -78,6 +99,7 @@ const PasswordChange = (props) => {
                         onChange={(e) => {
                           setEmail(e.target.value);
                         }}
+                        disabled
                       />
                     </td>
                     <td>
@@ -94,6 +116,7 @@ const PasswordChange = (props) => {
                         placeholder="인증 코드"
                         value={token}
                         onChange={(e) => setToken(e.target.value)}
+                        disabled
                       />
                     </td>
                     <td>

@@ -16,6 +16,10 @@ import ChatMain from "./Chat/ChatMain.js";
 import ProductMain from "./Product/ProductMain.js";
 import AdminHeader from "./Header/AdminHeader.js";
 import Header from "./Header/Header.js";
+import ProductDetail from "./Product/ProductDetail.js";
+import MyInfoPasswordCorrect from "./PasswordChange/MyInfoPasswordCorrect.js";
+import MyInfoUpdateMain from "./MyInfo/MyInfoUpdateMain.js";
+import AdminReportAnswer from "./AdminInfo/AdminReportAnswer.js";
 
 const App = () => {
   return (
@@ -27,13 +31,25 @@ const App = () => {
           <Route path="/MyInfoMain" element={<MyInfoMain />}></Route>
           <Route path="/AdminMain" element={<AdminMain />}></Route>
           <Route path="/PasswordChange" element={<PasswordChange />}></Route>
-
+          <Route
+            path="/MyInfoPasswordCorrect"
+            element={<MyInfoPasswordCorrect />}
+          ></Route>
+          <Route
+            path="/MyInfoUpdateMain"
+            element={<MyInfoUpdateMain />}
+          ></Route>
           <Route path="/Login" element={<Login />}></Route>
           <Route path="/WishList" element={<WishList />}></Route>
           <Route path="/ChatMain" element={<ChatMain />}></Route>
           <Route path="/Memberjoin" element={<Memberjoin />}></Route>
           <Route path="/WishList" element={<WishList />}></Route>
-
+          <Route path="/WishList" element={<WishList />}></Route>
+          <Route path="/ProductDetail" element={<ProductDetail />}></Route>
+          <Route
+            path="/AdminReportAnswer"
+            element={<AdminReportAnswer />}
+          ></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
