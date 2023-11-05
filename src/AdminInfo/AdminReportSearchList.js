@@ -89,17 +89,19 @@ function AdminReportSearchList() {
                   <td>{report.id}</td>
                   <td>{getStatusText(report.status)}</td>
                   <td>{report.title}</td>
-                  <td>{report.author}</td>
-                  <td>{report.date}</td>
+                  <td>{report.reporter_id}</td>
+                  <td>{report.createdAt}</td>
                 </tr>
                 {selectedReport === report.id && (
                   <tr>
                     <td colSpan="5">
                       <AdminReportSearch
-                        reporterId={report.author}
+                        reportId={report.id}
+                        reporterId={report.reporter_id}
                         reportTitle={report.title}
-                        reportContent={report.details}
+                        reportContent={report.content}
                         status={report.status}
+                        reportReplies={report.report_replies}
                       />
                     </td>
                   </tr>

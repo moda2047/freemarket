@@ -11,10 +11,7 @@ function ReportMySearch({
   reportReplies,
 }) {
   const [cookies] = useCookies(["token"]);
-  const handleReplyClick = () => {
-    // 답변 쓰러 가는 기능을 구현할 부분
-    // 예를 들어, 다른 페이지로 이동하는 방식으로 구현할 수 있습니다.
-  };
+
   const handleReportDelete = () => {
     const url = `http://localhost:8000/report/delete`;
     const data = {
