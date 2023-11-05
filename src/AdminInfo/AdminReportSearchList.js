@@ -1,51 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AdminReportSearchList.css";
 import AdminReportSearch from "./AdminReportSearch";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 function AdminReportSearchList() {
-  const [reports, setReports] = useState([
-    {
-      id: 1,
-      status: 0,
-      title: "문의 제목 1",
-      author: "사용자 1",
-      date: "2023-10-17",
-      details: "문의 내용 1",
-    },
-    {
-      id: 2,
-      status: 1,
-      title: "문의 제목 2",
-      author: "사용자 2",
-      date: "2023-10-18",
-      details: "문의 내용 2",
-    },
-    {
-      id: 3,
-      status: 1,
-      title: "문의 제목 2",
-      author: "사용자 2",
-      date: "2023-10-18",
-      details: "문의 내용 2",
-    },
-    {
-      id: 4,
-      status: 1,
-      title: "문의 제목 2",
-      author: "사용자 2",
-      date: "2023-10-18",
-      details: "문의 내용 2",
-    },
-    {
-      id: 5,
-      status: 1,
-      title: "문의 제목 2",
-      author: "사용자 2",
-      date: "2023-10-18",
-      details: "문의 내용 2",
-    },
-    // 다른 신고/문의 항목 추가
-  ]);
+  const [cookies] = useCookies(["token"]);
+  const [reports, setReports] = useState([]);
+  const fetchData = async () => {
+    const mailAuthAPI = "http://localhost:8000/report/searchForAdmin";
+    const headers = {
+      headers: {
+        Authorization: cookies.token,
+        ContentType: "application/json",
+        Accept: "application/json",
+      },
+    };
+    console.log("fetchData 함수가 실행됩니다.");
+    console.log(typeof cookies.token);
+    axios
+      .get(mailAuthAPI, headers)
+      .then((response) => {
+        console.log("API 응답 데이터: ", response.data);
+        if (response.data.result) {
+          const foundArray = response.data.found;
+          setReports(foundArray);
+          console.log("성공적으로 됐");
+        } else {
+          console.log("실패");
+        }
+      })
+      .catch((error) => {
+        console.error("오류 : ", error);
+        console.error("Error status: ", error.response.status);
+        console.error("Error data: ", error.response.data);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const [selectedReport, setSelectedReport] = useState(null);
 
