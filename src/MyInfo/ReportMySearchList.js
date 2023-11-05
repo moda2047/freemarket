@@ -21,8 +21,10 @@ function ReportMySearchList() {
     axios
       .get(mailAuthAPI, headers)
       .then((response) => {
+        console.log("API 응답 데이터: ", response.data);
         if (response.data.result) {
-          setReports(response.data.found);
+          const foundArray = response.data.found;
+          setReports(foundArray);
           console.log("성공적으로 됐");
         } else {
           console.log("실패");
@@ -38,7 +40,6 @@ function ReportMySearchList() {
   useEffect(() => {
     fetchData();
   }, []);
-
   const getStatusText = (status) => {
     return status === 0 ? "미해결" : "해결";
   };
@@ -87,7 +88,7 @@ function ReportMySearchList() {
               <th>문의자</th>
               <th>등록일</th>
             </tr>
-            {filteredReports.map((report) => (
+            {reports.map((report) => (
               <React.Fragment key={report.id}>
                 <tr onClick={() => handleTitleClick(report)}>
                   <td>{report.id}</td>
@@ -100,10 +101,12 @@ function ReportMySearchList() {
                   <tr>
                     <td colSpan="5">
                       <ReportMySearch
+                        reportId={report.id}
                         reporterId={report.reporter_id}
                         reportTitle={report.title}
                         reportContent={report.content}
                         status={report.status}
+                        reportReplies={report.report_replies}
                       />
                     </td>
                   </tr>
