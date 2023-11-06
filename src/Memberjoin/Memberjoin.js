@@ -59,10 +59,15 @@ const Memberjoin = (props) => {
         }
       )
       .then((response) => {
-        console.log(response);
-        console.log(response.data.message);
-
-        setResToken(response.data.authNum);
+        if (response.data.result) {
+          setResToken(response.data.authNum);
+          window.alert("인증코드가 해당 이메일로 발송되었습니다.");
+          console.log(response.data.message);
+          console.log(response);
+        } else {
+          console.log(response.data.message);
+          window.alert(response.data.message);
+        }
       })
       .catch((error) => {
         console.error("오류 : ", error);
