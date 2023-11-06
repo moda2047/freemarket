@@ -7,9 +7,15 @@ import { useCookies } from "react-cookie";
 function AdminReportSearchList() {
   const [cookies] = useCookies(["token"]);
   const [reports, setReports] = useState([]);
-  const handleReportDelete = (reportId) => {
-    // 신고/문의 삭제 API 호출 및 상태 업데이트
-    const updatedReports = reports.filter((report) => report.id !== reportId);
+
+  const onDelete = (reportId) => {
+    const updatedReports = reports.map((report) => {
+      if (report.id === reportId) {
+        // 해당 신고/문의의 상태(status)를 0으로 변경
+        return { ...report, status: 0 };
+      }
+      return report;
+    });
     setReports(updatedReports);
   };
   const fetchData = async () => {
@@ -107,7 +113,7 @@ function AdminReportSearchList() {
                         reportContent={report.content}
                         status={report.status}
                         reportReplies={report.report_replies}
-                        onDelete={handleReportDelete}
+                        onDelete={onDelete}
                       />
                     </td>
                   </tr>
