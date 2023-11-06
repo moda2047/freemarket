@@ -40,7 +40,7 @@ function AdminReportSearch({
       .then((response) => {
         console.log(response);
         if (response.data.result) {
-          window.alert("신고/문의글이 성공적으로 삭제되었습니다.");
+          window.alert("신고/문의 답변이 성공적으로 삭제되었습니다.");
           console.log(response.data.message);
           onDelete(reportId);
         } else {
@@ -49,14 +49,14 @@ function AdminReportSearch({
         }
       })
       .catch((error) => {
-        console.error("신고글 삭제 중 오류가 발생했습니다.", error);
+        console.error("신고/문의 답변 삭제 중 오류가 발생했습니다.", error);
         console.error("Error status: ", error.response.status);
         console.error("Error data: ", error.response.data);
       });
   };
   return (
     <div className="AdminReportSearchreport-page">
-      <h1>신고글 조회 페이지</h1>
+      <h1>신고/문의 조회 페이지</h1>
       <p>신고자 ID: {reporterId}</p>
       <p>신고 제목: {reportTitle}</p>
       <p>신고 내용: {reportContent}</p>
