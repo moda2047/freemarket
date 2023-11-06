@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import "./AdminReportAnswer.css";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AdminReportAnswer = () => {
   const [context, setcontext] = useState("");
   const [cookies] = useCookies(["token"]);
   const location = useLocation();
+  const navigate = useNavigate();
   const { reportId, reporterId, reportTitle } = location.state;
 
   const handleSubmit = () => {
@@ -36,6 +37,7 @@ const AdminReportAnswer = () => {
         if (response.data.result) {
           window.alert("신고/문의 답변이 성공적으로 등록되었습니다.");
           console.log(response.data.message);
+          navigate("../AdminMain");
         } else {
           console.log(response.data.message);
           window.alert(response.data.message);
