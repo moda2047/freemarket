@@ -50,6 +50,7 @@ const App = () => {
             path="/AdminReportAnswer"
             element={<AdminReportAnswer />}
           ></Route>
+          <Route path="/AdminReportAnswer" component={AdminReportAnswer} />
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>

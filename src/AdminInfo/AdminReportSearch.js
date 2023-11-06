@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./AdminReportSearch.css";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 function AdminReportSearch({
   reportId,
   reporterId,
@@ -12,8 +13,15 @@ function AdminReportSearch({
 }) {
   const [replyContent, setReplyContent] = useState("");
   const [cookies] = useCookies(["token"]);
+  const navigate = useNavigate();
   const openNewPage = () => {
-    window.open("/AdminReportAnswer", "_blank");
+    navigate("/AdminReportAnswer", {
+      state: {
+        reportId,
+        reporterId,
+        reportTitle,
+      },
+    });
   };
   const handleReportDelete = () => {
     const url = `http://localhost:8000/report/deleteReply`;

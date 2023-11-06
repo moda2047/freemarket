@@ -1,30 +1,62 @@
 import React, { useState } from "react";
 import "./AdminReportAnswer.css";
-
-const dummyData = {
-  reporterid: "전승기",
-  reporttitle: "불법 신고 합니다.",
-};
+import axios from "axios";
+import { useCookies } from "react-cookie";
+import { useLocation } from "react-router-dom";
 
 const AdminReportAnswer = () => {
-  const [reporterid] = useState(dummyData.reporterid);
-  const [reporttitle] = useState(dummyData.reporttitle);
   const [context, setcontext] = useState("");
+  const [cookies] = useCookies(["token"]);
+  const location = useLocation();
+  const { reportId, reporterId, reportTitle } = location.state;
 
   const handleSubmit = () => {
-    // 확인 버튼 클릭 시 실행될 로직을 작성하세요.
-    // 신고자id, 신고제목, 내용을 사용하여 처리합니다.
+    if (!context.trim()) {
+      window.alert("답변을 입력하세요.");
+      return;
+    }
+    const data = {
+      report_id: reportId,
+      content: context,
+    };
+    const url = "http://localhost:8000/report/reply";
+    const headers = {
+      headers: {
+        Authorization: cookies.token,
+        ContentType: "application/json",
+        Accept: "application/json",
+      },
+    };
+
+    axios
+      .post(url, data, headers)
+
+      .then((response) => {
+        console.log(response);
+        if (response.data.result) {
+          window.alert("신고/문의 답변이 성공적으로 등록되었습니다.");
+          console.log(response.data.message);
+        } else {
+          console.log(response.data.message);
+          window.alert(response.data.message);
+        }
+      })
+      .catch((error) => {
+        window.alert("신고글 등록 중 오류가 발생했습니다.");
+        console.error("신고글 등록 중 오류가 발생했습니다.", error);
+      });
   };
 
   const handleCancel = () => {
-    // 취소 버튼 클릭 시 실행될 로직을 작성하세요.
+    const previousPageURL = document.referrer; // 이전 페이지 URL 가져오기
+    window.location.href = previousPageURL;
   };
 
   return (
     <div className="AdminReportAnswerpage-container">
-      <label className="AdminReportAnswerlabel">신고자 ID: {reporterid}</label>
+      <label className="AdminReportAnswerlabel">신고자 ID: {reporterId}</label>
       <br />
-      <label className="AdminReportAnswerlabel">신고 제목: {reporttitle}</label>
+      <label className="AdminReportAnswerlabel">신고 제목: {reportTitle}</label>
       <br />
       <textarea
         className="AdminReportAnswertextarea"
