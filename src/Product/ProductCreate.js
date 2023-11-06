@@ -66,13 +66,13 @@ function ProductCreate() {
       return;
     }
 
-    if (thumbnailFile === null && thumbnail === "none") {
+    if (thumbnailFile === null || thumbnail === "none") {
       setThumbnailFile(false);
       window.alert("썸네일로 사용할 이미지를 선택해주세요.");
       return;
     }
 
-    if (category === "" && category === "none") {
+    if (category === "" || category === "none") {
       setCategoryValid(false);
       window.alert("상품 카테고리를 선택해주세요.");
       return;
