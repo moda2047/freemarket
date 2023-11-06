@@ -14,14 +14,15 @@ function LoginHeader() {
     removeCookie("author");
     removeCookie("userid");
   };
+
   return (
-    <div class="loginHeader">
-      <div class="loginHeader-top">
-        <div class="loginHeader-top-container">
-          <div class="loginHeader-top-button">
+    <div className="loginHeader">
+      <div className="loginHeader-top">
+        <div className="loginHeader-top-container">
+          <div className="loginHeader-top-button">
             <Link to="/">
               <button
-                class="loginHeader-top-button-logout"
+                className="loginHeader-top-button-logout"
                 onClick={handleLogout}
               >
                 로그아웃
@@ -30,17 +31,17 @@ function LoginHeader() {
           </div>
         </div>
       </div>
-      <div class="loginHeader-middle">
-        <div class="loginHeader-middle-container">
-          <div class="loginHeader-middle-left">
-            <div class="loginHeader-middle-left-logo">
+      <div className="loginHeader-middle">
+        <div className="loginHeader-middle-container">
+          <div className="loginHeader-middle-left">
+            <div className="loginHeader-middle-left-logo">
               <Link to="/">
                 <img src="./image/mainlogo-icon.png" alt="img"></img>
               </Link>
             </div>
           </div>
-          <div class="loginHeader-middle-center">
-            <div class="loginHeader-searchbox">
+          <div className="loginHeader-middle-center">
+            <div className="loginHeader-searchbox">
               <input
                 type="text"
                 name="query"
@@ -54,20 +55,25 @@ function LoginHeader() {
               </Link>
             </div>
           </div>
-          <div class="loginHeader-middle-right">
-            <div class="loginHeader-wishlist">
+          <div className="loginHeader-middle-right">
+            <div className="loginHeader-wishlist">
               <Link to="/WishList">
                 <img src="./image/wishlist-icon.png" alt="img"></img>
               </Link>
             </div>
-            <div class="loginHeader-mypage">
+            <div className="loginHeader-mypage">
               <Link to="/MyInfoMain">
                 <img src="./image/mypage-icon.png" alt="img"></img>
               </Link>
             </div>
-            <div class="loginHeader-chatting">
+            <div className="loginHeader-chatting">
               <Link to="/ChatMain">
                 <img src="./image/chat-icon.png" alt="img"></img>
+              </Link>
+            </div>
+            <div className="loginHeader-productCreate">
+              <Link to="/ProductCreate">
+                <img src="./image/productCreate-icon.png" alt="img"></img>
               </Link>
             </div>
           </div>

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link, Route } from "react-router-dom";
 import Login from "../Login/Login";
 
-function LogoutlogoutHeader(props) {
+function LogoutHeader(props) {
   const [query, setQuery] = useState("");
 
   const inputText = (e) => {
@@ -13,32 +13,32 @@ function LogoutlogoutHeader(props) {
   /* 로그인 안했을 시 로그인으로 넘어가도록 해야함 */
 
   return (
-    <div class="logoutHeader">
-      <div class="logoutHeader-top">
-        <div class="logoutHeader-top-container">
-          <div class="logoutHeader-top-button">
+    <div className="logoutHeader">
+      <div className="logoutHeader-top">
+        <div className="logoutHeader-top-container">
+          <div className="logoutHeader-top-button">
             <Link to="/Login">
-              <button class="logoutHeader-top-button-login">로그인</button>
+              <button className="logoutHeader-top-button-login">로그인</button>
             </Link>
             <Link to="/Memberjoin">
-              <button class="logoutHeader-top-button-memberJoin">
+              <button className="logoutHeader-top-button-memberJoin">
                 회원가입
               </button>
             </Link>
           </div>
         </div>
       </div>
-      <div class="logoutHeader-middle">
-        <div class="logoutHeader-middle-container">
-          <div class="logoutHeader-middle-left">
-            <div class="logoutHeader-middle-left-logo">
+      <div className="logoutHeader-middle">
+        <div className="logoutHeader-middle-container">
+          <div className="logoutHeader-middle-left">
+            <div className="logoutHeader-middle-left-logo">
               <Link to="/">
                 <img src="./image/mainlogo-icon.png" alt="img"></img>
               </Link>
             </div>
           </div>
-          <div class="logoutHeader-middle-center">
-            <div class="logoutHeader-searchbox">
+          <div className="logoutHeader-middle-center">
+            <div className="logoutHeader-searchbox">
               <input
                 type="text"
                 name="query"
@@ -52,20 +52,25 @@ function LogoutlogoutHeader(props) {
               </Link>
             </div>
           </div>
-          <div class="logoutHeader-middle-right">
-            <div class="logoutHeader-wishlist">
+          <div className="logoutHeader-middle-right">
+            <div className="logoutHeader-wishlist">
               <Link to="/Login">
                 <img src="./image/wishlist-icon.png" alt="img"></img>
               </Link>
             </div>
-            <div class="logoutHeader-mypage">
+            <div className="logoutHeader-mypage">
               <Link to="/Login">
                 <img src="./image/mypage-icon.png" alt="img"></img>
               </Link>
             </div>
-            <div class="logoutHeader-chatting">
+            <div className="logoutHeader-chatting">
               <Link to="/Login">
                 <img src="./image/chat-icon.png" alt="img"></img>
+              </Link>
+            </div>
+            <div classNameName="logoutHeader-productCreate">
+              <Link to="/Login">
+                <img src="./image/productCreate-icon.png" alt="img"></img>
               </Link>
             </div>
           </div>
@@ -75,4 +80,4 @@ function LogoutlogoutHeader(props) {
   );
 }
 
-export default LogoutlogoutHeader;
+export default LogoutHeader;
