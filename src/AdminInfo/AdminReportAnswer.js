@@ -47,11 +47,6 @@ const AdminReportAnswer = () => {
       });
   };
 
-  const handleCancel = () => {
-    const previousPageURL = document.referrer; // 이전 페이지 URL 가져오기
-    window.location.href = previousPageURL;
-  };
-
   return (
     <div className="AdminReportAnswerpage-container">
       <label className="AdminReportAnswerlabel">신고자 ID: {reporterId}</label>
@@ -67,9 +62,6 @@ const AdminReportAnswer = () => {
       <br />
       <button onClick={handleSubmit}>확인</button>
       <br />
-      <button className="AdminReportAnswercancel-button" onClick={handleCancel}>
-        취소
-      </button>
     </div>
   );
 };
