@@ -5,11 +5,38 @@
     /* margin: 0 20%; */
   }
   
-  .productListSearch .productListSearch-container {
-    width: 100%;
-  }
-  
-  .productListSearch::-webkit-scrollbar {
-    display: none;
-  }
-  
+.productListSearch {
+  width: 100%;
+}
+
+.productListSearch > .productListSearch-container {
+  width: 100%;
+  box-sizing: border-box;
+  height: 100%;
+  float: left;
+}
+
+.productListSearch .productListSearch-container-header {
+  display: flex;
+  justify-content: center;
+  height: 100px;
+  line-height: 100px;
+  background-color: rgb(224, 224, 224);
+}
+
+.productListSearch .productListSearch-container-header a {
+  font-style: bold;
+  font-size: 24px;
+}
+
+.productListSearch .productListSearch-container-header > span {
+  padding-left: 15px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.productListSearch .productListSearch-container-header > span:hover {
+  font-weight: bold;
+  font-size: 18px;
+}
+

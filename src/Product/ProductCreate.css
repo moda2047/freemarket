@@ -10,7 +10,7 @@
   }
   
   .productCreate h3 {
-    padding: 14px 0px;
+    padding: 14px;
   }
   
   table {
@@ -35,33 +35,41 @@
   }
   
   #productCreate-name {
-    width: 50%;
-    height: 50%;
+    width: 300px;
+    height: 28px;
     margin-left: 5%;
     padding: 0 1%;
   }
   
   #productCreate-category {
-    width: 50%;
-    height: 50%;
+    width: 310px;
+    height: 28px;
     margin-left: 5%;
+    text-align: center;
   }
   
+  #productCreate-thumbnail {
+    width: 310px;
+    height: 28px;
+    margin-left: 5%;
+    text-align: center;
+  }
+
   #productCreate-price {
-    width: 50%;
-    height: 50%;
-    text-indent: 96%;
+    width: 300px;
+    height: 28px;
+    text-indent: 80%;
     margin-left: 5%;
   }
   
   .productCreate .filebox {
     display: flex;
-    height: 50%;
+    height: 28px;
   }
   
-  .productCreate .filebox .upload-name {
+  .productCreate .filebox .file-list {
     display: inline-block;
-    width: 50%;
+    width: 300px;
     height: 100%;
     margin-left: 5%;
     padding: 0 1%;
@@ -102,9 +110,9 @@
   }
   
   #productCreate-description {
-    width: 50%;
-    height: 80%;
-    font-size: 18px;
+    width: 300px;
+    height: 170px;
+    font-size: 14px;
     resize: none;
     margin-left: 5%;
   }

@@ -47,34 +47,13 @@ function Carousel(props) {
     /* props로 이미지 전달 */
 
     const imagesData = [
-        {src: "https://cdn.pixabay.com/photo/2017/05/13/17/31/fruit-2310212_1280.jpg", alt: "img"},
-        {src: "https://cdn.pixabay.com/photo/2015/02/13/00/43/apples-634572_1280.jpg", alt: "img"},
-        {src: "https://cdn.pixabay.com/photo/2016/07/04/07/18/currants-1496075_1280.jpg", alt: "img"}
+        {src: props.img, alt: "Img"},
+        {src: props.img, alt: "Img"},
+        {src: props.img, alt: "Img"},
     ];
 
     return (
         <div className="Carousel">
-            {/* <div className="slideshow-container">
-                <div className="mySlides fade">
-                    <div className="numbertext">1 /3</div>
-                    <img src="https://cdn.pixabay.com/photo/2017/05/13/17/31/fruit-2310212_1280.jpg" alt=""/>
-                </div>
-
-                <div className="mySlides fade">
-                    <div className="numbertext">2 /3</div>
-                    <img src="https://cdn.pixabay.com/photo/2015/02/13/00/43/apples-634572_1280.jpg" alt=""/>
-                </div>
-
-                <div className="mySlides fade">
-                    <div className="numbertext">3 /3</div>
-                    <img src= "https://cdn.pixabay.com/photo/2016/07/04/07/18/currants-1496075_1280.jpg" alt=""/>
-                </div>
-
-                <a className= "prev" onClick={() => plusSlides(-1)}>❮</a>
-                <a class= "next" onClick={() => plusSlides(1)}>❯</a>
-
-            </div> */}
-
             <div className="slideshow-container">
                 {imagesData.map((image, index) => (
                 <div key={index} className={`mySlides fade ${index === slideIndex -1 ? 'active' : ''}`}>
