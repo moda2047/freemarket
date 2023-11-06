@@ -138,7 +138,7 @@ const Memberjoin = (props) => {
           password: password,
           email: email,
           name: name,
-          mobile: phoneNumber,
+          mobile: phoneNumber.replace(/-/g, ""),
         },
         {
           headers: {
