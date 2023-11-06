@@ -61,11 +61,6 @@ function AdminHeader() {
                 <img src="./image/adminpage-icon.png" alt="img"></img>
               </Link>
             </div>
-            <div class="adminHeader-chatting">
-              <Link to="/">
-                <img src="./image/chat-icon.png" alt="img"></img>
-              </Link>
-            </div>
           </div>
         </div>
       </div>
