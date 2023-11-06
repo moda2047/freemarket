@@ -49,6 +49,12 @@ hr {
   font-weight: bold;
   margin-left: 20px;
 }
+
+.MyInfoReviewYwMainIntroSpan > img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
 .MyInfoReviewYwMainContentsWrap > table {
   margin: 0 auto;
   width: 85%;

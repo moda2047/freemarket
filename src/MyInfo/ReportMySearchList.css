@@ -52,6 +52,12 @@ hr {
   margin-left: 20px;
 }
 
+.MyReportMSListMainIntroSpan > img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
 .MyReportMSListSearch {
   height: 380px;
 }

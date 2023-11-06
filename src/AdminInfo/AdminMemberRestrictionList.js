@@ -293,10 +293,8 @@ function AdminMemberRestrictionList() {
       <hr />
       <div className="AdminMRListMainWrap">
         <div className="AdminMRListMainIntro">
-          <div className="AdminMRListMainIntroImgDiv">
-            <img src="./image/MyInfoSearchMainIcon.png" alt="nono"></img>
-          </div>
           <span className="AdminMRListMainIntroSpan">
+            <img src="./image/MyInfoSearchMainIcon.png" alt="nono"></img>
             제재 당한 회원 목록 조회
           </span>
         </div>

@@ -139,10 +139,10 @@ const MySalList = () => {
       <hr />
       <div className="MyBuyListMainWrap">
         <div className="MyBuyListMainIntro">
-          <div className="MyBuyListMainIntroImgDiv">
+          <span className="MyBuyListMainIntroSpan">
             <img src="./image/MyInfoSearchMainIcon.png" alt="nono"></img>
-          </div>
-          <span className="MyBuyListMainIntroSpan">이우찬</span>
+            이우찬
+          </span>
           님의 판매목록입니다.
         </div>
         <div className="MySalListSearch">

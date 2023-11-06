@@ -66,10 +66,10 @@ function AdminReportSearchList() {
       <hr />
       <div className="AdminRSListMainWrap">
         <div className="AdminRSListMainIntro">
-          <div className="AdminRSListMainIntroImgDiv">
+          <span className="AdminRSListMainIntroSpan">
             <img src="./image/MyInfoSearchMainIcon.png" alt="nono"></img>
-          </div>
-          <span className="AdminRSListMainIntroSpan">신고/문의 목록 조회</span>
+            신고/문의 목록 조회
+          </span>
         </div>
         <div>
           <table className="AdminRSListSearchTable">

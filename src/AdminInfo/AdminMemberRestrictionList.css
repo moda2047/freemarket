@@ -51,6 +51,12 @@ hr {
   font-weight: bold;
   margin-left: 20px;
 }
+
+.AdminMRListMainIntroSpan > img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
 .AdminMRListSearchButton {
   margin: 0;
   height: 1vh;

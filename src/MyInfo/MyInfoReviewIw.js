@@ -80,10 +80,10 @@ const MyInfoReviewIw = (props) => {
       <hr />
       <div className="MyInfoReviewIwMainWrap">
         <div className="MyInfoReviewIwMainIntro">
-          <div className="MyInfoReviewIwMainIntroImgDiv">
+          <span className="MyInfoReviewIwMainIntroSpan">
             <img src="./image/MyInfoSearchMainIcon.png" alt="nono"></img>
-          </div>
-          <span className="MyInfoReviewIwMainIntroSpan">이우찬</span>
+            이우찬
+          </span>
           님이 작성하신 리뷰입니다.
         </div>
         <div className="MyInfoReviewIwMainContentsWrap">

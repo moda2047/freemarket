@@ -70,11 +70,9 @@ function ReportMySearchList() {
       <hr />
       <div className="MyReportMSListMainWrap">
         <div className="MyReportMSListMainIntro">
-          <div className="MyReportMSListMainIntroImgDiv">
-            <img src="./image/MyInfoSearchMainIcon.png" alt="nono"></img>
-          </div>
           <span className="MyReportMSListMainIntroSpan">
-            내 신고/문의 목록 조회
+            <img src="./image/MyInfoSearchMainIcon.png" alt="nono"></img>내
+            신고/문의 목록 조회
           </span>
         </div>
         <div>

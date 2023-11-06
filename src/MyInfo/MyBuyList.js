@@ -139,10 +139,9 @@ const MyBuyList = () => {
       <hr />
       <div className="MyBuyListMainWrap">
         <div className="MyBuyListMainIntro">
-          <div className="MyBuyListMainIntroImgDiv">
-            <img src="./image/MyInfoSearchMainIcon.png" alt="nono"></img>
-          </div>
-          <span className="MyBuyListMainIntroSpan">이우찬</span>
+          <span className="MyBuyListMainIntroSpan">
+            <img src="./image/MyInfoSearchMainIcon.png" alt="nono"></img>이우찬
+          </span>
           님의 구매목록입니다.
         </div>
         <div className="MyBuyListSearch">

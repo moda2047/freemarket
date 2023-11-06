@@ -358,10 +358,10 @@ function AdminMemberList() {
       <hr />
       <div className="AdminMListMainWrap">
         <div className="AdminMListMainIntro">
-          <div className="AdminMListMainIntroImgDiv">
+          <span className="AdminMListMainIntroSpan">
             <img src="./image/MyInfoSearchMainIcon.png" alt="nono"></img>
-          </div>
-          <span className="AdminMListMainIntroSpan">회원 목록 조회</span>
+            회원 목록 조회
+          </span>
         </div>
         <div>
           <div className="AdminMemberListSearchButton">

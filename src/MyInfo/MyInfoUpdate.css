@@ -48,6 +48,12 @@ hr {
   font-weight: bold;
   margin-left: 20px;
 }
+.MyInfoUpdateMainIntroSpan > img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
 .MyInfoUpdateMainContentsWrap > table {
   margin: 0 auto;
   width: 70%;

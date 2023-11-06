@@ -51,6 +51,11 @@ hr {
   font-weight: bold;
   margin-left: 20px;
 }
+.AdminMListMainIntroSpan > img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
 .AdminMemberListSearchButton {
   margin: 0;
   height: 1vh;

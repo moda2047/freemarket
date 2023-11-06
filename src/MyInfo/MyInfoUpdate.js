@@ -78,10 +78,11 @@ const MyInfoUpdate = (props) => {
       <hr />
       <div className="MyInfoUpdateMainWrap">
         <div className="MyInfoUpdateMainIntro">
-          <div className="MyInfoUpdateMainIntroImgDiv">
+          <div className="MyInfoUpdateMainIntroImgDiv"></div>
+          <span className="MyInfoUpdateMainIntroSpan">
             <img src="./image/MyInfoSearchMainIcon.png" alt="nono"></img>
-          </div>
-          <span className="MyInfoUpdateMainIntroSpan">{userid}</span>
+            {userid}
+          </span>
           님의 정보입니다.
         </div>
         <div className="MyInfoUpdateMainContentsWrap">
