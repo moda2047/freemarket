@@ -8,12 +8,20 @@ function ProductCreate() {
 
   const [name, setName] = useState("");
   const [imgFile, setImgFile] = useState(null);
+  const [thumbnailFile, setThumbnailFile] = useState(null);
   const [fileList, setFileList] = useState([]);
   const [thumbnail, setThumbnail] = useState("");
-  const [thumbnailFile, setThumbnailFile] = useState(null);
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+
+  // 유효성 검사용 데이터
+  const [nameValid, setNameValid] = useState(false);
+  const [fileValid, setFileValid] = useState(false);
+  const [thumbnailValid, setThumbnailValid] = useState(false);
+  const [categoryValid, setCategoryValid] = useState(false);
+  const [priceValid, setPriceValid] = useState(false);
+  const [descValid, setDescValid] = useState(false);
 
   const handleUploadFile = async (e) => {
     setImgFile(e.target.files);
@@ -46,6 +54,42 @@ function ProductCreate() {
   const submit = (e) => {
     e.preventDefault();
 
+    if (name === "") {
+      setNameValid(false);
+      window.alert("상품명을 입력해주세요.");
+      return;
+    }
+
+    if (imgFile === null) {
+      setFileValid(false);
+      window.alert("상품 이미지를 업로드해주세요.");
+      return;
+    }
+
+    if (thumbnailFile === null && thumbnail === "none") {
+      setThumbnailFile(false);
+      window.alert("썸네일로 사용할 이미지를 선택해주세요.");
+      return;
+    }
+
+    if (category === "" && category === "none") {
+      setCategoryValid(false);
+      window.alert("상품 카테고리를 선택해주세요.");
+      return;
+    }
+
+    if (price === "") {
+      setPriceValid(false);
+      window.alert("상품 가격을 입력해주세요.");
+      return;
+    }
+
+    if (description === "") {
+      setDescValid(false);
+      window.alert("상품 설명을 입력해주세요.");
+      return;
+    }
+
     const productCreateAPI = "http://localhost:8000/product/sell";
 
     const formData = new FormData();
@@ -76,19 +120,22 @@ function ProductCreate() {
         window.alert("오류");
       });
 
-    // setName('');
-    // setImgFile(null)
-    // setFileList([]);
-    // setCategory("none");
-    // setPrice('');
-    // setDescription('');
+    // 초기화
+    setName("");
+    setImgFile(null);
+    setFileList([]);
+    setThumbnail("");
+    setThumbnailFile(null);
+    setCategory("");
+    setPrice("");
+    setDescription("");
   };
 
   return (
     <div class="productCreate">
       <div class="productCreate-container">
         <h3> 상품 등록 </h3>
-        <table>
+        <table className="productCreate">
           <tbody>
             <tr id="">
               <td>
@@ -102,6 +149,7 @@ function ProductCreate() {
                   placeholder="상품명을 입력해주세요"
                   onChange={(e) => {
                     setName(e.target.value);
+                    setNameValid(true);
                   }}
                 />
               </td>
@@ -124,7 +172,10 @@ function ProductCreate() {
                     multiple
                     required
                     id="productCreate-file"
-                    onChange={handleUploadFile}
+                    onChange={(e) => {
+                      handleUploadFile(e);
+                      setFileValid(true);
+                    }}
                   />
                 </div>
               </td>
@@ -138,13 +189,14 @@ function ProductCreate() {
                   <select
                     id="productCreate-thumbnail"
                     defaultValue={thumbnail}
-                    placeholder="썸네일 선택"
                     onChange={(e) => {
                       handleThumbnail(e);
+                      setThumbnailValid(true);
                     }}
                   >
                     <option value="none">
-                      =============== 선택 ===============
+                      {" "}
+                      이미지를 등록하고 썸네일을 선택해주세요{" "}
                     </option>
                     {fileList.length !== 0
                       ? fileList.map((fileName) => (
@@ -167,6 +219,7 @@ function ProductCreate() {
                   defaultValue={category}
                   onChange={(e) => {
                     setCategory(e.target.value);
+                    setCategoryValid(true);
                   }}
                 >
                   <option value="none">
@@ -195,9 +248,11 @@ function ProductCreate() {
                 <input
                   type="number"
                   id="productCreate-price"
+                  placeholder=""
                   value={price}
                   onChange={(e) => {
                     setPrice(e.target.value);
+                    setPriceValid(true);
                   }}
                 />
                 {!price && <span className="placeholder-text"></span>}
@@ -214,6 +269,7 @@ function ProductCreate() {
                   placeholder="상품 설명을 입력해주세요"
                   onChange={(e) => {
                     setDescription(e.target.value);
+                    setDescValid(true);
                   }}
                 ></textarea>
               </td>

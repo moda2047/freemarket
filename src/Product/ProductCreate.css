@@ -12,12 +12,11 @@
   padding: 14px;
 }
 
-table {
+.productCreate table {
   width: 100%;
 }
 
-.productCreate td,
-tr {
+.productCreate tr > td {
   height: 50px;
   text-align: center;
   border-bottom: 1px solid #dddddd;
@@ -35,7 +34,7 @@ tr {
 }
 
 #productCreate-name {
-  width: 300px;
+  width: 400px;
   height: 28px;
   margin-left: 5%;
   padding: 0 1%;
@@ -56,9 +55,10 @@ tr {
 }
 
 #productCreate-price {
-  width: 300px;
+  width: 400px;
   height: 28px;
-  text-indent: 80%;
+  text-align: right;
+  padding-right: 5px;
   margin-left: 5%;
 }
 
@@ -69,7 +69,7 @@ tr {
 
 .productCreate .filebox .file-list {
   display: inline-block;
-  width: 300px;
+  width: 400px;
   height: 100%;
   margin-left: 5%;
   padding: 0 1%;
@@ -110,7 +110,7 @@ tr {
 }
 
 #productCreate-description {
-  width: 300px;
+  width: 400px;
   height: 170px;
   font-size: 14px;
   resize: none;
