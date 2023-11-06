@@ -88,10 +88,11 @@ const MyInfoSearch = (props) => {
       <hr />
       <div className="MyInfoSearchMainWrap">
         <div className="MyInfoSearchMainIntro">
-          <div className="MyInfoSearchMainIntroImgDiv">
+          <span className="MyInfoSearchMainIntroSpan">
             <img src="./image/MyInfoSearchMainIcon.png" alt="nono"></img>
-          </div>
-          <span className="MyInfoSearchMainIntroSpan">{userid}</span>
+
+            {userid}
+          </span>
           님의 정보입니다.
         </div>
         <div className="MyInfoSearchMainContentsWrap">

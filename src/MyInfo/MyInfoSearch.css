@@ -35,19 +35,16 @@ hr {
   line-height: 100px;
   background-color: #f3f3f3;
 }
-.MyInfoSearchMainIntroImgDiv {
-  position: absolute;
-  margin-left: 360px;
-}
-.MyInfoSearchMainIntroImgDiv > img {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
-}
+
 .MyInfoSearchMainIntroSpan {
   color: #0f297e;
   font-weight: bold;
   margin-left: 20px;
+}
+.MyInfoSearchMainIntroSpan > img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
 }
 .MyInfoSearchMainContentsWrap > table {
   margin: 0 auto;
