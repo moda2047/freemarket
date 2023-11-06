@@ -10,6 +10,7 @@ function AdminReportSearch({
   reportContent,
   status,
   reportReplies,
+  onDelete,
 }) {
   const [replyContent, setReplyContent] = useState("");
   const [cookies] = useCookies(["token"]);
@@ -41,6 +42,7 @@ function AdminReportSearch({
         if (response.data.result) {
           window.alert("신고/문의글이 성공적으로 삭제되었습니다.");
           console.log(response.data.message);
+          onDelete(reportId);
         } else {
           console.log(response.data.message);
           window.alert(response.data.message);
