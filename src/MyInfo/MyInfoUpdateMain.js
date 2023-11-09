@@ -12,7 +12,7 @@ import MyInfoReviewYw from "./MyInfoReviewYw.js";
 import ReportWrite from "./ReportWrite.js";
 import ReportMySearchList from "./ReportMySearchList.js";
 import MyInfoPasswordCorrect from "../PasswordChange/MyInfoPasswordCorrect.js";
-
+import WishList from "../WishList/WishList.js";
 const MyInfoMain = (props) => {
   const [activeTab, setActiveTab] = useState(1);
 
@@ -33,7 +33,7 @@ const MyInfoMain = (props) => {
             <MyInfoSearch activeTab={activeTab} onTabClick={handleTabClick} />
           )}
           {activeTab === 1 && <MyInfoUpdate />}
-          {activeTab === 2 && <MyInfoSearch />}
+          {activeTab === 2 && <WishList />}
           {activeTab === 3 && <MyBuyList />}
           {activeTab === 4 && <MySalList />}
           {activeTab === 5 && <MyInfoReviewIw />}
