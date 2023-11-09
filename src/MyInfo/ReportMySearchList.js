@@ -96,7 +96,7 @@ function ReportMySearchList() {
               <col width="15%" />
               <col width="40%" />
               <col width="10%" />
-              <col width="20%" />
+              <col width="auto" />
             </colgroup>
             <tr>
               <th>번호</th>
