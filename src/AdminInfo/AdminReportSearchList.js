@@ -36,6 +36,7 @@ function AdminReportSearchList() {
         if (response.data.result) {
           const foundArray = response.data.found;
           setReports(foundArray);
+          setTotalCount(response.data.totalCount);
           console.log("성공적으로 됐");
         } else {
           console.log("실패");
@@ -61,7 +62,26 @@ function AdminReportSearchList() {
   const handleTitleClick = (report) => {
     setSelectedReport(report.id === selectedReport ? null : report.id);
   };
+  const [totalCount, setTotalCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  useEffect(() => {
+    // Ensure currentPage is within a valid range
+    if (currentPage < 1) {
+      setCurrentPage(1);
+    }
+    if (currentPage > Math.ceil(totalCount / itemsPerPage)) {
+      setCurrentPage(Math.ceil(totalCount / itemsPerPage));
+    }
+  }, [currentPage, totalCount]);
 
+  const prevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
   return (
     <div className="AdminRSListWrap">
       <div className="AdminRSListWrapDiv">
@@ -94,34 +114,52 @@ function AdminReportSearchList() {
               <th>등록일</th>
             </tr>
 
-            {reports.map((report) => (
-              <React.Fragment key={report.id}>
-                <tr onClick={() => handleTitleClick(report)}>
-                  <td>{report.id}</td>
-                  <td>{getStatusText(report.status)}</td>
-                  <td>{report.title}</td>
-                  <td>{report.reporter_id}</td>
-                  <td>{report.createdAt}</td>
-                </tr>
-                {selectedReport === report.id && (
-                  <tr>
-                    <td colSpan="5">
-                      <AdminReportSearch
-                        reportId={report.id}
-                        reporterId={report.reporter_id}
-                        reportTitle={report.title}
-                        reportContent={report.content}
-                        status={report.status}
-                        reportReplies={report.report_replies}
-                        onDelete={onDelete}
-                      />
-                    </td>
+            {reports
+              .slice(
+                (currentPage - 1) * itemsPerPage,
+                currentPage * itemsPerPage
+              )
+              .map((report) => (
+                <React.Fragment key={report.id}>
+                  <tr onClick={() => handleTitleClick(report)}>
+                    <td>{report.id}</td>
+                    <td>{getStatusText(report.status)}</td>
+                    <td>{report.title}</td>
+                    <td>{report.reporter_id}</td>
+                    <td>{report.createdAt}</td>
                   </tr>
-                )}
-              </React.Fragment>
-            ))}
+                  {selectedReport === report.id && (
+                    <tr>
+                      <td colSpan="5">
+                        <AdminReportSearch
+                          reportId={report.id}
+                          reporterId={report.reporter_id}
+                          reportTitle={report.title}
+                          reportContent={report.content}
+                          status={report.status}
+                          reportReplies={report.report_replies}
+                          onDelete={onDelete}
+                        />
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
+              ))}
           </table>
         </div>
+        <div className="MyBuyListPagination">
+          <button onClick={prevPage} disabled={currentPage === 1}>
+            이전
+          </button>
+          <span>{currentPage}</span>
+          <button
+            onClick={nextPage}
+            disabled={currentPage >= Math.ceil(totalCount / itemsPerPage)}
+          >
+            다음
+          </button>
+        </div>
+        <br></br>
       </div>
     </div>
   );
