@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./AdminMemberList.css";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
+import AdminMemberRestriction from "./AdminMemberRestriction.js";
 
 function AdminMemberList() {
   const [members, setMembers] = useState([]);
   const [cookies] = useCookies(["token"]);
-
+  const navigate = useNavigate();
   const fetchData = async () => {
     const mailAuthAPI = "http://localhost:8000/member/search";
     const headers = {
@@ -64,7 +66,13 @@ function AdminMemberList() {
 
   const handleSearch = () => {};
 
-  const handleSanction = () => {};
+  const handleSanction = (memberId) => {
+    navigate("/AdminMemberRestriction", {
+      state: {
+        memberId,
+      },
+    });
+  };
   return (
     <div className="AdminMListWrap">
       <div className="AdminMListWrapDiv">
@@ -130,7 +138,10 @@ function AdminMemberList() {
                   <td>{member.email}</td>
                   <td>{member.mobile}</td>
                   <td>
-                    <button onClick={() => handleSanction(member.id)}>
+                    <button
+                      className="AdminMemberList-button"
+                      onClick={() => handleSanction(member.id)}
+                    >
                       제재
                     </button>
                   </td>

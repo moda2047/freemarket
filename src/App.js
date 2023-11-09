@@ -21,6 +21,7 @@ import MyInfoPasswordCorrect from "./PasswordChange/MyInfoPasswordCorrect.js";
 import MyInfoUpdateMain from "./MyInfo/MyInfoUpdateMain.js";
 import AdminReportAnswer from "./AdminInfo/AdminReportAnswer.js";
 import ProductCreate from "./Product/ProductCreate.js";
+import AdminMemberRestriction from "./AdminInfo/AdminMemberRestriction.js";
 const App = () => {
   return (
     <div className="wrap">
@@ -54,6 +55,10 @@ const App = () => {
           <Route path="/ProductDetail" element={<ProductDetail />}></Route>
           <Route path="/AdminReportAnswer" component={AdminReportAnswer} />
           <Route path="*" element={<NotFound />}></Route>
+          <Route
+            path="/AdminMemberRestriction"
+            element={<AdminMemberRestriction />}
+          ></Route>
         </Routes>
       </BrowserRouter>
     </div>

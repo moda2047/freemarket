@@ -12,7 +12,6 @@ function AdminReportSearch({
   reportReplies,
   onDelete,
 }) {
-  const [replyContent, setReplyContent] = useState("");
   const [cookies] = useCookies(["token"]);
   const navigate = useNavigate();
   const openNewPage = () => {

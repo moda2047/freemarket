@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import "./Test.css";
+import "./AdminMemberRestriction.css";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const AdminMemberRestriction = ({ memberId }) => {
+const AdminMemberRestriction = () => {
   const [reason, setReason] = useState("");
   const [duration, setDuration] = useState("1day");
-
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { memberId } = location.state;
   const handleReasonChange = (e) => {
     setReason(e.target.value);
   };
