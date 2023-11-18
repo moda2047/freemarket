@@ -68,7 +68,7 @@ const MyInfoSearch = (props) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/member/search?id=${userid}`)
+      .get(`http://localhost:8000/member/search?id=${userid}&getSanction=true`)
       .then((response) => {
         const userData = response.data.found[0]; // found 배열의 첫 번째 요소
         setUserData(userData);
@@ -117,6 +117,28 @@ const MyInfoSearch = (props) => {
                     ? formatPhoneNumber(userData.mobile)
                     : "로딩 중..."}
                 </td>
+              </td>
+            </tr>
+            <tr>
+              <td>제재 만료 일시</td>
+              <td>
+                {userData &&
+                userData.target_user_sanctions &&
+                userData.target_user_sanctions.length > 0 ? (
+                  <table>
+                    {userData.target_user_sanctions.map((sanction, index) => (
+                      <tr key={index}>
+                        <td>{sanction.expire}</td>
+                      </tr>
+                    ))}
+                  </table>
+                ) : userData &&
+                  userData.target_user_sanctions &&
+                  userData.target_user_sanctions.length === 0 ? (
+                  <p>클린한 회원입니다.</p>
+                ) : (
+                  "로딩 중..."
+                )}
               </td>
             </tr>
           </table>
