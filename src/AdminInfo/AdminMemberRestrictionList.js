@@ -1,367 +1,199 @@
-import React, { useState } from "react";
-import "./AdminMemberRestrictionList.css";
+import React, { useState, useEffect } from "react";
+import "./AdminMemberRestriction";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
-function AdminMemberRestrictionList() {
+function AdminMemberList() {
   const [members, setMembers] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [indexOfFirstMember, setIndexOfFirstMember] = useState(0);
-  const membersPerPage = 10;
+  const [cookies] = useCookies(["token"]);
 
-  const mockData = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john.doe@example.com",
-      phoneNumber: "555-123-4567",
-      sanctionReason: "부적절한 행동",
-      sanctionDuration: "30일",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      email: "jane.smith@example.com",
-      phoneNumber: "555-987-6543",
-      sanctionReason: "규칙 위반",
-      sanctionDuration: "15일",
-    },
-    {
-      id: 3,
-      name: "Bob Johnson",
-      email: "bob.johnson@example.com",
-      phoneNumber: "555-567-8901",
-      sanctionReason: "욕설 사용",
-      sanctionDuration: "10일",
-    },
-    {
-      id: 4,
-      name: "Alice Johnson",
-      email: "alice.johnson@example.com",
-      phoneNumber: "555-123-7890",
-      sanctionReason: "스팸 홍보",
-      sanctionDuration: "20일",
-    },
-    {
-      id: 5,
-      name: "Chris Lee",
-      email: "chris.lee@example.com",
-      phoneNumber: "555-567-1234",
-      sanctionReason: "기타 위반",
-      sanctionDuration: "5일",
-    },
-    {
-      id: 6,
-      name: "Emily White",
-      email: "emily.white@example.com",
-      phoneNumber: "555-789-5678",
-      sanctionReason: "부적절한 콘텐츠",
-      sanctionDuration: "25일",
-    },
-    {
-      id: 7,
-      name: "David Kim",
-      email: "david.kim@example.com",
-      phoneNumber: "555-234-8901",
-      sanctionReason: "규칙 위반",
-      sanctionDuration: "12일",
-    },
-    {
-      id: 8,
-      name: "Grace Brown",
-      email: "grace.brown@example.com",
-      phoneNumber: "555-789-1234",
-      sanctionReason: "욕설 사용",
-      sanctionDuration: "8일",
-    },
-    {
-      id: 9,
-      name: "Michael Park",
-      email: "michael.park@example.com",
-      phoneNumber: "555-123-5678",
-      sanctionReason: "스팸 홍보",
-      sanctionDuration: "18일",
-    },
-    {
-      id: 10,
-      name: "Linda Johnson",
-      email: "linda.johnson@example.com",
-      phoneNumber: "555-567-2345",
-      sanctionReason: "부적절한 행동",
-      sanctionDuration: "7일",
-    },
-    {
-      id: 11,
-      name: "Robert Wilson",
-      email: "robert.wilson@example.com",
-      phoneNumber: "555-234-5678",
-      sanctionReason: "규칙 위반",
-      sanctionDuration: "22일",
-    },
-    {
-      id: 12,
-      name: "Sophia Smith",
-      email: "sophia.smith@example.com",
-      phoneNumber: "555-678-9012",
-      sanctionReason: "욕설 사용",
-      sanctionDuration: "11일",
-    },
-    {
-      id: 13,
-      name: "William Johnson",
-      email: "william.johnson@example.com",
-      phoneNumber: "555-345-6789",
-      sanctionReason: "스팸 홍보",
-      sanctionDuration: "16일",
-    },
-    {
-      id: 14,
-      name: "Olivia Lee",
-      email: "olivia.lee@example.com",
-      phoneNumber: "555-901-2345",
-      sanctionReason: "부적절한 콘텐츠",
-      sanctionDuration: "9일",
-    },
-    {
-      id: 15,
-      name: "James Kim",
-      email: "james.kim@example.com",
-      phoneNumber: "555-123-9012",
-      sanctionReason: "규칙 위반",
-      sanctionDuration: "14일",
-    },
-    {
-      id: 16,
-      name: "Ava Brown",
-      email: "ava.brown@example.com",
-      phoneNumber: "555-567-1234",
-      sanctionReason: "욕설 사용",
-      sanctionDuration: "7일",
-    },
-    {
-      id: 17,
-      name: "Ethan Smith",
-      email: "ethan.smith@example.com",
-      phoneNumber: "555-901-5678",
-      sanctionReason: "스팸 홍보",
-      sanctionDuration: "20일",
-    },
-    {
-      id: 18,
-      name: "Mia Johnson",
-      email: "mia.johnson@example.com",
-      phoneNumber: "555-234-5678",
-      sanctionReason: "부적절한 행동",
-      sanctionDuration: "6일",
-    },
-    {
-      id: 19,
-      name: "Daniel Wilson",
-      email: "daniel.wilson@example.com",
-      phoneNumber: "555-567-9012",
-      sanctionReason: "규칙 위반",
-      sanctionDuration: "28일",
-    },
-    {
-      id: 20,
-      name: "Isabella Smith",
-      email: "isabella.smith@example.com",
-      phoneNumber: "555-234-9012",
-      sanctionReason: "욕설 사용",
-      sanctionDuration: "13일",
-    },
-    {
-      id: 21,
-      name: "Alexander Brown",
-      email: "alexander.brown@example.com",
-      phoneNumber: "555-567-1234",
-      sanctionReason: "스팸 홍보",
-      sanctionDuration: "17일",
-    },
-    {
-      id: 22,
-      name: "Sophia Johnson",
-      email: "sophia.johnson@example.com",
-      phoneNumber: "555-901-2345",
-      sanctionReason: "부적절한 콘텐츠",
-      sanctionDuration: "10일",
-    },
-    {
-      id: 23,
-      name: "Noah Kim",
-      email: "noah.kim@example.com",
-      phoneNumber: "555-234-5678",
-      sanctionReason: "규칙 위반",
-      sanctionDuration: "21일",
-    },
-    {
-      id: 24,
-      name: "Olivia Lee",
-      email: "olivia.lee@example.com",
-      phoneNumber: "555-901-1234",
-      sanctionReason: "욕설 사용",
-      sanctionDuration: "9일",
-    },
-    {
-      id: 25,
-      name: "Liam Smith",
-      email: "liam.smith@example.com",
-      phoneNumber: "555-123-5678",
-      sanctionReason: "스팸 홍보",
-      sanctionDuration: "19일",
-    },
-    {
-      id: 26,
-      name: "Charlotte Johnson",
-      email: "charlotte.johnson@example.com",
-      phoneNumber: "555-567-2345",
-      sanctionReason: "부적절한 행동",
-      sanctionDuration: "8일",
-    },
-    {
-      id: 27,
-      name: "William Wilson",
-      email: "william.wilson@example.com",
-      phoneNumber: "555-901-5678",
-      sanctionReason: "규칙 위반",
-      sanctionDuration: "25일",
-    },
-    {
-      id: 28,
-      name: "Ava Brown",
-      email: "ava.brown@example.com",
-      phoneNumber: "555-234-5678",
-      sanctionReason: "욕설 사용",
-      sanctionDuration: "11일",
-    },
-    {
-      id: 29,
-      name: "Michael Kim",
-      email: "michael.kim@example.com",
-      phoneNumber: "555-567-9012",
-      sanctionReason: "스팸 홍보",
-      sanctionDuration: "14일",
-    },
-    {
-      id: 30,
-      name: "Mia Smith",
-      email: "mia.smith@example.com",
-      phoneNumber: "555-234-9012",
-      sanctionReason: "부적절한 콘텐츠",
-      sanctionDuration: "12일",
-    },
-    {
-      id: 31,
-      name: "James Johnson",
-      email: "james.johnson@example.com",
-      phoneNumber: "555-901-1234",
-      sanctionReason: "규칙 위반",
-      sanctionDuration: "16일",
-    },
-  ];
-
-  const filteredMembers = mockData.filter(
-    (member) =>
-      member.id.toString().includes(searchQuery) ||
-      member.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const indexOfLastMember = currentPage * membersPerPage;
-  const currentMembers = filteredMembers.slice(
-    indexOfFirstMember,
-    indexOfLastMember
-  );
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const handlePageChange = (pageNumber) => {
-    // 업데이트된 페이지 번호를 기반으로 indexOfFirstMember를 계산
-    const newIndexOfFirstMember = (pageNumber - 1) * membersPerPage;
-    setCurrentPage(pageNumber);
-
-    // indexOfFirstMember 업데이트
-    setIndexOfFirstMember(newIndexOfFirstMember);
+  const fetchData = async () => {
+    const mailAuthAPI = "http://localhost:8000/sanction/searchForAdmin";
+    const headers = {
+      headers: {
+        Authorization: cookies.token,
+        ContentType: "application/json",
+        Accept: "application/json",
+      },
+    };
+    console.log("fetchData 함수가 실행됩니다.");
+    console.log(typeof cookies.token);
+    axios
+      .get(mailAuthAPI, headers)
+      .then((response) => {
+        console.log("API 응답 데이터: ", response.data);
+        if (response.data.result) {
+          const foundArray = response.data.found;
+          setMembers(foundArray);
+          setTotalCount(response.data.totalCount);
+          console.log("성공적으로 됐");
+        } else {
+          console.log("실패");
+        }
+      })
+      .catch((error) => {
+        console.error("오류 : ", error);
+        console.error("Error status: ", error.response.status);
+        console.error("Error data: ", error.response.data);
+      });
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+  const [totalCount, setTotalCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  useEffect(() => {
+    // Ensure currentPage is within a valid range
+    if (currentPage < 1) {
+      setCurrentPage(1);
+    }
+    if (currentPage > Math.ceil(totalCount / itemsPerPage)) {
+      setCurrentPage(Math.ceil(totalCount / itemsPerPage));
+    }
+  }, [currentPage, totalCount]);
+
+  const prevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
   const handleSearch = () => {};
 
-  const handleSanction = () => {};
+  const handleSanction = (memberId) => {
+    const userConfirmed = window.confirm("정말로 취소하시겠습니까?");
+
+    if (userConfirmed) {
+      const url = `http://localhost:8000/sanction/cancel?sanctionId=${memberId}`;
+      const data = {
+        sanctionId: memberId,
+      };
+      const headers = {
+        headers: {
+          Authorization: cookies.token,
+        },
+      };
+
+      axios
+        .delete(url, { data, ...headers })
+        .then((response) => {
+          console.log(response);
+          if (response.data.result) {
+            window.alert("제재가 취소되었습니다.");
+            console.log(response.data.message);
+
+            fetchData();
+          } else {
+            console.log(response.data.message);
+            window.alert(response.data.message);
+          }
+        })
+        .catch((error) => {
+          console.error("제재 취소에 문제가 생겼습니다..", error);
+          console.error("Error status: ", error.response.status);
+          console.error("Error data: ", error.response.data);
+        });
+    }
+  };
   return (
-    <div className="AdminMRListWrap">
-      <div className="AdminMRListWrapDiv">
+    <div className="AdminMListWrap">
+      <div className="AdminMListWrapDiv">
         <h3>
           <img src="./image/AdminMemberRestrictionList.png" alt="nono" />
         </h3>
       </div>
       <hr />
-      <div className="AdminMRListMainWrap">
-        <div className="AdminMRListMainIntro">
-          <span className="AdminMRListMainIntroSpan">
+      <div className="AdminMListMainWrap">
+        <div className="AdminMListMainIntro">
+          <span className="AdminMListMainIntroSpan">
             <img src="./image/MyInfoSearchMainIcon.png" alt="nono"></img>
             제재 당한 회원 목록 조회
           </span>
         </div>
         <div>
-          <div className="AdminMRListSearchButton">
-            <button className="AdminMRListSearchCheck" onClick={handleSearch}>
+          <div className="AdminMemberListSearchButton">
+            <button
+              className="AdminMemberListSearchCheck"
+              onClick={handleSearch}
+            >
               검색
             </button>
             <input
-              className="AdminMRListSearchInput"
+              className="AdminMemberListSearchInput"
               type="text"
               placeholder="ID 또는 이름으로 검색"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              //value={searchQuery}
+              //onChange={(e) => setSearchQuery(e.target.value)}
               style={{
                 float: "right",
                 width: "150px",
-              }} /* 오른쪽 정렬 및 크기 조정 */
-              maxLength="15" /* 최대 15글자로 제한 */
+              }}
+              maxLength="15"
             />
           </div>
 
-          <table className="AdminMRListSearchTable">
+          <table className="AdminMListSearchTable">
             <colgroup>
-              <col width="10%" />
-              <col width="10%" />
+              <col width="7%" />
+              <col width="13%" />
+              <col width="20%" />
               <col width="30%" />
-              <col width="30%" />
+              <col width="20%" />
               <col width="auto" />
             </colgroup>
             <tr>
               <th>ID</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Phone Number</th>
               <th>제재 사유</th>
               <th>제재 기간</th>
+              <th>Actions</th>
             </tr>
 
-            {currentMembers.map((member) => (
-              <tr key={member.id}>
-                <td>{member.id}</td>
-                <td>{member.name}</td>
-                <td>{member.email}</td>
-                <td>{member.phoneNumber}</td>
-                <td>
-                  {member.sanctionReason} {/* 제재 사유 표시 */}
-                </td>
-                <td>
-                  {member.sanctionDuration} {/* 제재 기간 표시 */}
-                </td>
-              </tr>
-            ))}
+            {members
+              .slice(
+                (currentPage - 1) * itemsPerPage,
+                currentPage * itemsPerPage
+              )
+              .map((member) => (
+                <tr key={member.id}>
+                  <td>{member.id}</td>
+                  <td>{member.target_id}</td>
+                  <td>{member.target_email}</td>
+                  <td>{member.reason}</td>
+                  <td>{member.expire_at}</td>
+                  <td>
+                    <button
+                      className="AdminMemberList-button"
+                      onClick={() => handleSanction(member.id)}
+                    >
+                      취소
+                    </button>
+                  </td>
+                </tr>
+              ))}
           </table>
-          <div className="AdminMRListpagination">
-            {Array.from({
-              length: Math.ceil(filteredMembers.length / membersPerPage),
-            }).map((_, index) => (
-              <button key={index} onClick={() => handlePageChange(index + 1)}>
-                {index + 1}
-              </button>
-            ))}
+          <div className="MyBuyListPagination">
+            <button onClick={prevPage} disabled={currentPage === 1}>
+              이전
+            </button>
+            <span>{currentPage}</span>
+            <button
+              onClick={nextPage}
+              disabled={currentPage >= Math.ceil(totalCount / itemsPerPage)}
+            >
+              다음
+            </button>
           </div>
+          <br></br>
         </div>
       </div>
     </div>
   );
 }
 
-export default AdminMemberRestrictionList;
+export default AdminMemberList;

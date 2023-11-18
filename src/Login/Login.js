@@ -73,7 +73,7 @@ const Login = (props) => {
             path: "/",
           });
           console.log(message);
-          window.alert("로그인 되었습니다!");
+          window.alert(message);
 
           // 로그인 이후 메인페이지로 이동? 마이페이지로 이동?
           navigate("/");

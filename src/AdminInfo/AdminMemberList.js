@@ -3,12 +3,12 @@ import "./AdminMemberList.css";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import AdminMemberRestriction from "./AdminMemberRestriction.js";
 
 function AdminMemberList() {
   const [members, setMembers] = useState([]);
   const [cookies] = useCookies(["token"]);
   const navigate = useNavigate();
+
   const fetchData = async () => {
     const mailAuthAPI = "http://localhost:8000/member/search";
     const headers = {
