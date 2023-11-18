@@ -6,6 +6,7 @@ import { useCookies } from "react-cookie";
 function AdminMemberList() {
   const [members, setMembers] = useState([]);
   const [cookies] = useCookies(["token"]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const fetchData = async () => {
     const mailAuthAPI = "http://localhost:8000/sanction/searchForAdmin";
@@ -62,7 +63,27 @@ function AdminMemberList() {
     setCurrentPage(currentPage + 1);
   };
 
-  const handleSearch = () => {};
+  const handleSearch = () => {
+    const filteredMembers = members.filter((member) => {
+      const memberName = (member.target_id || "").toString().toLowerCase(); // 이름 속성으로 변경
+      const memberEmail = (member.target_email || "").toString().toLowerCase(); // 이메일 속성으로 변경
+
+      // 검색어 및 멤버 이름과 이메일이 유효한지 확인
+      if (memberName && memberEmail && searchQuery) {
+        return (
+          memberName.includes(searchQuery.toLowerCase()) ||
+          memberEmail.includes(searchQuery.toLowerCase())
+        );
+      }
+      return false;
+    });
+
+    if (filteredMembers.length === 0) {
+      alert("검색 결과가 없습니다.");
+    } else {
+      setMembers(filteredMembers);
+    }
+  };
 
   const handleSanction = (memberId) => {
     const userConfirmed = window.confirm("정말로 취소하시겠습니까?");
@@ -125,9 +146,9 @@ function AdminMemberList() {
             <input
               className="AdminMemberListSearchInput"
               type="text"
-              placeholder="ID 또는 이름으로 검색"
-              //value={searchQuery}
-              //onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Name또는 Email로 검색"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               style={{
                 float: "right",
                 width: "150px",

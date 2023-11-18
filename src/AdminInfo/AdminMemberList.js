@@ -8,6 +8,7 @@ function AdminMemberList() {
   const [members, setMembers] = useState([]);
   const [cookies] = useCookies(["token"]);
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const fetchData = async () => {
     const mailAuthAPI = "http://localhost:8000/member/search";
@@ -43,9 +44,11 @@ function AdminMemberList() {
   useEffect(() => {
     fetchData();
   }, []);
+
   const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+
   useEffect(() => {
     // Ensure currentPage is within a valid range
     if (currentPage < 1) {
@@ -64,7 +67,19 @@ function AdminMemberList() {
     setCurrentPage(currentPage + 1);
   };
 
-  const handleSearch = () => {};
+  const handleSearch = () => {
+    const filteredMembers = members.filter(
+      (member) =>
+        member.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        member.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    if (filteredMembers.length === 0) {
+      // 검색 결과가 없는 경우
+      alert("검색 결과가 없습니다.");
+    } else {
+      setMembers(filteredMembers);
+    }
+  };
 
   const handleSanction = (memberId) => {
     navigate("/AdminMemberRestriction", {
@@ -99,9 +114,9 @@ function AdminMemberList() {
             <input
               className="AdminMemberListSearchInput"
               type="text"
-              placeholder="ID 또는 이름으로 검색"
-              //value={searchQuery}
-              //onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="ID 또는 Name으로 검색"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               style={{
                 float: "right",
                 width: "150px",
