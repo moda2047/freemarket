@@ -1,7 +1,7 @@
 import "./ProductCreate.css";
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
-import Modal from 'react-modal';
+import Modal from "react-modal";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -22,7 +22,6 @@ function ProductCreate() {
   // 유효성 검사용 데이터
   const [nameValid, setNameValid] = useState(false);
   const [fileValid, setFileValid] = useState(false);
-  const [thumbnailValid, setThumbnailValid] = useState(false);
   const [categoryValid, setCategoryValid] = useState(false);
   const [priceValid, setPriceValid] = useState(false);
   const [descValid, setDescValid] = useState(false);
@@ -41,9 +40,9 @@ function ProductCreate() {
     setDescription("");
 
     setModalIsOpen(false);
-  }, [])
+  }, []);
 
-  const handleUploadFile = async (e) => {
+  const handleUploadFile = (e) => {
     setImgFile(e.target.files);
 
     const list = [];
@@ -83,12 +82,6 @@ function ProductCreate() {
     if (!fileValid || imgFile === null) {
       setFileValid(false);
       window.alert("상품 이미지를 업로드해주세요.");
-      return;
-    }
-
-    if (!thumbnailValid || thumbnailFile === null || thumbnail === "none") {
-      setThumbnailFile(false);
-      window.alert("썸네일로 사용할 이미지를 선택해주세요.");
       return;
     }
 
@@ -134,7 +127,7 @@ function ProductCreate() {
       .then((response) => {
         console.log(response);
 
-        if(response.data.result) {
+        if (response.data.result) {
           // window.alert(response.data.message);
 
           setModalIsOpen(true);
@@ -181,7 +174,6 @@ function ProductCreate() {
                     className="file-list"
                     value={fileList}
                     placeholder="첨부파일 다중 선택 가능"
-                    readOnly
                   />
                   <label htmlFor="productCreate-file">파일 찾기</label>
                   <input
@@ -205,10 +197,9 @@ function ProductCreate() {
                 <div>
                   <select
                     id="productCreate-thumbnail"
-                    defaultValue={thumbnail}
+                    value={thumbnail}
                     onChange={(e) => {
                       handleThumbnail(e);
-                      setThumbnailValid(true);
                     }}
                   >
                     <option value="none">
@@ -295,19 +286,24 @@ function ProductCreate() {
         </table>
 
         <Modal isOpen={modalIsOpen}>
+          <div>상품 등록이 완료되었습니다. 계속하시겠습니까?</div>
           <div>
-            상품 등록이 완료되었습니다.
-            계속하시겠습니까?
-          </div>
-          <div>
-            <button onClick={()=> {
-                setModalIsOpen(false); 
+            <button
+              onClick={() => {
+                setModalIsOpen(false);
                 window.location.replace("/ProductCreate");
-              }}>계속하기</button>
-            <button onClick={()=> {
+              }}
+            >
+              계속하기
+            </button>
+            <button
+              onClick={() => {
                 setModalIsOpen(false);
                 navigate("/");
-              }}>메인으로</button>
+              }}
+            >
+              메인으로
+            </button>
           </div>
         </Modal>
 

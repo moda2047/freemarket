@@ -1,14 +1,14 @@
 import "./ProductUpdate.css";
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
-import Modal from 'react-modal';
+import Modal from "react-modal";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function ProductUpdate() {
   const navigate = useNavigate();
   const location = useLocation();
-  const state = location.state;
+  const productInfo = location.state;
   const [cookies] = useCookies(["token"]);
 
   const [title, setTitle] = useState(null);
@@ -16,7 +16,7 @@ function ProductUpdate() {
   const [thumbnailFile, setThumbnailFile] = useState(null);
   const [fileList, setFileList] = useState([]);
   const [thumbnail, setThumbnail] = useState(null);
-  const [category, setCategory] = useState(null);
+  const [category, setCategory] = useState(productInfo.category);
   const [price, setPrice] = useState(null);
   const [content, setContent] = useState(null);
 
@@ -55,26 +55,26 @@ function ProductUpdate() {
 
     const formData = new FormData();
 
-    formData.append("productId", state)
-    console.log(state);
+    formData.append("productId", productInfo.product_id);
+    console.log(productInfo.product_id);
 
     // 입력 여부 확인
-    if(title !== null) {
-      formData.append("title", title)
+    if (title !== null) {
+      formData.append("title", title);
     }
-    if(content !== null) {
+    if (content !== null) {
       formData.append("content", content);
     }
-    if(price !== null) {
+    if (price !== null) {
       formData.append("price", price);
     }
-    if(category !== null) {
+    if (category !== null || category !== productInfo.category) {
       formData.append("category", category);
     }
-    if(thumbnailFile !== null) {
+    if (thumbnailFile !== null) {
       formData.append("thumbnail", thumbnailFile);
     }
-    if(imgFile !== null) {
+    if (imgFile !== null) {
       for (let i = 0; i < imgFile.length; i++) {
         formData.append("img", imgFile[i]);
       }
@@ -91,7 +91,7 @@ function ProductUpdate() {
       .then((response) => {
         console.log(response);
 
-        if(response.data.result) {
+        if (response.data.result) {
           window.alert(response.data.message);
           navigate("/");
         } else {
@@ -109,7 +109,10 @@ function ProductUpdate() {
       <div class="productUpdate-container">
         <h2> 상품 수정 </h2>
         <div className="productUpdate-container-info">
-          <h3 style={{textAlign: "center"}}> 수정하실 내용만 입력해주세요. </h3>
+          <h3 style={{ textAlign: "center" }}>
+            {" "}
+            수정하실 내용만 입력해주세요.{" "}
+          </h3>
         </div>
         <table id="productUpdate">
           <tbody>
@@ -122,7 +125,7 @@ function ProductUpdate() {
                   type="text"
                   id="productUpdate-name"
                   value={title}
-                  placeholder="상품명을 입력해주세요"
+                  placeholder={productInfo.title}
                   onChange={(e) => {
                     setTitle(e.target.value);
                   }}
@@ -138,7 +141,7 @@ function ProductUpdate() {
                   <input
                     className="file-list"
                     value={fileList}
-                    placeholder="첨부파일 다중 선택 가능"
+                    placeholder=""
                     readOnly
                   />
                   <label htmlFor="productUpdate-file">파일 찾기</label>
@@ -162,7 +165,8 @@ function ProductUpdate() {
                 <div>
                   <select
                     id="productUpdate-thumbnail"
-                    defaultValue={thumbnail}
+                    value={thumbnail}
+                    placeholder={productInfo.thumbnail}
                     onChange={(e) => {
                       handleThumbnail(e);
                     }}
@@ -189,7 +193,7 @@ function ProductUpdate() {
               <td>
                 <select
                   id="productUpdate-category"
-                  defaultValue={category}
+                  value={category}
                   onChange={(e) => {
                     setCategory(e.target.value);
                   }}
@@ -220,7 +224,7 @@ function ProductUpdate() {
                 <input
                   type="number"
                   id="productUpdate-price"
-                  placeholder=""
+                  placeholder={productInfo.price}
                   value={price}
                   onChange={(e) => {
                     setPrice(e.target.value);
@@ -237,7 +241,7 @@ function ProductUpdate() {
                 <textarea
                   id="productUpdate-description"
                   value={content}
-                  placeholder="상품 설명을 입력해주세요"
+                  placeholder={productInfo.content}
                   onChange={(e) => {
                     setContent(e.target.value);
                   }}

@@ -67,6 +67,10 @@ const App = () => {
             path="/AdminMemberRestriction"
             element={<AdminMemberRestriction />}
           ></Route>
+          <Route
+            path="/OtherUserInfoSearch"
+            element={<OtherUserInfoSearch />}
+          ></Route>
           <Route path="/ReviewCreate" element={<ReviewCreate />}></Route>
         </Routes>
       </BrowserRouter>
