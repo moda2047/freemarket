@@ -1,73 +1,101 @@
 import React, { useState, useEffect } from "react";
 import "./MyInfoReviewIw.css";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 const MyInfoReviewIw = (props) => {
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
+  const [cookies] = useCookies(["token", "author", "userid"]);
+  const [selectedReviews, setSelectedReviews] = useState([]);
+  const [totalCount, setTotalCount] = useState();
+  const navigate = useNavigate();
+
+  const token = cookies.token;
+  const userid = cookies.userid;
 
   useEffect(() => {
-    // Initialize your dummy data
-    const dummyData = [
-      {
-        id: "feijddy",
-        productName: "Product 1",
-        rating: "1",
-        coments: "coments 1",
-      },
-      {
-        id: "feijddy2",
-        productName: "Product 1",
-        rating: "1",
-        coments: "coments 1",
-      },
-      {
-        id: "feijddy3",
-        productName: "Product 1",
-        rating: "1",
-        coments: "coments 1",
-      },
-      {
-        id: "feijddy3",
-        productName: "Product 1",
-        rating: "1",
-        coments: "coments 1",
-      },
-      {
-        id: "feijddy6",
-        productName: "Product 1",
-        rating: "1",
-        coments: "coments 1",
-      },
-      {
-        id: "feijddy7",
-        productName: "Product 1",
-        rating: "1",
-        coments: "coments 1",
-      },
-
-      // Add more data items as needed
-    ];
-
-    setData(dummyData);
-  }, []);
+    axios
+      .get(`http://localhost:8000/review/searchWriteReview?user_id=${userid}`, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      })
+      .then((response) => {
+        const data = response.data.found;
+        setData(data);
+        setTotalCount(response.data.totalCount);
+      })
+      .catch((error) => {
+        console.error("데이터 가져오기 실패:", error);
+      });
+  }, [token]);
 
   useEffect(() => {
-    // Ensure currentPage is within a valid range
-    if (currentPage < 1) {
-      setCurrentPage(1);
+    const maxPage = Math.ceil(data.length / itemsPerPage);
+
+    if (currentPage < 1 || currentPage > maxPage) {
+      setCurrentPage((prevPage) => Math.min(Math.max(prevPage, 1), maxPage));
     }
-    if (currentPage > Math.ceil(data.length / itemsPerPage)) {
-      setCurrentPage(Math.ceil(data.length / itemsPerPage));
-    }
-  }, [currentPage, data]);
+  }, [currentPage, data.length, itemsPerPage]);
 
   const prevPage = () => {
-    setCurrentPage(currentPage - 1);
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
+  };
+
+  const handleCheckboxChange = (index) => {
+    const selectedIndex = selectedReviews.indexOf(index);
+    console.log(selectedIndex);
+    if (selectedIndex === -1) {
+      setSelectedReviews([...selectedReviews, index]);
+    } else {
+      const updatedSelection = [...selectedReviews];
+      updatedSelection.splice(selectedIndex, 1);
+      setSelectedReviews(updatedSelection);
+    }
+  };
+
+  const handleDeleteReviews = () => {
+    console.log("data", data);
+    console.log("selectedReviews", selectedReviews);
+
+    selectedReviews.forEach((index) => {
+      console.log("data[index]", data[index]);
+      const reviewIdToDelete = data[index]?.review_id;
+      console.log("reviewIdToDelete", reviewIdToDelete);
+
+      if (reviewIdToDelete) {
+        // Call API to delete the review
+        axios
+          .delete("http://localhost:8000/review/delete", {
+            headers: {
+              Authorization: token,
+            },
+            data: {
+              review_id: reviewIdToDelete,
+            },
+          })
+          .then((response) => {
+            console.log("리뷰 삭제 성공:", response);
+            alert("선택한 리뷰를 삭제했습니다.");
+            navigate("/MyInfoMain");
+          })
+          .catch((error) => {
+            console.error("리뷰 삭제 실패:", error);
+          });
+      }
+    });
+
+    // Clear selected reviews after deletion
+    setSelectedReviews([]);
   };
 
   return (
@@ -82,7 +110,7 @@ const MyInfoReviewIw = (props) => {
         <div className="MyInfoReviewIwMainIntro">
           <span className="MyInfoReviewIwMainIntroSpan">
             <img src="./image/MyInfoSearchMainIcon.png" alt="nono"></img>
-            이우찬
+            {userid}
           </span>
           님이 작성하신 리뷰입니다.
         </div>
@@ -103,26 +131,34 @@ const MyInfoReviewIw = (props) => {
               <th>코멘트</th>
             </tr>
 
-            {data
-              .slice(
-                (currentPage - 1) * itemsPerPage,
-                currentPage * itemsPerPage
-              )
-              .map((item, index) => (
-                <tr key={index}>
-                  <td>
-                    <input
-                      type="checkbox"
-                      id={index}
-                      name="MyInfoReviewIwCheckBoxGroup"
-                    ></input>
-                  </td>
-                  <td>{item.id}</td>
-                  <td>{item.productName}</td>
-                  <td>{item.rating}</td>
-                  <td>{item.coments}</td>
-                </tr>
-              ))}
+            {data.length > 0 ? (
+              data
+                .slice(
+                  (currentPage - 1) * itemsPerPage,
+                  currentPage * itemsPerPage
+                )
+                .map((item, index) => (
+                  <tr key={index}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        id={index}
+                        name="MyInfoReviewIwCheckBoxGroup"
+                        checked={selectedReviews.includes(index)}
+                        onChange={() => handleCheckboxChange(index)}
+                      />
+                    </td>
+                    <td>{item.review_id}</td>
+                    <td>{item.transaction.product.title}</td>
+                    <td>{item.rating}</td>
+                    <td>{item.content}</td>
+                  </tr>
+                ))
+            ) : (
+              <tr>
+                <td colSpan="5">작성한 리뷰가 없습니다.</td>
+              </tr>
+            )}
           </table>
           <div className="MyBuyListPagination">
             <button onClick={prevPage} disabled={currentPage === 1}>
@@ -140,7 +176,7 @@ const MyInfoReviewIw = (props) => {
       </div>
       <div className="MyInfoReviewIwBtnWrap">
         <div className="MyInfoReviewIwBtnGoDelete">
-          <button>삭제</button>
+          <button onClick={handleDeleteReviews}>삭제</button>
         </div>
       </div>
     </div>

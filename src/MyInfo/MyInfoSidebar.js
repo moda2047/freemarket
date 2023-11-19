@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./MyInfoSidebar.css";
 import { useCookies } from "react-cookie";
+import { Link } from "react-router-dom";
 
 const MyInfoSidebar = (props) => {
   const { activeTab, onTabClick } = props;
@@ -72,11 +73,10 @@ const MyInfoSidebar = (props) => {
           <div className="MyInfoSidebarInWrapDiv">
             <h3>찜 목록</h3>
             <ul>
-              <li
-                className={`MyInfoMainTabTdActive ${renderTabClass(2)}`}
-                onClick={() => handleTabClick(2)}
-              >
-                찜 목록 조회
+              <li className={`MyInfoMainTabTdActive ${renderTabClass(2)}`}>
+                <Link className="MyInfoSidebarWishListLink" to="/WishList">
+                  찜 목록 조회
+                </Link>
               </li>
             </ul>
           </div>

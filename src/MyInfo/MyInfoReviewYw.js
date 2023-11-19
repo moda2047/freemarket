@@ -1,74 +1,57 @@
 import React, { useState, useEffect } from "react";
 import "./MyInfoReviewYw.css";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 
 const MyInfoReviewYw = (props) => {
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
+  const [cookies] = useCookies(["token", "author", "userid"]);
+  const [selectedReviews, setSelectedReviews] = useState([]);
+  const [totalCount, setTotalCount] = useState();
+
+  const token = cookies.token;
+  const userid = cookies.userid;
 
   useEffect(() => {
-    // Initialize your dummy data
-    const dummyData = [
-      {
-        id: "feijddy",
-        productName: "Product 1",
-        rating: "1",
-        coments: "coments 1",
-      },
-      {
-        id: "feijddy2",
-        productName: "Product 1",
-        rating: "1",
-        coments: "coments 1",
-      },
-      {
-        id: "feijddy3",
-        productName: "Product 1",
-        rating: "1",
-        coments: "coments 1",
-      },
-      {
-        id: "feijddy3",
-        productName: "Product 1",
-        rating: "1",
-        coments: "coments 1",
-      },
-      {
-        id: "feijddy6",
-        productName: "Product 1",
-        rating: "1",
-        coments: "coments 1",
-      },
-      {
-        id: "feijddy7",
-        productName: "Product 1",
-        rating: "1",
-        coments: "coments 1",
-      },
-
-      // Add more data items as needed
-    ];
-
-    setData(dummyData);
-  }, []);
+    axios
+      .get(
+        `http://localhost:8000/review/searchWrittenReview?user_id=${userid}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        const data = response.data.found;
+        setData(data);
+        setTotalCount(response.data.totalCount);
+      })
+      .catch((error) => {
+        console.error("데이터 가져오기 실패:", error);
+      });
+  }, [token]);
 
   useEffect(() => {
-    // Ensure currentPage is within a valid range
-    if (currentPage < 1) {
-      setCurrentPage(1);
+    const maxPage = Math.ceil(data.length / itemsPerPage);
+
+    if (currentPage < 1 || currentPage > maxPage) {
+      setCurrentPage((prevPage) => Math.min(Math.max(prevPage, 1), maxPage));
     }
-    if (currentPage > Math.ceil(data.length / itemsPerPage)) {
-      setCurrentPage(Math.ceil(data.length / itemsPerPage));
-    }
-  }, [currentPage, data]);
+  }, [currentPage, data.length, itemsPerPage]);
 
   const prevPage = () => {
-    setCurrentPage(currentPage - 1);
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
   };
+
   return (
     <div className="MyInfoReviewYwWrap">
       <div className="MyInfoReviewYwWrapDiv">
@@ -81,7 +64,7 @@ const MyInfoReviewYw = (props) => {
         <div className="MyInfoReviewYwMainIntro">
           <span className="MyInfoReviewYwMainIntroSpan">
             <img src="./image/MyInfoSearchMainIcon.png" alt="nono"></img>
-            이우찬
+            {userid}
           </span>
           님에 대한 리뷰입니다.
         </div>
@@ -99,19 +82,25 @@ const MyInfoReviewYw = (props) => {
               <th>별점</th>
               <th>코멘트</th>
             </tr>
-            {data
-              .slice(
-                (currentPage - 1) * itemsPerPage,
-                currentPage * itemsPerPage
-              )
-              .map((item, index) => (
-                <tr key={index}>
-                  <td>{item.id}</td>
-                  <td>{item.productName}</td>
-                  <td>{item.rating}</td>
-                  <td>{item.coments}</td>
-                </tr>
-              ))}
+            {data.length > 0 ? (
+              data
+                .slice(
+                  (currentPage - 1) * itemsPerPage,
+                  currentPage * itemsPerPage
+                )
+                .map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.writer_id}</td>
+                    <td>{item.transaction.product.title}</td>
+                    <td>{item.rating}</td>
+                    <td>{item.content}</td>
+                  </tr>
+                ))
+            ) : (
+              <tr>
+                <td colSpan="5">작성된 리뷰가 없습니다.</td>
+              </tr>
+            )}
           </table>
           <div className="MyBuyListPagination">
             <button onClick={prevPage} disabled={currentPage === 1}>

@@ -1,128 +1,52 @@
 import React, { useState, useEffect } from "react";
 import "./MySalList.css";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 const MySalList = () => {
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
+  const [cookies] = useCookies(["token", "author", "userid"]);
+  const [totalCount, setTotalCount] = useState();
+
+  const token = cookies.token;
+  const author = cookies.author;
+  const userid = cookies.userid;
 
   useEffect(() => {
-    // Initialize your dummy data
-    const dummyData = [
-      {
-        date: "2023-10-16",
-        productNumber: "001",
-        productName: "Product 1",
-        sellerId: "Seller 1",
-      },
-      {
-        date: "2023-10-15",
-        productNumber: "002",
-        productName: "Product 2",
-        sellerId: "Seller 2",
-      },
-      {
-        date: "2023-10-16",
-        productNumber: "001",
-        productName: "Product 1",
-        sellerId: "Seller 1",
-      },
-      {
-        date: "2023-10-15",
-        productNumber: "002",
-        productName: "Product 2",
-        sellerId: "Seller 2",
-      },
-      {
-        date: "2023-10-16",
-        productNumber: "001",
-        productName: "Product 1",
-        sellerId: "Seller 1",
-      },
-      {
-        date: "2023-10-15",
-        productNumber: "002",
-        productName: "Product 2",
-        sellerId: "Seller 2",
-      },
-      {
-        date: "2023-10-16",
-        productNumber: "001",
-        productName: "Product 1",
-        sellerId: "Seller 1",
-      },
-      {
-        date: "2023-10-15",
-        productNumber: "002",
-        productName: "Product 2",
-        sellerId: "Seller 2",
-      },
-      {
-        date: "2023-10-16",
-        productNumber: "001",
-        productName: "Product 1",
-        sellerId: "Seller 1",
-      },
-      {
-        date: "2023-10-15",
-        productNumber: "002",
-        productName: "Product 2",
-        sellerId: "Seller 2",
-      },
-      {
-        date: "2023-10-16",
-        productNumber: "001",
-        productName: "Product 1",
-        sellerId: "Seller 1",
-      },
-      {
-        date: "2023-10-15",
-        productNumber: "002",
-        productName: "Product 2",
-        sellerId: "Seller 2",
-      },
-      {
-        date: "2023-10-16",
-        productNumber: "001",
-        productName: "Product 1",
-        sellerId: "Seller 1",
-      },
-      {
-        date: "2023-10-15",
-        productNumber: "002",
-        productName: "Product 2",
-        sellerId: "Seller 2",
-      },
-      {
-        date: "2023-10-16",
-        productNumber: "001",
-        productName: "Product 1",
-        sellerId: "Seller 1",
-      },
-      {
-        date: "2023-10-15",
-        productNumber: "002",
-        productName: "Product 2",
-        sellerId: "Seller 100",
-      },
-      // Add more data items as needed
-    ];
-
-    setData(dummyData);
-  }, []);
+    axios
+      .get(`http://localhost:8000/transaction/searchSaleList`, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      })
+      .then((response) => {
+        const data = response.data.found; // found 배열의 첫 번째 요소
+        const totalCount = response.data.totalCount;
+        setData(data);
+        setTotalCount(totalCount);
+      })
+      .catch((error) => {
+        console.error("데이터 가져오기 실패:", error);
+      });
+  }, [token, setData]);
 
   useEffect(() => {
+    // Calculate the maximum page based on data length and itemsPerPage
+    const maxPage = Math.ceil(data.length / itemsPerPage);
+
     // Ensure currentPage is within a valid range
-    if (currentPage < 1) {
-      setCurrentPage(1);
+    if (currentPage < 1 || currentPage > maxPage) {
+      setCurrentPage((prevPage) => Math.min(Math.max(prevPage, 1), maxPage));
     }
-    if (currentPage > Math.ceil(data.length / itemsPerPage)) {
-      setCurrentPage(Math.ceil(data.length / itemsPerPage));
-    }
-  }, [currentPage, data]);
+    console.log(currentPage);
+  }, [currentPage, data.length, itemsPerPage]);
 
   const prevPage = () => {
     setCurrentPage(currentPage - 1);
+    console.log(currentPage);
   };
 
   const nextPage = () => {
@@ -137,11 +61,11 @@ const MySalList = () => {
         </h3>
       </div>
       <hr />
-      <div className="MyBuyListMainWrap">
-        <div className="MyBuyListMainIntro">
-          <span className="MyBuyListMainIntroSpan">
+      <div className="MySalListMainWrap">
+        <div className="MySalListMainIntro">
+          <span className="MySalListMainIntroSpan">
             <img src="./image/MyInfoSearchMainIcon.png" alt="nono"></img>
-            이우찬
+            {userid}
           </span>
           님의 판매목록입니다.
         </div>
@@ -159,19 +83,25 @@ const MySalList = () => {
               <th>상품명</th>
               <th>구매자 ID</th>
             </tr>
-            {data
-              .slice(
-                (currentPage - 1) * itemsPerPage,
-                currentPage * itemsPerPage
-              )
-              .map((item, index) => (
-                <tr key={index}>
-                  <td>{item.date}</td>
-                  <td>{item.productNumber}</td>
-                  <td>{item.productName}</td>
-                  <td>{item.sellerId}</td>
-                </tr>
-              ))}
+            {data.length > 0 ? (
+              data
+                .slice(
+                  (currentPage - 1) * itemsPerPage,
+                  currentPage * itemsPerPage
+                )
+                .map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.product.updated_at.slice(0, 10)}</td>
+                    <td>{item.product.product_id}</td>
+                    <td>{item.product.title}</td>
+                    <td>{item.buyer_id}</td>
+                  </tr>
+                ))
+            ) : (
+              <tr>
+                <td colSpan="4">판매 내역이 없습니다.</td>
+              </tr>
+            )}
           </table>
           <div className="MySalListPagination">
             <button onClick={prevPage} disabled={currentPage === 1}>

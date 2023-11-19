@@ -22,6 +22,7 @@ import MyInfoUpdateMain from "./MyInfo/MyInfoUpdateMain.js";
 import AdminReportAnswer from "./AdminInfo/AdminReportAnswer.js";
 import ProductCreate from "./Product/ProductCreate.js";
 import AdminMemberRestriction from "./AdminInfo/AdminMemberRestriction.js";
+import ReviewCreate from "./Product/ReviewCreate.js";
 const App = () => {
   return (
     <div className="wrap">
@@ -59,6 +60,7 @@ const App = () => {
             path="/AdminMemberRestriction"
             element={<AdminMemberRestriction />}
           ></Route>
+          <Route path="/ReviewCreate" element={<ReviewCreate />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
