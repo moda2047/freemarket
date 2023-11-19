@@ -14,8 +14,7 @@
 }
 
 .productSidebar h3 {
-  text-align: left;
-  padding-left: 70px;
+  text-align: center;
 }
 
 .productSidebar ul {
@@ -23,16 +22,15 @@
   padding: 0;
   margin: 15px;
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid rgb(224, 224, 224);
 }
 
 .productSidebar li{
   text-align: left;
-  padding : 0 70px 0 70px;
+  padding : 0 10px 0 10px;
   margin: 10px 0;
   cursor: pointer;
 }
-
 
 .productSidebar li a {
   display: block;
@@ -42,9 +40,9 @@
   text-align: center;
 }
 
-.productSidebar a:hover {
-  background-color: rgb(240, 240, 240);
+.productSidebar li:hover a {
+  color: white;
+  background-color: #5a74cc;
   border: 1px solid #7e7e7e;
   font-weight: bold;
-  color: #2d51c5;
 }

@@ -17,6 +17,8 @@ import ProductMain from "./Product/ProductMain.js";
 import AdminHeader from "./Header/AdminHeader.js";
 import Header from "./Header/Header.js";
 import ProductDetail from "./Product/ProductDetail.js";
+import ProductUpdate from "./Product/ProductUpdate.js";
+import ProductListSearch from "./Product/ProductListSearch.js";
 import MyInfoPasswordCorrect from "./PasswordChange/MyInfoPasswordCorrect.js";
 import MyInfoUpdateMain from "./MyInfo/MyInfoUpdateMain.js";
 import AdminReportAnswer from "./AdminInfo/AdminReportAnswer.js";
@@ -54,6 +56,11 @@ const App = () => {
           ></Route>
           <Route path="/ProductCreate" element={<ProductCreate />}></Route>
           <Route path="/ProductDetail" element={<ProductDetail />}></Route>
+          <Route path="/ProductUpdate" element={<ProductUpdate />}></Route>
+          <Route
+            path="/ProductListSearch"
+            element={<ProductListSearch />}
+          ></Route>
           <Route path="/AdminReportAnswer" component={AdminReportAnswer} />
           <Route path="*" element={<NotFound />}></Route>
           <Route

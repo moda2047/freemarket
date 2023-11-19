@@ -1,8 +1,11 @@
 import "./AdminHeader.css";
-import { Link } from "react-router-dom";
+import HeaderDetailSearch from "./HeaderDetailSearch";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
+
 function AdminHeader() {
+  const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(["token", "author"]);
 
@@ -13,6 +16,14 @@ function AdminHeader() {
     removeCookie("token");
     removeCookie("author");
     removeCookie("userid");
+  };
+
+  const handleSearch = (e) => {
+    const form = {
+      keyword: query
+    };
+
+    navigate("/ProductListSearch?Keyword="+`${query}`, {state: form})
   };
 
   return (
@@ -46,13 +57,11 @@ function AdminHeader() {
                 type="text"
                 name="query"
                 value={query}
-                onChange={inputText}
+                onChange={(e) => setQuery(e.target.value)}
               />
-              <Link to="/">
-                <button type="submit">
-                  <img src="./image/search-icon.png" alt="img"></img>
-                </button>
-              </Link>
+              <button type="submit" onClick={handleSearch}>
+                <img src="./image/search-icon.png" alt="img"></img>
+              </button>
             </div>
           </div>
           <div class="adminHeader-middle-right">
@@ -63,6 +72,9 @@ function AdminHeader() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="adminHeader-bottom">
+        <HeaderDetailSearch />
       </div>
     </div>
   );

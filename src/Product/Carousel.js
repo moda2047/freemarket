@@ -46,11 +46,15 @@ function Carousel(props) {
 
     /* props로 이미지 전달 */
 
-    const imagesData = [
-        {src: props.img, alt: "Img"},
-        {src: props.img, alt: "Img"},
-        {src: props.img, alt: "Img"},
-    ];
+    const imagesData = props.img.map((img, index) => {
+        // 이미지 배열의 각 요소에 접근하기 전에 해당 값이 존재하는지 확인
+        const src = img && img.image_url ? img.image_url : '';
+        
+        // alt 속성은 필요에 따라 조정
+        const alt = `Img ${index + 1}`;
+      
+        return { src, alt };
+    });
 
     return (
         <div className="Carousel">

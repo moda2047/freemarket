@@ -1,0 +1,142 @@
+.productUpdate {
+    position: relative;
+  }
+  
+  .productUpdate .productUpdate-container {
+    margin: 0 20%;
+  }
+  
+  .productUpdate h3 {
+    padding: 14px;
+  }
+  
+  .productUpdate-container-info {
+    background-color: rgb(240, 240, 240);
+  }
+
+  
+  .productUpdate table {
+    width: 100%;
+  }
+  
+  .productUpdate tr > td {
+    height: 50px;
+    text-align: center;
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  .productUpdate tr td:nth-child(1) {
+    width: 30%;
+    border-right: 1px solid #dddddd;
+  }
+  
+  .productUpdate tr td:nth-child(2) {
+    width: 70%;
+    text-align: left;
+    margin-left: 10px;
+  }
+  
+  #productUpdate-name {
+    width: 400px;
+    height: 28px;
+    margin-left: 5%;
+    padding: 0 1%;
+  }
+  
+  #productUpdate-category {
+    width: 310px;
+    height: 28px;
+    margin-left: 5%;
+    text-align: center;
+  }
+  
+  #productUpdate-thumbnail {
+    width: 310px;
+    height: 28px;
+    margin-left: 5%;
+    text-align: center;
+  }
+  
+  #productUpdate-price {
+    width: 400px;
+    height: 28px;
+    text-align: right;
+    padding-right: 5px;
+    margin-left: 5%;
+  }
+  
+  .productUpdate .filebox {
+    display: flex;
+    height: 28px;
+  }
+  
+  .productUpdate .filebox .file-list {
+    display: inline-block;
+    width: 400px;
+    height: 100%;
+    margin-left: 5%;
+    padding: 0 1%;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    color: #999999;
+  }
+  
+  .productUpdate .filebox label {
+    display: inline-block;
+    height: 16px;
+    padding: 5px;
+    color: #fff;
+    font-size: small;
+    line-height: 16px;
+    background-color: #999999;
+    cursor: pointer;
+    margin-left: 2%;
+  }
+  
+  .productUpdate .filebox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+  }
+  
+  #productUpdate-price::-webkit-outer-spin-button,
+  #productUpdate-price::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  .productUpdate table #description {
+    height: 200px;
+  }
+  
+  #productUpdate-description {
+    width: 400px;
+    height: 170px;
+    font-size: 14px;
+    resize: none;
+    margin-left: 5%;
+  }
+  
+  .productUpdate .bottom {
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+  }
+  
+  .productUpdate .bottom button {
+    width: 10%;
+    padding: 1% 0;
+    color: #fff;
+    font-weight: bold;
+    background-color: #0062ff;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .productUpdate .bottom button:hover {
+    background-color: #2d51c5;
+    cursor: pointer;
+  }

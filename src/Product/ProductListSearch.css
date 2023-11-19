@@ -1,16 +1,22 @@
 /*********************************//*********************************//*********************************//*********************************/
 /* ProductListSearch.js */
-
-.productListSearch {
-    /* margin: 0 20%; */
-  }
   
 .productListSearch {
-  width: 100%;
+  display: flex;
+  height: auto;
+}
+
+.productListSearch .productListSearch-sidebar {
+  width: 20%;
+  height: 100%;
+  box-sizing: border-box;
+  float: left;
+  height: 100%;
 }
 
 .productListSearch > .productListSearch-container {
-  width: 100%;
+  width: 60%;
+  min-width: 800px;
   box-sizing: border-box;
   height: 100%;
   float: left;
@@ -24,19 +30,22 @@
   background-color: rgb(224, 224, 224);
 }
 
+.productListSearch .productListSearch-container-header #goMainPage {
+  padding-left: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+  color: black;
+}
+
+.productListSearch .productListSearch-container-header #goMainPage:hover {
+  font-size: 18px;
+}
+
 .productListSearch .productListSearch-container-header a {
   font-style: bold;
   font-size: 24px;
 }
 
-.productListSearch .productListSearch-container-header > span {
-  padding-left: 15px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.productListSearch .productListSearch-container-header > span:hover {
-  font-weight: bold;
-  font-size: 18px;
-}
 

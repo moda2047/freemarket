@@ -1,13 +1,21 @@
 import "./LogoutHeader.css";
 import React, { useState } from "react";
-import { Link, Route } from "react-router-dom";
-import Login from "../Login/Login";
+import { Link, Route, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import HeaderDetailSearch from "./HeaderDetailSearch";
 
 function LogoutHeader(props) {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [query, setQuery] = useState("");
 
-  const inputText = (e) => {
-    setQuery(e.target.value);
+  const handleSearch = (e) => {
+    const form = {
+      keyword: query
+    };
+
+    navigate("/ProductListSearch?Keyword="+`${query}`, {state: form})
   };
 
   /* 로그인 안했을 시 로그인으로 넘어가도록 해야함 */
@@ -43,13 +51,11 @@ function LogoutHeader(props) {
                 type="text"
                 name="query"
                 value={query}
-                onChange={inputText}
+                onChange={(e) => setQuery(e.target.value)}
               />
-              <Link to="/">
-                <button type="submit">
-                  <img src="./image/search-icon.png" alt="img"></img>
-                </button>
-              </Link>
+              <button type="submit" onClick={handleSearch}>
+                <img src="./image/search-icon.png" alt="img"></img>
+              </button>
             </div>
           </div>
           <div className="logoutHeader-middle-right">
@@ -68,13 +74,16 @@ function LogoutHeader(props) {
                 <img src="./image/chat-icon.png" alt="img"></img>
               </Link>
             </div>
-            <div classNameName="logoutHeader-productCreate">
+            <div className="logoutHeader-productCreate">
               <Link to="/Login">
                 <img src="./image/productCreate-icon.png" alt="img"></img>
               </Link>
             </div>
           </div>
         </div>
+      </div>
+      <div className="logoutHeader-bottom">
+        <HeaderDetailSearch />
       </div>
     </div>
   );

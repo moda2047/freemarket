@@ -1,47 +1,24 @@
-import "./ProductCreate.css";
+import "./ProductUpdate.css";
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import Modal from 'react-modal';
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
-function ProductCreate() {
-  const location = useLocation();
+function ProductUpdate() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const state = location.state;
   const [cookies] = useCookies(["token"]);
 
-  const [name, setName] = useState("");
+  const [title, setTitle] = useState(null);
   const [imgFile, setImgFile] = useState(null);
   const [thumbnailFile, setThumbnailFile] = useState(null);
   const [fileList, setFileList] = useState([]);
-  const [thumbnail, setThumbnail] = useState("");
-  const [category, setCategory] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
-
-  // 유효성 검사용 데이터
-  const [nameValid, setNameValid] = useState(false);
-  const [fileValid, setFileValid] = useState(false);
-  const [thumbnailValid, setThumbnailValid] = useState(false);
-  const [categoryValid, setCategoryValid] = useState(false);
-  const [priceValid, setPriceValid] = useState(false);
-  const [descValid, setDescValid] = useState(false);
-
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  useEffect(() => {
-    // 초기화
-    setName("");
-    setImgFile(null);
-    setFileList([]);
-    setThumbnail("");
-    setThumbnailFile(null);
-    setCategory("");
-    setPrice("");
-    setDescription("");
-
-    setModalIsOpen(false);
-  }, [])
+  const [thumbnail, setThumbnail] = useState(null);
+  const [category, setCategory] = useState(null);
+  const [price, setPrice] = useState(null);
+  const [content, setContent] = useState(null);
 
   const handleUploadFile = async (e) => {
     setImgFile(e.target.files);
@@ -74,57 +51,37 @@ function ProductCreate() {
   const submit = (e) => {
     e.preventDefault();
 
-    if (!nameValid || name === "") {
-      setNameValid(false);
-      window.alert("상품명을 입력해주세요.");
-      return;
-    }
-
-    if (!fileValid || imgFile === null) {
-      setFileValid(false);
-      window.alert("상품 이미지를 업로드해주세요.");
-      return;
-    }
-
-    if (!thumbnailValid || thumbnailFile === null || thumbnail === "none") {
-      setThumbnailFile(false);
-      window.alert("썸네일로 사용할 이미지를 선택해주세요.");
-      return;
-    }
-
-    if (!categoryValid || category === "" || category === "none") {
-      setCategoryValid(false);
-      window.alert("상품 카테고리를 선택해주세요.");
-      return;
-    }
-
-    if (!priceValid || price === "") {
-      setPriceValid(false);
-      window.alert("상품 가격을 입력해주세요.");
-      return;
-    }
-
-    if (description === "") {
-      setDescValid(false);
-      window.alert("상품 설명을 입력해주세요.");
-      return;
-    }
-
-    const productCreateAPI = "http://localhost:8000/product/sell";
+    const ProductUpdateAPI = "http://localhost:8000/product/change";
 
     const formData = new FormData();
 
-    formData.append("thumbnail", thumbnailFile);
-    for (let i = 0; i < imgFile.length; i++) {
-      formData.append("img", imgFile[i]);
+    formData.append("productId", state)
+    console.log(state);
+
+    // 입력 여부 확인
+    if(title !== null) {
+      formData.append("title", title)
     }
-    formData.append("title", name);
-    formData.append("content", description);
-    formData.append("price", price);
-    formData.append("category", category);
+    if(content !== null) {
+      formData.append("content", content);
+    }
+    if(price !== null) {
+      formData.append("price", price);
+    }
+    if(category !== null) {
+      formData.append("category", category);
+    }
+    if(thumbnailFile !== null) {
+      formData.append("thumbnail", thumbnailFile);
+    }
+    if(imgFile !== null) {
+      for (let i = 0; i < imgFile.length; i++) {
+        formData.append("img", imgFile[i]);
+      }
+    }
 
     axios
-      .post(productCreateAPI, formData, {
+      .patch(ProductUpdateAPI, formData, {
         headers: {
           Authorization: cookies.token,
           "Content-Type": "multipart/form-data",
@@ -135,9 +92,8 @@ function ProductCreate() {
         console.log(response);
 
         if(response.data.result) {
-          // window.alert(response.data.message);
-
-          setModalIsOpen(true);
+          window.alert(response.data.message);
+          navigate("/");
         } else {
           window.alert(response.data.message);
         }
@@ -149,10 +105,13 @@ function ProductCreate() {
   };
 
   return (
-    <div class="productCreate">
-      <div class="productCreate-container">
-        <h3> 상품 등록 </h3>
-        <table className="productCreate">
+    <div class="productUpdate">
+      <div class="productUpdate-container">
+        <h2> 상품 수정 </h2>
+        <div className="productUpdate-container-info">
+          <h3 style={{textAlign: "center"}}> 수정하실 내용만 입력해주세요. </h3>
+        </div>
+        <table id="productUpdate">
           <tbody>
             <tr id="">
               <td>
@@ -161,12 +120,11 @@ function ProductCreate() {
               <td>
                 <input
                   type="text"
-                  id="productCreate-name"
-                  value={name}
+                  id="productUpdate-name"
+                  value={title}
                   placeholder="상품명을 입력해주세요"
                   onChange={(e) => {
-                    setName(e.target.value);
-                    setNameValid(true);
+                    setTitle(e.target.value);
                   }}
                 />
               </td>
@@ -183,15 +141,14 @@ function ProductCreate() {
                     placeholder="첨부파일 다중 선택 가능"
                     readOnly
                   />
-                  <label htmlFor="productCreate-file">파일 찾기</label>
+                  <label htmlFor="productUpdate-file">파일 찾기</label>
                   <input
                     type="file"
                     multiple
                     required
-                    id="productCreate-file"
+                    id="productUpdate-file"
                     onChange={(e) => {
                       handleUploadFile(e);
-                      setFileValid(true);
                     }}
                   />
                 </div>
@@ -204,11 +161,10 @@ function ProductCreate() {
               <td>
                 <div>
                   <select
-                    id="productCreate-thumbnail"
+                    id="productUpdate-thumbnail"
                     defaultValue={thumbnail}
                     onChange={(e) => {
                       handleThumbnail(e);
-                      setThumbnailValid(true);
                     }}
                   >
                     <option value="none">
@@ -232,11 +188,10 @@ function ProductCreate() {
               </td>
               <td>
                 <select
-                  id="productCreate-category"
+                  id="productUpdate-category"
                   defaultValue={category}
                   onChange={(e) => {
                     setCategory(e.target.value);
-                    setCategoryValid(true);
                   }}
                 >
                   <option value="none">
@@ -264,12 +219,11 @@ function ProductCreate() {
               <td>
                 <input
                   type="number"
-                  id="productCreate-price"
+                  id="productUpdate-price"
                   placeholder=""
                   value={price}
                   onChange={(e) => {
                     setPrice(e.target.value);
-                    setPriceValid(true);
                   }}
                 />
                 {!price && <span className="placeholder-text"></span>}
@@ -281,12 +235,11 @@ function ProductCreate() {
               </td>
               <td>
                 <textarea
-                  id="productCreate-description"
-                  value={description}
+                  id="productUpdate-description"
+                  value={content}
                   placeholder="상품 설명을 입력해주세요"
                   onChange={(e) => {
-                    setDescription(e.target.value);
-                    setDescValid(true);
+                    setContent(e.target.value);
                   }}
                 ></textarea>
               </td>
@@ -294,27 +247,10 @@ function ProductCreate() {
           </tbody>
         </table>
 
-        <Modal isOpen={modalIsOpen}>
-          <div>
-            상품 등록이 완료되었습니다.
-            계속하시겠습니까?
-          </div>
-          <div>
-            <button onClick={()=> {
-                setModalIsOpen(false); 
-                window.location.replace("/ProductCreate");
-              }}>계속하기</button>
-            <button onClick={()=> {
-                setModalIsOpen(false);
-                navigate("/");
-              }}>메인으로</button>
-          </div>
-        </Modal>
-
         <div class="bottom">
-          <button onClick={submit} className="productCreate-register">
+          <button onClick={submit} className="productUpdate-register">
             {" "}
-            등록하기
+            수정하기
           </button>
         </div>
       </div>
@@ -322,4 +258,4 @@ function ProductCreate() {
   );
 }
 
-export default ProductCreate;
+export default ProductUpdate;

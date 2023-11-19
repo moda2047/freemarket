@@ -4,91 +4,163 @@
     margin: 0 20%;
   }
   
-  .productDetail-top {
-    display: flex;
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgb(128, 128, 128);
-  }
-  .productDetail-image {
-    display: inline-block;
-    width: 256px;
-    height: 256px;
-    flex-grow: 0;
-  }
-  
-  .productDetail-info {
-    padding: 0 5%;
-    flex-grow: 1;
-  }
-  
-  .productDetail-info-top {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 2%;
-    border-bottom: 1px solid rgb(160, 160, 160);
-  }
-  
-  .productDetail-info-top h2, .productDetail-info-top p {
-    text-align: left;; 
-  }
-  
-  .productDetail-info-top button {
-    width: 100px;
-    height: 30px;
-    margin: 0 5%;
-    margin-bottom: 2%; 
-    font-size: small;
-    font-weight: bold;
-    background-color: #fff;
-    border: 1px solid #000;
-    border-radius: 5px;
-    box-shadow: inset 0 0 8px #a9aaad;
-    background-color: #ebecf0;
-    cursor: pointer;
-  }
-  
-  .productDetail-info-bottom {
-    padding-top: 10px;
-  }
-  
-  .productDetail-info-bottom table {
-     
-  }
-  
-  .productDetail-info-bottom td {
-    text-align: left;
-  }
-  
-  .productDetail-info-bottom td #tag, .productDetail-info-bottom td #value {
-    display: inline-block;
-  }
+.productDetail > .productDetail-navbar {
+  padding-top: 20px;
+}
 
-  .productDetail-info-bottom td #tag {
-    height: 30px;
-    width: 70px;
-    padding: 10px;
-    text-align: center;
-    border-right: 1px solid #ddd;
-  }
-  
-  .productDetail-info-bottom td #value {
-    padding: 10px 0px 10px 20px;
-    vertical-align: middle;
-  }
+.productDetail-navbar > a {
+  text-decoration: none;
+  color: #000;
+}
 
-  .productDetail-bottom {
-    margin: 5% 0; 
-    padding: 0 5%;
-  }
+.productDetail-top {
+  display: flex;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(128, 128, 128);
+}
+.productDetail-image {
+  display: inline-block;
+  width: 256px;
+  height: 256px;
+  flex-grow: 0;
+}
+
+.productDetail-info {
+  padding: 0 5%;
+  flex-grow: 1;
+}
+
+.productDetail-info-top {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 2%;
+  border-bottom: 1px solid rgb(160, 160, 160);
+}
+
+.productDetail-info-top h1, .productDetail-info-top h3 {
+  padding-left: 30px;
+}
+
+.productDetail-info-top #btn-productUpdate{
+  text-decoration: none;
+  color: black;
+  display: block;
+  text-align: center;
+  width: 120px;
+  height: 60px;
+  line-height: 60px;
+  margin: 0 5%;
+  margin-bottom: 2%; 
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 3px;
+  background-color: #ebecf0;
+  cursor: pointer;
+}
+
+.productDetail-info-top #btn-productDelete {
+  width: 120px;
+  height: 60px;
+  margin: 0 5%;
+  margin-bottom: 2%; 
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 3px;
+  background-color: #ebecf0;
+  cursor: pointer;
+}
+
+.productDetail-info-top table .btn-container {
+  padding-left: 30px;
+  padding-top: 35px;
+  display: flex;
+  justify-content: left;
+}
+
+.productDetail-info-top table .btn-container #btn-addWish {
+  margin-left: 30px;
+  width: 140px;
+  height: 70px;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  border-radius: 3px;
+  background-color: rgb(224, 180, 180);
+  cursor: pointer;
+  border: none;
+}
+
+.productDetail-info-top  table .btn-container #btn-chatting {
+ 
+  width: 140px;
+  height: 70px;
+  text-align: center;
+  line-height: 70px;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 3px;
+  color: white;
+  background-color: rgb(180, 180, 224);
+  cursor: pointer;
+  border: none;
+}
+
+.productDetail-info-bottom {
+  padding-top: 10px;
+}
+
+.productDetail-info-bottom > table {
+  width: 100%;
+}
+
+.productDetail-info-bottom td {
+  text-align: left;
+}
+
+.productDetail-info-bottom td #tag, .productDetail-info-bottom td #value {
+  display: inline-block;
+}
+
+.productDetail-info-bottom td #tag {
+  height: 30px;
+  width: 70px;
+  padding: 10px;
+  text-align: center;
+  border-right: 1px solid #ddd;
+}
+
+.productDetail-info-bottom td #value {
+  height: 30px;
+  padding: 10px;
+  vertical-align: middle;
+  text-decoration: none;
+  color: black;
+}
+
+.productDetail-bottom {
+  margin: 5% 0; 
+  padding: 0 5%;
+}
+
+.productDetail-bottom h3 {
+  display: block;
+  padding: 2% 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.productDetail-bottom a {
+  display: block;
+  padding: 2% 0;
+}
   
-  .productDetail-bottom h3 {
-    display: block;
-    padding: 2% 0;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .productDetail-bottom a {
-    display: block;
-    padding: 2% 0;
-  }
-  
+.ReactModal__Content > div > button{
+  width: 70px;
+  height: 30px;
+  border-radius: 3px;
+  cursor: pointer;
+}

@@ -49,8 +49,11 @@
   color: #0f297e;
 }
 
-.productMain-productRow-category > a{
+.productMain-productRow-category > #productMain-viewMore{
   text-align: right;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
 }
 
 .productMain > .right{

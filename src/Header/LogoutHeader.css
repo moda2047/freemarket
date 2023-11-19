@@ -87,6 +87,7 @@
 }
 
 .logoutHeader-middle-right {
+
   display: flex;
   width: 200px;
   margin: 0 20px;
@@ -112,7 +113,5 @@
 
 .logoutHeader-bottom {
   margin: 0;
-  height: 30%;
-  padding: 0 10%;
 }
-  
+

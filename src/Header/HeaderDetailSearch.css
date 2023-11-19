@@ -1,0 +1,60 @@
+/*********************************//*********************************//*********************************//*********************************/
+/* HeaderDetailSearch.js */
+
+.headerDetailSearch {
+}
+
+.headerDetailSearch .headerDetailSearch-container #btn-toggleMenu {
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.headerDetailSearch .headerDetailSearch-container #btn-toggleMenu img {
+  padding-left: 5px;
+  width: 25px;
+  height: 25px;
+}
+
+.headerDetailSearch .headerDetailSearch-container #toggleMenu {
+  padding-top: 10px;
+}
+
+.headerDetailSearch .headerDetailSearch-container table {
+  width: 100%;
+  background-color: rgb(234, 234, 234);
+  border: 1px solid black;
+}
+
+.headerDetailSearch .headerDetailSearch-container table tr {
+  height: 50px;
+}
+
+.headerDetailSearch .headerDetailSearch-container table tr > td {
+}
+
+.headerDetailSearch .headerDetailSearch-container table a {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.headerDetailSearch .headerDetailSearch-container table #keyword-box {
+  width: 300px;
+  height: 24px;
+}
+
+.headerDetailSearch .headerDetailSearch-container table #btn-search {
+  display: flex;
+  justify-content: center;
+}
+
+.headerDetailSearch .headerDetailSearch-container table #btn-search button {
+  border: none;
+  border-radius: 3px;
+  color: white;
+  background-color: #0062ff;
+  width: 60px;
+  height: 30px;
+  cursor: pointer;
+}
+  
