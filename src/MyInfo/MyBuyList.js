@@ -111,7 +111,7 @@ const MyBuyList = () => {
                 ))
             ) : (
               <tr>
-                <td colSpan="4">구매 내역이 없습니다.</td>
+                <td colSpan="5">구매 내역이 없습니다.</td>
               </tr>
             )}
           </table>
