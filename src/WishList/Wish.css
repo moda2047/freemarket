@@ -1,4 +1,4 @@
-/*********************************//*********************************//*********************************//*********************************/
+/*********************************/ /*********************************/ /*********************************/ /*********************************/
 /* Wish.js */
 
 .wish {
@@ -16,6 +16,10 @@
 }
 
 .wish .wish-left .wish-image {
+  width: 100%;
+  height: 100%;
+}
+.wish-image > img {
   width: 100%;
   height: 100%;
 }
@@ -56,13 +60,12 @@
 
 .wish .wish-right .close:after {
   display: inline-block;
-  content: "\00d7"; 
+  content: "\00d7";
   font-size: 45pt;
   line-height: 35px;
 }
 
 .wish .wish-right .wish-chatting {
-
 }
 
 .wish .wish-right .wish-chatting button {

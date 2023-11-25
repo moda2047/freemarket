@@ -223,7 +223,13 @@ function ProductDetail({ props }) {
                   </td>
                   <td>
                     <a id="tag">판매자</a>
-                    <Link to="/OtherUserInfoSearch" id="value">
+                    <Link
+                      to={{
+                        pathname: "/OtherUserInfoSearch",
+                        search: productInfo.seller_id,
+                      }}
+                      id="value"
+                    >
                       {productInfo.seller_id}
                     </Link>
                   </td>

@@ -1,74 +1,67 @@
 import React, { useState, useEffect } from "react";
 import "./OtherUserInfoSearch.css";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 const OtherUserInfoSearch = (props) => {
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
+  const [selectedReviews, setSelectedReviews] = useState([]);
+  const [totalCount, setTotalCount] = useState();
+  const [userData, setUserData] = useState([]);
+  const location = useLocation();
+  const sellerId = location.search.slice(1);
+
+  console.log(sellerId);
 
   useEffect(() => {
-    // Initialize your dummy data
-    const dummyData = [
-      {
-        id: "feijddy",
-        productName: "Product 1",
-        rating: "1",
-        coments: "coments 1",
-      },
-      {
-        id: "feijddy2",
-        productName: "Product 1",
-        rating: "1",
-        coments: "coments 1",
-      },
-      {
-        id: "feijddy3",
-        productName: "Product 1",
-        rating: "1",
-        coments: "coments 1",
-      },
-      {
-        id: "feijddy3",
-        productName: "Product 1",
-        rating: "1",
-        coments: "coments 1",
-      },
-      {
-        id: "feijddy6",
-        productName: "Product 1",
-        rating: "1",
-        coments: "coments 1",
-      },
-      {
-        id: "feijddy7",
-        productName: "Product 1",
-        rating: "1",
-        coments: "coments 1",
-      },
-
-      // Add more data items as needed
-    ];
-
-    setData(dummyData);
+    axios
+      .get(
+        `http://localhost:8000/review/searchWrittenReview?user_id=${sellerId}`
+      )
+      .then((response) => {
+        const data = response.data.found;
+        setData(data);
+        setTotalCount(response.data.totalCount);
+      })
+      .catch((error) => {
+        console.error("데이터 가져오기 실패:", error);
+      });
   }, []);
 
   useEffect(() => {
-    // Ensure currentPage is within a valid range
-    if (currentPage < 1) {
-      setCurrentPage(1);
+    axios
+      .get(
+        `http://localhost:8000/member/search?id=${sellerId}&getSanction=true`
+      )
+      .then((response) => {
+        const userData = response.data.found[0]; // found 배열의 첫 번째 요소
+        setUserData(userData);
+      })
+      .catch((error) => {
+        console.error("데이터 가져오기 실패:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    const maxPage = Math.ceil(data.length / itemsPerPage);
+
+    if (currentPage < 1 || currentPage > maxPage) {
+      setCurrentPage((prevPage) => Math.min(Math.max(prevPage, 1), maxPage));
     }
-    if (currentPage > Math.ceil(data.length / itemsPerPage)) {
-      setCurrentPage(Math.ceil(data.length / itemsPerPage));
-    }
-  }, [currentPage, data]);
+  }, [currentPage, data.length, itemsPerPage]);
 
   const prevPage = () => {
-    setCurrentPage(currentPage - 1);
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
   };
+
   return (
     <div className="OtherUserInfoSearchWrap">
       <div className="OtherUserInfoSearchWrapDiv">
@@ -79,10 +72,10 @@ const OtherUserInfoSearch = (props) => {
       <hr />
       <div className="OtherUserInfoSearchMainWrap">
         <div className="OtherUserInfoSearchMainIntro">
-          <div className="OtherUserInfoSearchMainIntroImgDiv">
+          <span className="OtherUserInfoSearchMainIntroSpan">
             <img src="./image/MyInfoSearchMainIcon.png" alt="nono"></img>
-          </div>
-          <span className="OtherUserInfoSearchMainIntroSpan">이우찬</span>
+            {sellerId}
+          </span>
           님의 정보입니다.
         </div>
         <div className="OtherUserInfoSearchMainContentsWrap">
@@ -99,19 +92,25 @@ const OtherUserInfoSearch = (props) => {
               <th>별점</th>
               <th>코멘트</th>
             </tr>
-            {data
-              .slice(
-                (currentPage - 1) * itemsPerPage,
-                currentPage * itemsPerPage
-              )
-              .map((item, index) => (
-                <tr key={index}>
-                  <td>{item.id}</td>
-                  <td>{item.productName}</td>
-                  <td>{item.rating}</td>
-                  <td>{item.coments}</td>
-                </tr>
-              ))}
+            {data.length > 0 ? (
+              data
+                .slice(
+                  (currentPage - 1) * itemsPerPage,
+                  currentPage * itemsPerPage
+                )
+                .map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.writer_id}</td>
+                    <td>{item.transaction.product.title}</td>
+                    <td>{item.rating}</td>
+                    <td>{item.content}</td>
+                  </tr>
+                ))
+            ) : (
+              <tr>
+                <td colSpan="4">작성된 리뷰가 없습니다.</td>
+              </tr>
+            )}
           </table>
           <div className="MyBuyListPagination">
             <button onClick={prevPage} disabled={currentPage === 1}>
@@ -127,12 +126,56 @@ const OtherUserInfoSearch = (props) => {
           </div>
         </div>
       </div>
-      <div className="OtherUserInfoSearchBtnWrap">
-        <div className="OtherUserInfoSearchBtnGoUpdate">
-          <button>리뷰 쓰기</button>
+      <div className="OtherUserInfoSearchMainIntroEmpireInfo">
+        <div>
+          {userData &&
+          userData.target_user_sanctions &&
+          userData.target_user_sanctions.length > 0 ? (
+            <table className="OtherUserInfoSearchMainIntroEmpireInfoTable">
+              {userData.target_user_sanctions.map((sanction, index) => (
+                <tr key={index}>
+                  <td>
+                    <p>
+                      <img
+                        className="OtherUserSearchCheckImg"
+                        src="./image/OtherUserSearchCheckImg.png"
+                        alt="nono"
+                      ></img>
+                      {sellerId}님은
+                      {sanction.expire}
+                      까지 제재를 당했습니다.
+                    </p>
+                  </td>
+                </tr>
+              ))}
+            </table>
+          ) : userData &&
+            userData.target_user_sanctions &&
+            userData.target_user_sanctions.length === 0 ? (
+            <p>
+              <img
+                className="OtherUserSearchCheckImg"
+                src="./image/OtherUserSearchCheckImg.png"
+                alt="nono"
+              ></img>
+              {sellerId}
+              님은 클린한 회원입니다.
+            </p>
+          ) : (
+            "로딩 중..."
+          )}
         </div>
+      </div>
+      <div className="OtherUserInfoSearchBtnWrap">
         <div className="OtherUserInfoSearchBtnGoExit">
-          <button>채팅 하기</button>
+          <button>
+            {sellerId}와 채팅 하기 &nbsp;
+            <img
+              className="OtherUserSearchGoChatImg"
+              src="./image/OtherUserSearchGoChatImg.png"
+              alt="nono"
+            ></img>
+          </button>
         </div>
       </div>
     </div>

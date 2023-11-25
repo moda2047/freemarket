@@ -11,7 +11,10 @@ function Wish({ wishInfo, onDelete }) {
     <div class="wish">
       <div class="wish-left">
         <div class="wish-image">
-          {/* <img src={wishInfo.img} alt=""></img> */}
+          <img
+            src={wishInfo.product.product_Images[0].image_url}
+            alt="nono"
+          ></img>
         </div>
       </div>
 

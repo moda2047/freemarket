@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./MyInfoSidebar.css";
 import { useCookies } from "react-cookie";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 const MyInfoSidebar = (props) => {
   const { activeTab, onTabClick } = props;
   const [cookies] = useCookies(["token", "author", "userid"]);
+  const [userData, setUserData] = useState({}); // 빈 객체로 초기화
 
   const token = cookies.token;
   const author = cookies.author;
@@ -20,6 +22,19 @@ const MyInfoSidebar = (props) => {
       : "MyInfoMainTabTdDefault";
   };
 
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/member/search?id=${userid}&getSanction=true`)
+      .then((response) => {
+        const userData = response.data.found[0]; // found 배열의 첫 번째 요소
+        setUserData(userData);
+        console.log(userData);
+      })
+      .catch((error) => {
+        console.error("데이터 가져오기 실패:", error);
+      });
+  }, []);
+
   return (
     <div className="MyInfoSidebarWrap">
       <div className="MyInfoSidebarMyInfoWrap">
@@ -33,19 +48,22 @@ const MyInfoSidebar = (props) => {
           </h3>
           <div className="MyInfoSidebarLevel">
             <div className="MyInfoSidebarText">
-              <span className="MyInfoSidebarTextName">{userid}</span>
-              님의 거래건수는
-              <br />
-              <span className="MyInfoSidebarTextTransNum">0</span>건 입니다.
+              <span className="MyInfoSidebarTextName">{userid}</span>님
+              안녕하세요.
             </div>
           </div>
           <div className="MyInfoSidebarPointBox">
             <ul>
               <li>
                 <div className="MyInfoSidebarPointBoxDiv">
-                  <div className="MyInfoSidebarPointTitle">Point</div>
+                  <div className="MyInfoSidebarPointTitle">평점</div>
                   <div className="MyInfoSidebarPointInt">
-                    <span className="MyInfoSidebarPointSpan">0</span>P
+                    <span className="MyInfoSidebarPointSpan">
+                      {userData.rating > 0
+                        ? userData.rating
+                        : Math.floor(userData.rating)}
+                    </span>
+                    점입니다.
                   </div>
                 </div>
               </li>
@@ -71,12 +89,13 @@ const MyInfoSidebar = (props) => {
             </ul>
           </div>
           <div className="MyInfoSidebarInWrapDiv">
-            <h3>찜 목록</h3>
+            <h3>판매 중인 상품</h3>
             <ul>
-              <li className={`MyInfoMainTabTdActive ${renderTabClass(2)}`}>
-                <Link className="MyInfoSidebarWishListLink" to="/WishList">
-                  찜 목록 조회
-                </Link>
+              <li
+                className={`MyInfoMainTabTdActive ${renderTabClass(2)}`}
+                onClick={() => handleTabClick(2)}
+              >
+                판매 중인 상품
               </li>
             </ul>
           </div>

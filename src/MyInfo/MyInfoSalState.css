@@ -1,0 +1,111 @@
+.MyInfoSalStateWrap {
+    margin-top: 20px;
+    height: 600px;
+  }
+  .MyInfoSalStateWrapDiv {
+    clear: both;
+    padding-bottom: 10px;
+    margin-top: 50px;
+  }
+  .MyInfoSalStateWrapDiv > h3 {
+    position: relative;
+    height: 25px;
+    margin-top: 20px;
+    padding-left: 12px;
+  }
+  .MyInfoSalStateWrapDiv > h3 > img {
+    vertical-align: middle;
+  }
+  hr {
+    margin: 0px;
+  }
+  .MyInfoSalStateMainWrap {
+    width: 100%;
+    height: 470px;
+    border: 1px solid #b1b1b1;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  .MyInfoSalStateMainIntro {
+    width: 100%;
+    height: 100px;
+    border-bottom: 1px solid #b1b1b1;
+    text-align: center;
+    font-size: 17px;
+    line-height: 100px;
+    background-color: #f3f3f3;
+  }
+  .MyInfoSalStateMainIntroImgDiv {
+    position: absolute;
+    margin-left: 340px;
+  }
+  .MyInfoSalStateMainIntroImgDiv > img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  .MyInfoSalStateMainIntroSpan {
+    color: #0f297e;
+    font-weight: bold;
+    margin-left: 20px;
+  }
+  .MyInfoSalStateMainIntroSpan > img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  .MyInfoSalStateSearch {
+    height: 380px;
+  }
+  .MyInfoSalStateSearchTable {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 40px;
+    border-collapse: collapse;
+    font-size: 15px;
+    border-bottom: 2px solid #0f297e;
+  }
+  
+  .MyInfoSalStateSearchTable > tr > th {
+    border-top: 2px solid #0f297e;
+    border-bottom: 2px solid #0f297e;
+    height: 40px;
+  }
+  .MyInfoSalStateSearchTable > tr > td {
+    text-align: center;
+    border: 1px solid #a7a7a7;
+    font-size: 13px;
+    height: 36px;
+  }
+  .MyInfoSalStateSearchTable > tr > td:first-child {
+    border-left: 0px;
+  }
+  .MyInfoSalStateSearchTable > tr > td:last-child {
+    border-right: 0px;
+  }
+  .MyInfoSalStatePagination {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .MyInfoSalStatePagination > span {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .MyInfoSalStatePagination > button {
+    background-color: #ebecf0;
+    box-shadow: inset 0 0 8px #a9aaad;
+    border-radius: 5px;
+    font-size: 15px;
+    border: 0px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .MyInfoSalStateGoBtn{
+    background-color: white;
+    border: 0px;
+  }
+  .MyInfoSalStateGoBtnImg{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }

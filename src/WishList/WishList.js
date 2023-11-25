@@ -27,6 +27,7 @@ function WishList() {
 
         setWishList(dataFromApi);
         setTotalCount(totalCount);
+        console.log(wishList[0].product.product_Images[0].image_url);
       })
       .catch((error) => {
         console.error("위시리스트 데이터 가져오기 실패:", error);
