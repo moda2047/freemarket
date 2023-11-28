@@ -19,10 +19,10 @@ function LoginHeader() {
 
   const handleSearch = (e) => {
     const form = {
-      keyword: query
+      keyword: query,
     };
 
-    navigate("/ProductListSearch?Keyword="+`${query}`, {state: form})
+    navigate("/ProductListSearch?Keyword=" + `${query}`, { state: form });
   };
 
   return (
