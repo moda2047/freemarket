@@ -34,9 +34,9 @@ const ChatList = ({ onChatItemClick, setSelectedChatId }) => {
       newSocket.disconnect();
     };
   }, []);
-  const handleChatClick = (chatId, chatData) => {
+  const handleChatClick = (chatId, chat) => {
     setSelectedChatId(chatId); // 클릭한 채팅의 ID를 설정
-    onChatItemClick(chatId, chatData); // 클릭한 채팅의 ID와 데이터를 부모 컴포넌트로 전달
+    onChatItemClick(chatId, chat); // 클릭한 채팅의 ID와 데이터를 부모 컴포넌트로 전달
   };
 
   return (
@@ -44,7 +44,11 @@ const ChatList = ({ onChatItemClick, setSelectedChatId }) => {
       <h1>채팅 목록</h1>
       <ul>
         {chatRooms.map((chat) => (
-          <li key={chat.id} className="chat-list-item">
+          <li
+            key={chat.id}
+            className="chat-list-item"
+            onClick={() => handleChatClick(chat.id, chat)}
+          >
             <h2>{chat.product.title}</h2>
             <p>{`상대방: ${
               chat.seller_id !== myID ? chat.buyer_id : chat.seller_id
