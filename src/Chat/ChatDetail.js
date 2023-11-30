@@ -74,6 +74,7 @@ const ChatDetail = ({ chatRoomId, chat }) => {
             window.alert("구매가 확정되었습니다.");
             console.log(response.data.message);
           } else {
+            window.alert(response.data.message);
             console.log(response.data.message);
           }
         })
