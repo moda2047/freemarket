@@ -84,8 +84,8 @@ const ChatDetail = ({ chatRoomId, chat }) => {
   return (
     <div className="ChatDetailContainer">
       <div className="ChatDetailProductInfo">
-        <h2>{chat.product.title}</h2>
-        <p>판매자: {chat.seller_id}</p>
+        <h2>{chat && chat.product && chat.product.title}</h2>
+        <p>판매자: {chat && chat.seller_id}</p>
         <button onClick={handleConfirmPurchase}>구매확정</button>
       </div>
       <div className="ChatDetailmessages">

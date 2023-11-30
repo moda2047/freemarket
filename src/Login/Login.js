@@ -116,7 +116,7 @@ const Login = (props) => {
               ></input>
               <button
                 className="form_loginBtn"
-                type="button"
+                type="submit"
                 onClick={handleSubmit}
               >
                 로그인

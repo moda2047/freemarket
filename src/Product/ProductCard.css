@@ -1,112 +1,123 @@
-/*********************************//*********************************//*********************************//*********************************/
+/*********************************/ /*********************************/ /*********************************/ /*********************************/
 /* ProductCard.js */
 
 .productCard {
-    display: flex;
-    overflow: unset;
-    margin: 0 10px;
-    width: 260px;
-    height: 330px;
-    flex-direction: column;
-    background-color: white;
-    border: 1px solid rgb(224, 224, 224);
-  }
-  
-  .productCard-img {
-    padding: 2%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    object-fit: cover;
-  }
-  
-  .productCard-img img {
-    width: 180px;
-    height: 180px;
-    object-fit: cover;
-    border: 1px solid #000;
-  }
-  
-  .productCard-name, .productCard-price {
-    padding-left: 40px;
-    margin-bottom: 5px;
-    height: 30px;
-  }
-  
-  .productCard-name > a {
-    text-decoration : none;
-  }
+  display: flex;
+  overflow: unset;
+  margin: 0 10px;
+  width: 200px;
+  min-width: 200px;
+  height: 330px;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid rgb(224, 224, 224);
+}
 
-  .productCard-name > a > h4 {
-    margin: 0;
-    line-height: 30px;
-    color: black;
-  }
+.productCard-img {
+  padding: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: cover;
+}
 
-  .productCard-name > a > h4:hover {
-    font-size: 18px;
-    color: #0f297e;
-  }
-  
-  .productCard-price > h5 {
-    margin: 0;
-    line-height: 30px;
-  }
+.productCard-img img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border: 1px solid #000;
+}
 
-  .productCard-info {
-    display: flex;
-    justify-content: space-evenly;
-    height: 30px;
-  }
+.productCard-img > a,
+.productCard-name > a {
+  cursor: pointer;
+}
 
-  .productCard-info > h5 {
-    margin: 0;
-  }
+.productCard-name,
+.productCard-price {
+  padding-left: 10px;
+  margin-bottom: 5px;
+  height: 30px;
+  width: 180px;
+}
 
-  .productCard-info > h5 > img {
-    width: 25px;
-    height: 25px;
-    object-fit: cover;
-  }
+.productCard-name > a {
+  text-decoration: none;
+}
 
-  .productCard-button {
-    display: flex;
-    justify-content: space-evenly;
-    height: 35px;
-  }
-  
-  .productCard-button > a {
-    width: 70px;
-    height: 35px;
-    line-height: 35px;
-    color: white;
-    font-size: small;
-    font-weight: bold;
-    text-align: center;
-    text-decoration-line: none;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-  }
+.productCard-name > a > h4 {
+  margin: 0;
+  height: 30px;
+  line-height: 30px;
+  color: black;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
-  .productCard-button > button {
-    width: 70px;
-    height: 35px;
-    line-height: 35px;
-    color: white;
-    font-size: small;
-    font-weight: bold;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-  }
+.productCard-name > a > h4:hover {
+  font-size: 18px;
+  color: #0f297e;
+}
 
-  .productCard-button > #btn-chatting {
-    color: white;
-    background-color: rgb(180, 180, 224);
-  }
+.productCard-price > h5 {
+  margin: 0;
+  line-height: 30px;
+}
 
-  .productCard-button > #btn-addWish {
-    color: white;
-    background-color: rgb(224, 180, 180);
-  }
+.productCard-info {
+  display: flex;
+  justify-content: space-evenly;
+  height: 30px;
+}
+
+.productCard-info > h5 {
+  margin: 0;
+}
+
+.productCard-info > h5 > img {
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
+}
+
+.productCard-button {
+  display: flex;
+  justify-content: space-evenly;
+  height: 35px;
+}
+
+.productCard-button > a {
+  width: 70px;
+  height: 35px;
+  line-height: 35px;
+  color: white;
+  font-size: small;
+  font-weight: bold;
+  text-align: center;
+  text-decoration-line: none;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.productCard-button > button {
+  width: 70px;
+  height: 35px;
+  line-height: 35px;
+  color: white;
+  font-size: small;
+  font-weight: bold;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.productCard-button > #btn-chatting {
+  color: white;
+  background-color: rgb(180, 180, 224);
+}
+
+.productCard-button > #btn-addWish {
+  color: white;
+  background-color: rgb(224, 180, 180);
+}

@@ -1,5 +1,5 @@
 import "./ProductCard.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ProductDetail from "./ProductDetail";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -7,6 +7,9 @@ import { useCookies } from "react-cookie";
 
 function ProductCard({ product }) {
   const [cookies] = useCookies(["userid", "token"]);
+
+  const location = useLocation();
+  const state = location.state;
 
   const navigate = useNavigate();
 
@@ -25,11 +28,7 @@ function ProductCard({ product }) {
   const [image, setImage] = useState([]);
   const [rating, setRating] = useState(0);
 
-  useEffect(() => {}, [product]);
-
-  const viewProductDetail = (e) => {
-    e.preventDefault();
-
+  const viewProductDetail = () => {
     const ProductDetailSearchAPI = "http://localhost:8000/product/searchOne";
 
     axios
@@ -48,12 +47,14 @@ function ProductCard({ product }) {
       )
       .then((response) => {
         if (response.data.result) {
+          console.log(response);
           console.log(response.data.message);
 
           setProductInfo(response.data.found);
 
           navigate("/ProductDetail", { state: response.data.found });
         } else {
+          console.log(response);
           console.log(response.data.message);
         }
       })
@@ -92,6 +93,8 @@ function ProductCard({ product }) {
         if (response.data.result) {
           console.log(response.data.message);
           window.alert(response.data.message);
+
+          window.location.reload("/");
         } else {
           console.log(response.data.message);
           window.alert(response.data.message);
@@ -106,29 +109,14 @@ function ProductCard({ product }) {
   return (
     <div className="productCard">
       <div className="productCard-img">
-        <Link
-          to={{
-            pathname: "/ProductDetail",
-            state: {
-              product: product,
-            },
-          }}
-          onClick={viewProductDetail}
-        >
+        <a onClick={viewProductDetail}>
           <img src={product.product_Images[0].image_url}></img>
-        </Link>
+        </a>
       </div>
       <div className="productCard-name">
-        <Link
-          to={{
-            pathname: "/ProductDetail",
-            state: {
-              product: product,
-            },
-          }}
-        >
+        <a onClick={viewProductDetail}>
           <h4>{product.title}</h4>
-        </Link>
+        </a>
       </div>
       <div className="productCard-price">
         <h5> {product.price}원</h5>

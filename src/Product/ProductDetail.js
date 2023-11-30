@@ -1,5 +1,5 @@
 import "./ProductDetail.css";
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
@@ -15,13 +15,46 @@ function ProductDetail({ props }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [productInfo, setProductInfo] = useState(location.state);
 
-  const productInfo = location.state;
   const id = productInfo.product_id;
   const category = productInfo.category;
 
   const form = {
     category: category,
+  };
+
+  const fetchProductInfo = () => {
+    const ProductDetailSearchAPI = "http://localhost:8000/product/searchOne";
+
+    axios
+      .get(
+        ProductDetailSearchAPI,
+        {
+          params: {
+            productId: id,
+          },
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        if (response.data.result) {
+          console.log(response);
+          console.log(response.data.message);
+
+          setProductInfo(response.data.found);
+        } else {
+          console.log(response);
+          console.log(response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.error("오류", error);
+      });
   };
 
   const handleProductDelete = () => {
@@ -91,6 +124,8 @@ function ProductDetail({ props }) {
         if (response.data.result) {
           console.log(response.data.message);
           window.alert(response.data.message);
+
+          fetchProductInfo();
         } else {
           console.log(response.data.message);
           window.alert(response.data.message);
@@ -101,6 +136,8 @@ function ProductDetail({ props }) {
         window.alert(error);
       });
   };
+
+  useEffect(() => {}, []);
 
   return (
     <div class="productDetail">
@@ -223,13 +260,7 @@ function ProductDetail({ props }) {
                   </td>
                   <td>
                     <a id="tag">판매자</a>
-                    <Link
-                      to={{
-                        pathname: "/OtherUserInfoSearch",
-                        search: productInfo.seller_id,
-                      }}
-                      id="value"
-                    >
+                    <Link to="/OtherUserInfoSearch" id="value">
                       {productInfo.seller_id}
                     </Link>
                   </td>
