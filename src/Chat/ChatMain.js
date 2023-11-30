@@ -4,7 +4,7 @@ import ChatDetail from "./ChatDetail.js";
 
 import "./ChatMain.css"; // CSS 파일 가져오기
 
-function ChatMain() {
+function ChatMain(props) {
   const [selectedChatId, setSelectedChatId] = useState(null);
   const [selectedChatData, setSelectedChatData] = useState(null); // 선택한 채팅 데이터 상태 추가
   const handleChatItemClick = (chatId, chat) => {

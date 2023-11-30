@@ -7,6 +7,7 @@ const ChatList = ({ onChatItemClick, setSelectedChatId }) => {
   const [cookies] = useCookies(["token", "userid"]);
   const [chatRooms, setChatRooms] = useState([]);
   const myID = cookies.userId || "";
+
   useEffect(() => {
     const mailAuthAPI = "http://localhost:8000/chatRoomList";
     const token = cookies.token;
@@ -29,29 +30,7 @@ const ChatList = ({ onChatItemClick, setSelectedChatId }) => {
     });
     newSocket.on("chatRoomList", (data) => {
       console.log("클라이언트로부터 받은 메시지:", data);
-
-      // 서버에서 받은 데이터를 클라이언트 측에서 unread 및 updatedAt 기준으로 정렬
-      const sortedChatRooms = data.sort((a, b) => {
-        const aUnread = check(a);
-        const bUnread = check(b);
-
-        if (aUnread > 0 && bUnread === 0) {
-          return -1; // unread가 있는 채팅을 위로 배치
-        } else if (aUnread === 0 && bUnread > 0) {
-          return 1; // unread가 없는 채팅을 밑으로 배치
-        } else {
-          // unread가 같은 경우에는 updatedAt을 기준으로 최신 순서로 배치
-          if (a.updatedAt > b.updatedAt) {
-            return -1;
-          } else if (a.updatedAt < b.updatedAt) {
-            return 1;
-          } else {
-            return 0; // 그 외의 경우에는 순서를 유지
-          }
-        }
-      });
-
-      setChatRooms(sortedChatRooms);
+      setChatRooms(data);
     });
 
     // 컴포넌트 언마운트 시 소켓 연결 해제
@@ -80,9 +59,9 @@ const ChatList = ({ onChatItemClick, setSelectedChatId }) => {
     }
   };
   return (
-    <div>
+    <div className="chat-list-container">
       <h1>채팅 목록</h1>
-      <ul>
+      <ul className="chat-list">
         {chatRooms.map((chat) => (
           <li
             key={chat.id}
@@ -94,10 +73,15 @@ const ChatList = ({ onChatItemClick, setSelectedChatId }) => {
                 ? chat.product.title
                 : getOtherUserID(chat)}
             </h2>
-            <p>{`상대방: ${getOtherUserID(chat)}`}</p>
-            <p>{`unread: ${check(chat)}`}</p>
+            <div className="chat-list-item-box">
+              <p id="opponent_id">{`상대방: ${getOtherUserID(chat)}`}</p>
+              <p id="unread_message">{`${check(chat)}`}</p>
+            </div>
 
-            <button onClick={() => handleChatClick(chat.id, chat)}>
+            <button
+              id="chat_open_btn"
+              onClick={() => handleChatClick(chat.id, chat)}
+            >
               채팅 열기
             </button>
           </li>

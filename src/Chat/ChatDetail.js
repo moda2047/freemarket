@@ -48,7 +48,7 @@ const ChatDetail = ({ chatRoomId, chat }) => {
     });
 
     return () => {
-      console.log("소켓 연결이 해제되었습니다.");
+      console.log("채팅방 소켓 연결이 해제되었습니다.");
       newSocket.disconnect();
     };
   }, [chatRoomId, cookies.token]);
@@ -114,6 +114,7 @@ const ChatDetail = ({ chatRoomId, chat }) => {
           content: newMessage,
           sender_id: cookies.userid,
           createdAt: getFormattedDate(),
+          unread: 1,
         };
 
         // Show the user's message on the screen before sending
@@ -186,6 +187,10 @@ const ChatDetail = ({ chatRoomId, chat }) => {
               message.sender_id === cookies.userid ? "sent" : "received"
             }`}
           >
+            <div
+              className={`${message.unread === 1 ? "unread" : ""}`}
+              data-unread={message.unread}
+            ></div>
             <div className="ChatDetailmessage-text">{message.content}</div>
             <div className="ChatDetailmessage-timestamp">
               {formatReceivedDate(message.createdAt)}

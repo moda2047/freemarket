@@ -37,10 +37,26 @@
   overflow-y: scroll;
 }
 .message {
+  position: relative;
   padding: 10px;
   border-radius: 10px;
   margin: 5px;
   max-width: 70%;
+}
+
+.unread {
+  content: attr(data-unread); /* unread 속성의 값을 표시 */
+  display: inline-block;
+  position: absolute;
+  right: 105%;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 50%;
+  background-color: #0056b3; /* 원하는 색상으로 변경 가능 */
+  color: white;
+  text-align: center;
+  margin-left: 0px; /* 숫자와 메시지 사이의 간격 조정 */
 }
 
 .sent {
