@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./OtherUserInfoSearch.css";
-import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { useLocation, Link, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 const OtherUserInfoSearch = (props) => {
   const itemsPerPage = 5;
@@ -12,7 +13,8 @@ const OtherUserInfoSearch = (props) => {
   const [userData, setUserData] = useState([]);
   const location = useLocation();
   const sellerId = location.search.slice(1);
-
+  const [cookies] = useCookies(["token", "userid"]);
+  const navigate = useNavigate();
   console.log(sellerId);
 
   useEffect(() => {
@@ -61,7 +63,37 @@ const OtherUserInfoSearch = (props) => {
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
   };
+  const handleChat = () => {
+    const data = {
+      chatPartnerId: sellerId,
+    };
+    const url = "http://localhost:8000/chat/enterChatRoom";
+    const headers = {
+      headers: {
+        Authorization: cookies.token,
+        ContentType: "application/json",
+        Accept: "application/json",
+      },
+    };
 
+    axios
+      .post(url, data, headers)
+
+      .then((response) => {
+        console.log(response);
+        if (response.data.result) {
+          navigate("/ChatMain");
+          console.log(response.data.message);
+        } else {
+          navigate("/ChatMain");
+          console.log(response.data.message);
+        }
+      })
+      .catch((error) => {
+        window.alert("채팅방 생성 중 오류.");
+        console.error("채팅방 생성 중 오류", error);
+      });
+  };
   return (
     <div className="OtherUserInfoSearchWrap">
       <div className="OtherUserInfoSearchWrapDiv">
@@ -168,7 +200,7 @@ const OtherUserInfoSearch = (props) => {
       </div>
       <div className="OtherUserInfoSearchBtnWrap">
         <div className="OtherUserInfoSearchBtnGoExit">
-          <button>
+          <button onClick={handleChat}>
             {sellerId}와 채팅 하기 &nbsp;
             <img
               className="OtherUserSearchGoChatImg"

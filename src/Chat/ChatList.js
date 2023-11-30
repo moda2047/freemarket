@@ -68,7 +68,11 @@ const ChatList = ({ onChatItemClick, setSelectedChatId }) => {
             className="chat-list-item"
             onClick={() => handleChatClick(chat.id, chat)}
           >
-            <h2>{chat.product.title}</h2>
+            <h2>
+              {chat.product && chat.product.title
+                ? chat.product.title
+                : getOtherUserID(chat)}
+            </h2>
             <p>{`상대방: ${getOtherUserID(chat)}`}</p>
             <p>{`unread: ${check(chat)}`}</p>
 

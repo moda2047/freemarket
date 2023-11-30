@@ -155,12 +155,28 @@ const ChatDetail = ({ chatRoomId, chat }) => {
 
     return formattedDate.replace(",", ""); // Remove comma between date and time
   };
+  const getOtherUserID = (chat) => {
+    if (cookies.userid === chat.seller_id) {
+      return chat.buyer_id;
+    } else {
+      return chat.seller_id;
+    }
+  };
   return (
     <div className="ChatDetailContainer">
       <div className="ChatDetailProductInfo">
-        <h2>{chat && chat.product && chat.product.title}</h2>
-        <p>판매자: {chat && chat.seller_id}</p>
-        <button onClick={handleConfirmPurchase}>구매확정</button>
+        {chat && chat.product && chat.product.title !== null ? (
+          <>
+            <h2>{chat.product.title}</h2>
+            <p>판매자: {chat.seller_id}</p>
+            <button onClick={handleConfirmPurchase}>구매확정</button>
+          </>
+        ) : (
+          <>
+            <h2>{chat && getOtherUserID(chat)}</h2>
+            {chat && chat.seller_id && <p>판매자: {chat.seller_id}</p>}
+          </>
+        )}
       </div>
       <div ref={chatContainerRef} className="ChatDetailmessages">
         {chatData.map((message, index) => (
