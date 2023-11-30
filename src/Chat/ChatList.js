@@ -29,13 +29,8 @@ const ChatList = ({ onChatItemClick, setSelectedChatId }) => {
     });
     newSocket.on("chatRoomList", (data) => {
       console.log("클라이언트로부터 받은 메시지:", data);
-      const sortedChatRooms = data.sort((a, b) => {
-        const dateA = new Date(a.chat_room.updatedAt);
-        const dateB = new Date(b.chat_room.updatedAt);
-        return dateB - dateA; // 최신순으로 정렬
-      });
 
-      setChatRooms(sortedChatRooms);
+      setChatRooms(data);
     });
 
     // 컴포넌트 언마운트 시 소켓 연결 해제
