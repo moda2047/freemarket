@@ -2,7 +2,7 @@ import { useCookies } from "react-cookie";
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import "./ChatDetail.css"; // CSS 파일을 import
-
+import axios from "axios";
 const ChatDetail = ({ chatRoomId, chat }) => {
   const [cookies] = useCookies(["token", "userid"]);
   const myID = cookies.userId || "";
@@ -51,7 +51,37 @@ const ChatDetail = ({ chatRoomId, chat }) => {
   };
 
   const handleConfirmPurchase = () => {
-    alert("구매가 확정되었습니다!");
+    const confirmation = window.confirm("정말로 구매확정을 하시겠습니까?");
+    if (confirmation) {
+      // 사용자가 확인을 선택한 경우에만 구매확정 처리를 진행합니다.
+      const data = {
+        chatRoomId: chatRoomId,
+      };
+      const url = `http://localhost:8000/chat/confirmTransaction`;
+      const headers = {
+        headers: {
+          Authorization: cookies.token,
+          ContentType: "application/json",
+          Accept: "application/json",
+        },
+      };
+
+      axios
+        .patch(url, data, headers) // POST 대신 PATCH로 변경
+        .then((response) => {
+          console.log(response);
+          if (response.data.result) {
+            window.alert("구매가 확정되었습니다.");
+            console.log(response.data.message);
+          } else {
+            console.log(response.data.message);
+          }
+        })
+        .catch((error) => {
+          window.alert("상품 구매 확정 중 오류.");
+          console.error("상품 구매 확정 중 오류", error);
+        });
+    }
   };
 
   const handleSendMessage = () => {

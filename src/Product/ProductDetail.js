@@ -138,7 +138,37 @@ function ProductDetail({ props }) {
   };
 
   useEffect(() => {}, []);
+  const handleChat = () => {
+    const data = {
+      productId: id,
+    };
+    const url = "http://localhost:8000/chat/enterChatRoom";
+    const headers = {
+      headers: {
+        Authorization: cookies.token,
+        ContentType: "application/json",
+        Accept: "application/json",
+      },
+    };
 
+    axios
+      .post(url, data, headers)
+
+      .then((response) => {
+        console.log(response);
+        if (response.data.result) {
+          navigate("/ChatMain", { state: { state: productInfo.seller_id } });
+          console.log(response.data.message);
+        } else {
+          navigate("/ChatMain", { state: { state: productInfo.seller_id } });
+          console.log(response.data.message);
+        }
+      })
+      .catch((error) => {
+        window.alert("채팅방 생성 중 오류.");
+        console.error("채팅방 생성 중 오류", error);
+      });
+  };
   return (
     <div class="productDetail">
       <Modal isOpen={modalIsOpen}>
@@ -233,14 +263,9 @@ function ProductDetail({ props }) {
               </tr>
               <tr>
                 <td className="btn-container">
-                  <Link
-                    to="/ChatMain"
-                    state={{ state: productInfo.seller_id }}
-                    id="btn-chatting"
-                  >
-                    {" "}
-                    1:1 채팅{" "}
-                  </Link>
+                  <button id="btn-chatting" onClick={handleChat}>
+                    1:1 채팅
+                  </button>
                   <button id="btn-addWish" onClick={addWishlist}>
                     {" "}
                     찜 등록{" "}

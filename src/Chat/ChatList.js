@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 
 const ChatList = ({ onChatItemClick, setSelectedChatId }) => {
-  const [cookies] = useCookies(["token", "userId"]);
+  const [cookies] = useCookies(["token", "userid"]);
   const [chatRooms, setChatRooms] = useState([]);
   const myID = cookies.userId || "";
   useEffect(() => {
@@ -38,7 +38,13 @@ const ChatList = ({ onChatItemClick, setSelectedChatId }) => {
     setSelectedChatId(chatId); // 클릭한 채팅의 ID를 설정
     onChatItemClick(chatId, chat); // 클릭한 채팅의 ID와 데이터를 부모 컴포넌트로 전달
   };
-
+  const getOtherUserID = (chat) => {
+    if (cookies.userid === chat.seller_id) {
+      return chat.buyer_id;
+    } else {
+      return chat.seller_id;
+    }
+  };
   return (
     <div>
       <h1>채팅 목록</h1>
@@ -50,9 +56,7 @@ const ChatList = ({ onChatItemClick, setSelectedChatId }) => {
             onClick={() => handleChatClick(chat.id, chat)}
           >
             <h2>{chat.product.title}</h2>
-            <p>{`상대방: ${
-              chat.seller_id !== myID ? chat.buyer_id : chat.seller_id
-            }`}</p>
+            <p>{`상대방: ${getOtherUserID(chat)}`}</p>
             <button onClick={() => handleChatClick(chat.id, chat)}>
               채팅 열기
             </button>
