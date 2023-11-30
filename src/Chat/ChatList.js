@@ -24,16 +24,27 @@ const ChatList = ({ onChatItemClick, setSelectedChatId }) => {
     newSocket.on("connect", () => {
       console.log("소켓이 연결되었습니다.");
     });
+    newSocket.on("unread", (unreadData) => {
+      console.log("언리드 메시지:", unreadData);
+    });
     newSocket.on("chatRoomList", (data) => {
       console.log("클라이언트로부터 받은 메시지:", data);
-      setChatRooms(data);
+      const sortedChatRooms = data.sort((a, b) => {
+        const dateA = new Date(a.chat_room.updatedAt);
+        const dateB = new Date(b.chat_room.updatedAt);
+        return dateB - dateA; // 최신순으로 정렬
+      });
+
+      setChatRooms(sortedChatRooms);
     });
+
     // 컴포넌트 언마운트 시 소켓 연결 해제
     return () => {
       console.log("소켓 연결이 해제되었습니다.");
       newSocket.disconnect();
     };
   }, []);
+
   const handleChatClick = (chatId, chat) => {
     setSelectedChatId(chatId); // 클릭한 채팅의 ID를 설정
     onChatItemClick(chatId, chat); // 클릭한 채팅의 ID와 데이터를 부모 컴포넌트로 전달
