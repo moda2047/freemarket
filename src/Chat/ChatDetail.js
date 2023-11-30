@@ -1,8 +1,9 @@
+import { useRef, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
-import "./ChatDetail.css"; // CSS 파일을 import
+import "./ChatDetail.css";
 import axios from "axios";
+
 const ChatDetail = ({ chatRoomId, chat }) => {
   const [cookies] = useCookies(["token", "userid"]);
   const myID = cookies.userId || "";
@@ -11,8 +12,16 @@ const ChatDetail = ({ chatRoomId, chat }) => {
   const [chatData, setChatData] = useState([]);
   const [socket, setSocket] = useState(null);
 
+  const chatContainerRef = useRef(null);
+
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
+    }
+  };
+
   useEffect(() => {
-    console.log("Received chat data:", chat);
     const mailAuthAPI = `http://localhost:8000/chatRoom?chatRoomId=${chatRoomId}`;
     const token = cookies.token;
 
@@ -84,13 +93,31 @@ const ChatDetail = ({ chatRoomId, chat }) => {
         });
     }
   };
+  const getFormattedDate = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const seconds = String(now.getSeconds()).padStart(2, "0");
 
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  };
   const handleSendMessage = () => {
     if (socket) {
       if (newMessage.trim() !== "") {
         const newMessageData = {
           message: newMessage,
         };
+        const newMessageData2 = {
+          content: newMessage,
+          sender_id: cookies.userid,
+          createdAt: getFormattedDate(),
+        };
+
+        // Show the user's message on the screen before sending
+        setChatData((prevChatData) => [...prevChatData, newMessageData2]);
 
         socket.emit("chat", newMessageData);
         setNewMessage("");
@@ -112,6 +139,22 @@ const ChatDetail = ({ chatRoomId, chat }) => {
     }
   }, [socket]);
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [chatData]);
+  const formatReceivedDate = (isoDate) => {
+    const date = new Date(isoDate);
+    const formattedDate = date.toLocaleString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+
+    return formattedDate.replace(",", ""); // Remove comma between date and time
+  };
   return (
     <div className="ChatDetailContainer">
       <div className="ChatDetailProductInfo">
@@ -119,7 +162,7 @@ const ChatDetail = ({ chatRoomId, chat }) => {
         <p>판매자: {chat && chat.seller_id}</p>
         <button onClick={handleConfirmPurchase}>구매확정</button>
       </div>
-      <div className="ChatDetailmessages">
+      <div ref={chatContainerRef} className="ChatDetailmessages">
         {chatData.map((message, index) => (
           <div
             key={index}
@@ -129,7 +172,7 @@ const ChatDetail = ({ chatRoomId, chat }) => {
           >
             <div className="ChatDetailmessage-text">{message.content}</div>
             <div className="ChatDetailmessage-timestamp">
-              {message.createdAt}
+              {formatReceivedDate(message.createdAt)}
             </div>
           </div>
         ))}
