@@ -56,6 +56,13 @@ const ChatList = ({ onChatItemClick, setSelectedChatId }) => {
       return chat.seller_id;
     }
   };
+  const check = (chat) => {
+    if (cookies.userid === chat.seller_id) {
+      return chat.chat_room.seller_unread;
+    } else {
+      return chat.chat_room.buyer_unread;
+    }
+  };
   return (
     <div>
       <h1>채팅 목록</h1>
@@ -68,6 +75,8 @@ const ChatList = ({ onChatItemClick, setSelectedChatId }) => {
           >
             <h2>{chat.product.title}</h2>
             <p>{`상대방: ${getOtherUserID(chat)}`}</p>
+            <p>{`unread: ${check(chat)}`}</p>
+
             <button onClick={() => handleChatClick(chat.id, chat)}>
               채팅 열기
             </button>
