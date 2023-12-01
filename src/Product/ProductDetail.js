@@ -157,11 +157,11 @@ function ProductDetail({ props }) {
       .then((response) => {
         console.log(response);
         if (response.data.result) {
-          navigate("/ChatMain", { state: { state: productInfo.seller_id } });
-          console.log(response.data.message);
+          navigate("/ChatMain", { state: { chatAttend: response.data } });
+          console.log(response.data);
         } else {
-          navigate("/ChatMain", { state: { state: productInfo.seller_id } });
-          console.log(response.data.message);
+          navigate("/ChatMain", { state: { chatAttend: response.data } });
+          console.log(response.data);
         }
       })
       .catch((error) => {

@@ -5,6 +5,8 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
 const MyInfoSalState = () => {
+  const navigate = useNavigate();
+
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
@@ -54,6 +56,40 @@ const MyInfoSalState = () => {
     setCurrentPage(currentPage + 1);
   };
 
+  // product_id 상품 상세 조회한 뒤, 상세 조회 정보를 포함하여 Detail 페이지로 이동
+  const navigateProductDetail = (product_id) => {
+    const ProductDetailSearchAPI = "http://localhost:8000/product/searchOne";
+
+    axios
+      .get(
+        ProductDetailSearchAPI,
+        {
+          params: {
+            productId: product_id,
+          },
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        if (response.data.result) {
+          console.log(response);
+          console.log(response.data.message);
+
+          navigate("/ProductDetail", { state: response.data.found });
+        } else {
+          console.log(response);
+          console.log(response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.error("오류", error);
+      });
+  };
+
   return (
     <div className="MyInfoSalStateWrap">
       <div className="MyInfoSalStateWrapDiv">
@@ -101,10 +137,11 @@ const MyInfoSalState = () => {
                     <td>
                       <Link
                         className="MyInfoSalStateGoBtn"
-                        to={{
-                          pathname: "/ProductDetail",
-                        }}
-                        search={{ productId: item.product_id }}
+                        // to={{
+                        //   pathname: "/ProductDetail",
+                        // }}
+                        // search={{ productId: item.product_id }}
+                        onClick={() => navigateProductDetail(item.product_id)}
                       >
                         <img
                           className="MyInfoSalStateGoBtnImg"

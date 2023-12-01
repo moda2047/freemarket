@@ -102,6 +102,12 @@ const MyBuyList = () => {
                         <Link
                           className="MyBuyListReviewLink"
                           to="/ReviewCreate"
+                          state={{
+                            product_id: item.product.product_id,
+                            seller_id: item.seller_id,
+                            title: item.product.title,
+                            transactionId: item.transaction_id,
+                          }}
                         >
                           리뷰쓰기
                         </Link>

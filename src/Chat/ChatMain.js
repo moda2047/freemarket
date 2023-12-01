@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ChatList from "./ChatList.js";
 import ChatDetail from "./ChatDetail.js";
 
