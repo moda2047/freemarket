@@ -124,10 +124,11 @@ function ProductCard({ product }) {
       .then((response) => {
         console.log(response);
         if (response.data.result) {
-          navigate("/ChatMain", { state: { state: productInfo.seller_id } });
+          console.log(response.data);
+          navigate("/ChatMain", { state: { chatData: response.data } });
           console.log(response.data.message);
         } else {
-          navigate("/ChatMain", { state: { state: productInfo.seller_id } });
+          navigate("/ChatMain", { state: { chatData: response.data } });
           console.log(response.data.message);
         }
       })

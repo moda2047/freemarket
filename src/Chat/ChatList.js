@@ -7,29 +7,25 @@ const ChatList = ({ onChatItemClick, setSelectedChatId }) => {
   const [cookies] = useCookies(["token", "userid"]);
   const [chatRooms, setChatRooms] = useState([]);
   const myID = cookies.userId || "";
-
+  const mailAuthAPI = "http://localhost:8000/chatRoomList";
+  const token = cookies.token;
+  const [socket, setSocket] = useState(null);
   useEffect(() => {
-    const mailAuthAPI = "http://localhost:8000/chatRoomList";
-    const token = cookies.token;
-
     const newSocket = io(mailAuthAPI, {
       extraHeaders: {
         Authorization: token,
       },
     });
-
     newSocket.on("connect_error", (error) => {
       console.error("소켓 연결 에러:", error);
     });
 
     newSocket.on("connect", () => {
       console.log("소켓이 연결되었습니다.");
-    });
-    newSocket.on("unread", (unreadData) => {
-      console.log("언리드 메시지:", unreadData);
+      setSocket(newSocket);
     });
     newSocket.on("chatRoomList", (data) => {
-      console.log("클라이언트로부터 받은 메시지:", data);
+      console.log("서버로부터 받은 메시지:", data);
       setChatRooms(data);
     });
 
@@ -39,7 +35,14 @@ const ChatList = ({ onChatItemClick, setSelectedChatId }) => {
       newSocket.disconnect();
     };
   }, []);
-
+  useEffect(() => {
+    if (socket) {
+      socket.on("newChatRoom", (data) => {
+        console.log("새로운 채팅방 도착:", data);
+        setChatRooms((prevChatData) => [...prevChatData, data]);
+      });
+    }
+  }, [socket]);
   const handleChatClick = (chatId, chat) => {
     setSelectedChatId(chatId); // 클릭한 채팅의 ID를 설정
     onChatItemClick(chatId, chat); // 클릭한 채팅의 ID와 데이터를 부모 컴포넌트로 전달

@@ -82,10 +82,10 @@ const OtherUserInfoSearch = (props) => {
       .then((response) => {
         console.log(response);
         if (response.data.result) {
-          navigate("/ChatMain");
+          navigate("/ChatMain", { state: { chatData: response.data } });
           console.log(response.data.message);
         } else {
-          navigate("/ChatMain");
+          navigate("/ChatMain", { state: { chatData: response.data } });
           console.log(response.data.message);
         }
       })

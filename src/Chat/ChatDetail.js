@@ -7,11 +7,9 @@ import axios from "axios";
 const ChatDetail = ({ chatRoomId, chat }) => {
   const [cookies] = useCookies(["token", "userid"]);
   const myID = cookies.userId || "";
-
   const [newMessage, setNewMessage] = useState("");
   const [chatData, setChatData] = useState([]);
   const [socket, setSocket] = useState(null);
-
   const chatContainerRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -163,6 +161,7 @@ const ChatDetail = ({ chatRoomId, chat }) => {
       return chat.seller_id;
     }
   };
+
   return (
     <div className="ChatDetailContainer">
       <div className="ChatDetailProductInfo">

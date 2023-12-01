@@ -157,10 +157,10 @@ function ProductDetail({ props }) {
       .then((response) => {
         console.log(response);
         if (response.data.result) {
-          navigate("/ChatMain", { state: { chatAttend: response.data } });
+          navigate("/ChatMain", { state: { chatData: response.data } });
           console.log(response.data);
         } else {
-          navigate("/ChatMain", { state: { chatAttend: response.data } });
+          navigate("/ChatMain", { state: { chatData: response.data } });
           console.log(response.data);
         }
       })

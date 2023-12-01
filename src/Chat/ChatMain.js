@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from "react";
 import ChatList from "./ChatList.js";
 import ChatDetail from "./ChatDetail.js";
-
+import { useLocation } from "react-router-dom";
 import "./ChatMain.css"; // CSS 파일 가져오기
 
 function ChatMain(props) {
   const [selectedChatId, setSelectedChatId] = useState(null);
   const [selectedChatData, setSelectedChatData] = useState(null); // 선택한 채팅 데이터 상태 추가
+  const location = useLocation();
+  const chatDataFromProductDetail = location.state
+    ? location.state.chatData
+    : null;
+
+  useEffect(() => {
+    if (chatDataFromProductDetail) {
+      setSelectedChatId(chatDataFromProductDetail.chatAttend.chat_room_id);
+      setSelectedChatData(chatDataFromProductDetail.chatAttend);
+    }
+  }, [chatDataFromProductDetail]);
   const handleChatItemClick = (chatId, chat) => {
     setSelectedChatId(chatId); // 클릭한 채팅의 ID를 상태에 저장
     setSelectedChatData(chat); // 클릭한 채팅의 데이터를 상태에 저장
