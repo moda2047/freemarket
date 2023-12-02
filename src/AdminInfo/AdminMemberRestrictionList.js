@@ -7,7 +7,7 @@ function AdminMemberList() {
   const [members, setMembers] = useState([]);
   const [cookies] = useCookies(["token"]);
   const [searchQuery, setSearchQuery] = useState("");
-
+  const [data, setData] = useState([]);
   const fetchData = async () => {
     const mailAuthAPI = "http://localhost:8000/sanction/searchForAdmin";
     const headers = {
@@ -24,9 +24,11 @@ function AdminMemberList() {
       .then((response) => {
         console.log("API 응답 데이터: ", response.data);
         if (response.data.result) {
+          const data = response.data.found;
           const foundArray = response.data.found;
           setMembers(foundArray);
           setTotalCount(response.data.totalCount);
+          setData(data);
           console.log("성공적으로 됐");
         } else {
           console.log("실패");
@@ -46,14 +48,15 @@ function AdminMemberList() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   useEffect(() => {
+    // Calculate the maximum page based on data length and itemsPerPage
+    const maxPage = Math.ceil(data.length / itemsPerPage);
+
     // Ensure currentPage is within a valid range
-    if (currentPage < 1) {
-      setCurrentPage(1);
+    if (currentPage < 1 || currentPage > maxPage) {
+      setCurrentPage((prevPage) => Math.min(Math.max(prevPage, 1), maxPage));
     }
-    if (currentPage > Math.ceil(totalCount / itemsPerPage)) {
-      setCurrentPage(Math.ceil(totalCount / itemsPerPage));
-    }
-  }, [currentPage, totalCount]);
+    console.log(currentPage);
+  }, [currentPage, data.length, itemsPerPage]);
 
   const prevPage = () => {
     setCurrentPage(currentPage - 1);
