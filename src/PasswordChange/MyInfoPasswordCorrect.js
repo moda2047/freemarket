@@ -20,7 +20,7 @@ const MyInfoPasswordCorrect = () => {
   const handleCheckPassword = async () => {
     try {
       // 사용자가 입력한 비밀번호와 토큰을 사용하여 API 요청을 보냅니다.
-      const apiUrl = "http://localhost:8000/auth/checkPassword"; // API 엔드포인트 URL
+      const apiUrl = process.env.REACT_APP_API_URL + "/auth/checkPassword"; // API 엔드포인트 URL
       const data = { password: password }; // 비밀번호를 요청 본문에 포함
 
       const response = await axios.post(apiUrl, data, {

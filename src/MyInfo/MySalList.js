@@ -17,7 +17,7 @@ const MySalList = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/transaction/searchSaleList`, {
+      .get(process.env.REACT_APP_API_URL + `/transaction/searchSaleList`, {
         headers: {
           Authorization: `${token}`,
         },

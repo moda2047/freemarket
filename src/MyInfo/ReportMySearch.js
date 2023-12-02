@@ -14,7 +14,7 @@ function ReportMySearch({
   const [cookies] = useCookies(["token"]);
 
   const handleReportDelete = () => {
-    const url = `http://localhost:8000/report/delete`;
+    const url = process.env.REACT_APP_API_URL + `/report/delete`;
     const data = {
       report_id: reportId,
     };

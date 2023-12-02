@@ -25,7 +25,8 @@ function ProductDetail({ props }) {
   };
 
   const fetchProductInfo = () => {
-    const ProductDetailSearchAPI = "http://localhost:8000/product/searchOne";
+    const ProductDetailSearchAPI =
+      process.env.REACT_APP_API_URL + "/product/searchOne";
 
     axios
       .get(
@@ -58,7 +59,7 @@ function ProductDetail({ props }) {
   };
 
   const handleProductDelete = () => {
-    const ProductDeleteAPI = "http://localhost:8000/product/remove";
+    const ProductDeleteAPI = process.env.REACT_APP_API_URL + "/product/remove";
 
     console.log(token);
 
@@ -103,7 +104,7 @@ function ProductDetail({ props }) {
       return;
     }
 
-    const AddWishlistAPI = "http://localhost:8000/wishList/add";
+    const AddWishlistAPI = process.env.REACT_APP_API_URL + "/wishList/add";
 
     axios
       .post(
@@ -142,7 +143,7 @@ function ProductDetail({ props }) {
     const data = {
       productId: id,
     };
-    const url = "http://localhost:8000/chat/enterChatRoom";
+    const url = process.env.REACT_APP_API_URL + "/chat/enterChatRoom";
     const headers = {
       headers: {
         Authorization: cookies.token,

@@ -16,7 +16,7 @@ function WishList() {
   useEffect(() => {
     // API 호출
     axios
-      .get("http://localhost:8000/wishList/search", {
+      .get(process.env.REACT_APP_API_URL + "/wishList/search", {
         headers: {
           Authorization: `${token}`,
         },
@@ -48,7 +48,7 @@ function WishList() {
     if (shouldDelete) {
       // API 호출하여 위시 삭제 등의 동작 수행
       axios
-        .delete(`http://localhost:8000/wishList/delete`, {
+        .delete(process.env.REACT_APP_API_URL + `/wishList/delete`, {
           headers: {
             Authorization: token,
           },

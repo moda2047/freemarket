@@ -20,7 +20,8 @@ const OtherUserInfoSearch = (props) => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8000/review/searchWrittenReview?user_id=${sellerId}`
+        process.env.REACT_APP_API_URL +
+          `/review/searchWrittenReview?user_id=${sellerId}`
       )
       .then((response) => {
         const data = response.data.found;
@@ -35,7 +36,8 @@ const OtherUserInfoSearch = (props) => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8000/member/search?id=${sellerId}&getSanction=true`
+        process.env.REACT_APP_API_URL +
+          `/member/search?id=${sellerId}&getSanction=true`
       )
       .then((response) => {
         const userData = response.data.found[0]; // found 배열의 첫 번째 요소
@@ -67,7 +69,7 @@ const OtherUserInfoSearch = (props) => {
     const data = {
       chatPartnerId: sellerId,
     };
-    const url = "http://localhost:8000/chat/enterChatRoom";
+    const url = process.env.REACT_APP_API_URL + "/chat/enterChatRoom";
     const headers = {
       headers: {
         Authorization: cookies.token,

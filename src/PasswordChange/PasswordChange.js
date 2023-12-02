@@ -34,7 +34,7 @@ const PasswordChange = (props) => {
     }
 
     // 데이터를 서버로 전송
-    fetch("http://localhost:8000/member/changePw", {
+    fetch(process.env.REACT_APP_API_URL + "/member/changePw", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",

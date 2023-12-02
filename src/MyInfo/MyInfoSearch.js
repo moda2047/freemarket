@@ -43,7 +43,7 @@ const MyInfoSearch = (props) => {
     // 토큰 값이나 다른 필요한 정보를 이용하여 DELETE 요청을 보냄
     if (userConfirmed) {
       axios
-        .delete("http://localhost:8000/member/drop", {
+        .delete(process.env.REACT_APP_API_URL + "/member/drop", {
           headers: {
             Authorization: `${token}`, // 토큰을 헤더에 추가
           },
@@ -68,7 +68,10 @@ const MyInfoSearch = (props) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/member/search?id=${userid}&getSanction=true`)
+      .get(
+        process.env.REACT_APP_API_URL +
+          `/member/search?id=${userid}&getSanction=true`
+      )
       .then((response) => {
         const userData = response.data.found[0]; // found 배열의 첫 번째 요소
         setUserData(userData);

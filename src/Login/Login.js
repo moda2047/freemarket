@@ -30,7 +30,7 @@ const Login = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const loginAPI = "http://localhost:8000/auth/login";
+    const loginAPI = process.env.REACT_APP_API_URL + "/auth/login";
 
     axios
       .post(

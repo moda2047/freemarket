@@ -31,7 +31,10 @@ function ReviewCreate() {
     console.log(transactionId);
 
     axios
-      .get(`http://localhost:8000/product/searchOne?productId=${productId}`)
+      .get(
+        process.env.REACT_APP_API_URL +
+          `/product/searchOne?productId=${productId}`
+      )
       .then((response) => {
         if (response) {
           const productDetails = response.data.found;
@@ -69,7 +72,7 @@ function ReviewCreate() {
 
       // 서버에 POST 요청 보내기
       const response = await axios.post(
-        "http://localhost:8000/review/write",
+        process.env.REACT_APP_API_URL + "/review/write",
         reviewData,
         {
           headers: {

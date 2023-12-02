@@ -17,7 +17,8 @@ const MyInfoReviewYw = (props) => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8000/review/searchWrittenReview?user_id=${userid}`,
+        process.env.REACT_APP_API_URL +
+          `/review/searchWrittenReview?user_id=${userid}`,
         {
           headers: {
             Authorization: `${token}`,

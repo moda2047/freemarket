@@ -42,7 +42,7 @@ const Memberjoin = (props) => {
   const handleMailAuthentication = (event) => {
     event.preventDefault();
 
-    const mailAuthAPI = "http://localhost:8000/auth/mailAuth";
+    const mailAuthAPI = process.env.REACT_APP_API_URL + "/auth/mailAuth";
 
     axios
       .get(
@@ -90,7 +90,7 @@ const Memberjoin = (props) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    const memberJoinAPI = "http://localhost:8000/member/enroll";
+    const memberJoinAPI = process.env.REACT_APP_API_URL + "/member/enroll";
 
     // 폼 제출 시 호출되는 함수
     if (password !== confirmPassword) {

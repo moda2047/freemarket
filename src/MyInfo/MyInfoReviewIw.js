@@ -18,11 +18,15 @@ const MyInfoReviewIw = (props) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/review/searchWriteReview?user_id=${userid}`, {
-        headers: {
-          Authorization: `${token}`,
-        },
-      })
+      .get(
+        process.env.REACT_APP_API_URL +
+          `/review/searchWriteReview?user_id=${userid}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      )
       .then((response) => {
         const data = response.data.found;
         setData(data);
@@ -75,7 +79,7 @@ const MyInfoReviewIw = (props) => {
       if (reviewIdToDelete) {
         // Call API to delete the review
         axios
-          .delete("http://localhost:8000/review/delete", {
+          .delete(process.env.REACT_APP_API_URL + "/review/delete", {
             headers: {
               Authorization: token,
             },

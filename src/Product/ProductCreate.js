@@ -103,7 +103,7 @@ function ProductCreate() {
       return;
     }
 
-    const productCreateAPI = "http://localhost:8000/product/sell";
+    const productCreateAPI = process.env.REACT_APP_API_URL + "/product/sell";
 
     const formData = new FormData();
 
