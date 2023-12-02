@@ -13,7 +13,8 @@ function ReportMySearchList() {
     setReports(updatedReports);
   };
   const fetchData = async () => {
-    const mailAuthAPI = "http://localhost:8000/report/searchForMember";
+    const mailAuthAPI =
+      process.env.REACT_APP_API_URL + "/report/searchForMember";
     const headers = {
       headers: {
         Authorization: cookies.token,

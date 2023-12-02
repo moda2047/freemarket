@@ -14,7 +14,7 @@ const MyInfoUpdate = (props) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/member/search?id=${userid}`)
+      .get(process.env.REACT_APP_API_URL + `/member/search?id=${userid}`)
       .then((response) => {
         const userData = response.data.found[0];
         setUserData(userData);
@@ -36,7 +36,7 @@ const MyInfoUpdate = (props) => {
       // 수정 중이라면, 서버에 업데이트 요청 보냄
       axios
         .patch(
-          "http://localhost:8000/member/change",
+          process.env.REACT_APP_API_URL + "/member/change",
           {
             id: userData.id,
             password: userData.password,

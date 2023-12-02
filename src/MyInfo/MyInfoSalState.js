@@ -19,11 +19,15 @@ const MyInfoSalState = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/product/searchList?sellerId=${userid}`, {
-        headers: {
-          Authorization: `${token}`,
-        },
-      })
+      .get(
+        process.env.REACT_APP_API_URL +
+          `/product/searchList?sellerId=${userid}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      )
       .then((response) => {
         const data = response.data.found; // found 배열의 첫 번째 요소
         const totalCount = response.data.totalCount;
@@ -58,7 +62,8 @@ const MyInfoSalState = () => {
 
   // product_id 상품 상세 조회한 뒤, 상세 조회 정보를 포함하여 Detail 페이지로 이동
   const navigateProductDetail = (product_id) => {
-    const ProductDetailSearchAPI = "http://localhost:8000/product/searchOne";
+    const ProductDetailSearchAPI =
+      process.env.REACT_APP_API_URL + "/product/searchOne";
 
     axios
       .get(

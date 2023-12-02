@@ -9,7 +9,8 @@ function AdminMemberList() {
   const [searchQuery, setSearchQuery] = useState("");
   const [data, setData] = useState([]);
   const fetchData = async () => {
-    const mailAuthAPI = "http://localhost:8000/sanction/searchForAdmin";
+    const mailAuthAPI =
+      process.env.REACT_APP_API_URL + "/sanction/searchForAdmin";
     const headers = {
       headers: {
         Authorization: cookies.token,
@@ -92,7 +93,9 @@ function AdminMemberList() {
     const userConfirmed = window.confirm("정말로 취소하시겠습니까?");
 
     if (userConfirmed) {
-      const url = `http://localhost:8000/sanction/cancel?sanctionId=${memberId}`;
+      const url =
+        process.env.REACT_APP_API_URL +
+        `/sanction/cancel?sanctionId=${memberId}`;
       const data = {
         sanctionId: memberId,
       };

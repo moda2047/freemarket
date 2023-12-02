@@ -51,7 +51,7 @@ function ProductUpdate() {
   const submit = (e) => {
     e.preventDefault();
 
-    const ProductUpdateAPI = "http://localhost:8000/product/change";
+    const ProductUpdateAPI = process.env.REACT_APP_API_URL + "/product/change";
 
     const formData = new FormData();
 

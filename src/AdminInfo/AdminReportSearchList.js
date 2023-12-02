@@ -19,7 +19,8 @@ function AdminReportSearchList() {
     setReports(updatedReports);
   };
   const fetchData = async () => {
-    const mailAuthAPI = "http://localhost:8000/report/searchForAdmin";
+    const mailAuthAPI =
+      process.env.REACT_APP_API_URL + "/report/searchForAdmin";
     const headers = {
       headers: {
         Authorization: cookies.token,

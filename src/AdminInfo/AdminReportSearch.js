@@ -24,7 +24,7 @@ function AdminReportSearch({
     });
   };
   const handleReportDelete = () => {
-    const url = `http://localhost:8000/report/deleteReply`;
+    const url = process.env.REACT_APP_API_URL + `/report/deleteReply`;
     const data = {
       report_id: reportId,
     };

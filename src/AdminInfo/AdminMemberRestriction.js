@@ -61,7 +61,7 @@ const AdminMemberRestriction = () => {
       expire_at:
         endDate === "permanent" ? "permanent" : moment(endDate).toISOString(),
     };
-    const url = "http://localhost:8000/sanction/impose";
+    const url = process.env.REACT_APP_API_URL + "/sanction/impose";
     const headers = {
       headers: {
         Authorization: cookies.token,

@@ -27,7 +27,7 @@ const AdminSidebar = (props) => {
           </h3>
           <div className="AdminSidebarLevel">
             <div className="AdminSidebarText">
-              <span className="AdminSidebarTextName">이우찬</span>님 안녕하세요!
+              <span className="AdminSidebarTextName">관리자</span>님 안녕하세요!
             </div>
           </div>
         </div>

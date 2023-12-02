@@ -11,7 +11,7 @@ function AdminMemberList() {
   const [searchQuery, setSearchQuery] = useState("");
   const [data, setData] = useState([]);
   const fetchData = async () => {
-    const mailAuthAPI = "http://localhost:8000/member/search";
+    const mailAuthAPI = process.env.REACT_APP_API_URL + "/member/search";
     const headers = {
       headers: {
         Authorization: cookies.token,

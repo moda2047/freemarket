@@ -20,7 +20,7 @@ const AdminReportAnswer = () => {
       report_id: reportId,
       content: context,
     };
-    const url = "http://localhost:8000/report/reply";
+    const url = process.env.REACT_APP_API_URL + "/report/reply";
     const headers = {
       headers: {
         Authorization: cookies.token,

@@ -12,7 +12,7 @@ function ReportWrite() {
       title: title,
       content: content,
     };
-    const url = "http://localhost:8000/report/register";
+    const url = process.env.REACT_APP_API_URL + "/report/register";
     const headers = {
       headers: {
         Authorization: cookies.token,

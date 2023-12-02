@@ -29,7 +29,8 @@ function ProductCard({ product }) {
   const [rating, setRating] = useState(0);
 
   const viewProductDetail = () => {
-    const ProductDetailSearchAPI = "http://localhost:8000/product/searchOne";
+    const ProductDetailSearchAPI =
+      process.env.REACT_APP_API_URL + "/product/searchOne";
 
     axios
       .get(
@@ -72,7 +73,7 @@ function ProductCard({ product }) {
       return;
     }
 
-    const AddWishlistAPI = "http://localhost:8000/wishList/add";
+    const AddWishlistAPI = process.env.REACT_APP_API_URL + "/wishList/add";
 
     axios
       .post(
@@ -109,7 +110,7 @@ function ProductCard({ product }) {
     const data = {
       productId: productId,
     };
-    const url = "http://localhost:8000/chat/enterChatRoom";
+    const url = process.env.REACT_APP_API_URL + "/chat/enterChatRoom";
     const headers = {
       headers: {
         Authorization: cookies.token,
