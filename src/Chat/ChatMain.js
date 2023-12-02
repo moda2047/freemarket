@@ -7,6 +7,7 @@ import "./ChatMain.css"; // CSS 파일 가져오기
 function ChatMain(props) {
   const [selectedChatId, setSelectedChatId] = useState(null);
   const [selectedChatData, setSelectedChatData] = useState(null); // 선택한 채팅 데이터 상태 추가
+  const [newestChatRoom, setNewestChatRoom] = useState(null);
   const location = useLocation();
   const chatDataFromProductDetail = location.state
     ? location.state.chatData
@@ -32,11 +33,16 @@ function ChatMain(props) {
             onChatItemClick={handleChatItemClick}
             setSelectedChatId={setSelectedChatId}
             setSelectedChatData={setSelectedChatData} // Chat 데이터 설정 함수 전달
+            newestChatRoom={newestChatRoom}
           />
         </div>
         <div className="ChatMainMajorWrap">
           {/* ChatDetail에 selectedChatId 및 선택된 채팅 데이터 전달 */}
-          <ChatDetail chatRoomId={selectedChatId} chat={selectedChatData} />
+          <ChatDetail
+            chatRoomId={selectedChatId}
+            chat={selectedChatData}
+            setNewestChatRoom={setNewestChatRoom}
+          />
         </div>
       </div>
     </>
