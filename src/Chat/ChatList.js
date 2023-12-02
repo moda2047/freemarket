@@ -6,9 +6,9 @@ import io from "socket.io-client";
 const ChatList = ({ onChatItemClick, setSelectedChatId, newestChatRoom }) => {
   const [cookies] = useCookies(["token", "userid"]);
   const [chatRooms, setChatRooms] = useState([]);
-  const [unread, setUnread] = useState({chatRoomId: 0, count: 0});
+  const [unread, setUnread] = useState({ chatRoomId: 0, count: 0 });
   const token = cookies.token;
-  const chatRoomListAPI = "http://localhost:8000/chatRoomList";
+  const chatRoomListAPI = process.env.REACT_APP_API_URL + "/chatRoomList";
   let chatListSocket;
 
   useEffect(() => {
@@ -33,7 +33,10 @@ const ChatList = ({ onChatItemClick, setSelectedChatId, newestChatRoom }) => {
 
     chatListSocket.on("unread", (unreadInfo) => {
       console.log("읽지 않은 메시지:", unreadInfo);
-      setUnread({chatRoomId: unreadInfo.chat_room_id, count: unreadInfo.count});
+      setUnread({
+        chatRoomId: unreadInfo.chat_room_id,
+        count: unreadInfo.count,
+      });
     });
 
     chatListSocket.on("newChatRoom", (data) => {
@@ -67,13 +70,14 @@ const ChatList = ({ onChatItemClick, setSelectedChatId, newestChatRoom }) => {
       (chatRoom) => chatRoom.id === targetId
     );
 
-    if (raiseIdx === -1) { return; }
+    if (raiseIdx === -1) {
+      return;
+    }
 
     const updatedChatRooms = [...chatRooms];
     if (updatedChatRooms[raiseIdx].seller_id === cookies.userid) {
       updatedChatRooms[raiseIdx].chat_room.seller_unread = count;
-    }
-    else if (updatedChatRooms[raiseIdx].buyer_id === cookies.userid) {
+    } else if (updatedChatRooms[raiseIdx].buyer_id === cookies.userid) {
       updatedChatRooms[raiseIdx].chat_room.buyer_unread = count;
     }
 
@@ -84,12 +88,10 @@ const ChatList = ({ onChatItemClick, setSelectedChatId, newestChatRoom }) => {
     const chatToRaise = updatedChatRooms.splice(raiseIdx, 1)[0];
     updatedChatRooms.unshift(chatToRaise);
     setChatRooms(updatedChatRooms);
-  }
+  };
 
   const raiseChatRoom = (roomId) => {
-    const raiseIdx = chatRooms.findIndex(
-      (chatRoom) => chatRoom.id === roomId
-    );
+    const raiseIdx = chatRooms.findIndex((chatRoom) => chatRoom.id === roomId);
     if (raiseIdx < 1) return;
     const updatedChatRooms = [...chatRooms];
     const chatToRaise = updatedChatRooms.splice(raiseIdx, 1)[0];
@@ -98,20 +100,17 @@ const ChatList = ({ onChatItemClick, setSelectedChatId, newestChatRoom }) => {
   };
 
   const readChatRoom = (roomId) => {
-    const raiseIdx = chatRooms.findIndex(
-      (chatRoom) => chatRoom.id === roomId
-    );
+    const raiseIdx = chatRooms.findIndex((chatRoom) => chatRoom.id === roomId);
 
     const updatedChatRooms = [...chatRooms];
     if (updatedChatRooms[raiseIdx].seller_id === cookies.userid) {
       updatedChatRooms[raiseIdx].chat_room.seller_unread = 0;
-    }
-    else if (updatedChatRooms[raiseIdx].buyer_id === cookies.userid) {
+    } else if (updatedChatRooms[raiseIdx].buyer_id === cookies.userid) {
       updatedChatRooms[raiseIdx].chat_room.buyer_unread = 0;
     }
 
     setChatRooms(updatedChatRooms);
-  }
+  };
 
   const handleChatClick = (chatId, chat) => {
     setSelectedChatId(chatId); // 클릭한 채팅의 ID를 설정
@@ -149,7 +148,9 @@ const ChatList = ({ onChatItemClick, setSelectedChatId, newestChatRoom }) => {
             </h2>
             <div className="chat-list-item-box">
               <p id="opponent_id">{`상대방: ${getOtherUserID(chat)}`}</p>
-              {check(chat) < 1 ? null : <p id="unread_message">{`${check(chat)}`}</p>}
+              {check(chat) < 1 ? null : (
+                <p id="unread_message">{`${check(chat)}`}</p>
+              )}
             </div>
 
             <button

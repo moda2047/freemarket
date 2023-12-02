@@ -23,7 +23,8 @@ const ChatDetail = ({ chatRoomId, chat, setNewestChatRoom }) => {
   useEffect(() => {
     if (_.isNull(chatRoomId)) return;
 
-    const mailAuthAPI = `http://localhost:8000/chatRoom?chatRoomId=${chatRoomId}`;
+    const mailAuthAPI =
+      process.env.REACT_APP_API_URL + `/chatRoom?chatRoomId=${chatRoomId}`;
     const token = cookies.token;
 
     console.log("api", mailAuthAPI);
@@ -73,7 +74,7 @@ const ChatDetail = ({ chatRoomId, chat, setNewestChatRoom }) => {
       const data = {
         chatRoomId: chatRoomId,
       };
-      const url = `http://localhost:8000/chat/confirmTransaction`;
+      const url = process.env.REACT_APP_API_URL + `/chat/confirmTransaction`;
       const headers = {
         headers: {
           Authorization: cookies.token,
@@ -87,7 +88,7 @@ const ChatDetail = ({ chatRoomId, chat, setNewestChatRoom }) => {
         .then((response) => {
           console.log(response);
           if (response.data.result) {
-            window.alert("구매가 확정되었습니다.");
+            window.alert("거래가 확정되었습니다.");
             console.log(response.data.message);
           } else {
             window.alert(response.data.message);
@@ -95,8 +96,8 @@ const ChatDetail = ({ chatRoomId, chat, setNewestChatRoom }) => {
           }
         })
         .catch((error) => {
-          window.alert("상품 구매 확정 중 오류.");
-          console.error("상품 구매 확정 중 오류", error);
+          window.alert("상품 거래 확정 중 오류.");
+          console.error("상품 거래 확정 중 오류", error);
         });
     }
   };
@@ -163,7 +164,7 @@ const ChatDetail = ({ chatRoomId, chat, setNewestChatRoom }) => {
           <>
             <h2>{chat.product.title}</h2>
             <p>판매자: {chat.seller_id}</p>
-            <button onClick={handleConfirmPurchase}>구매확정</button>
+            <button onClick={handleConfirmPurchase}>거래확정</button>
           </>
         ) : (
           <>

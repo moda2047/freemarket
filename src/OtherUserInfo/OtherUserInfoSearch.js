@@ -87,7 +87,7 @@ const OtherUserInfoSearch = (props) => {
           navigate("/ChatMain", { state: { chatData: response.data } });
           console.log(response.data.message);
         } else {
-          navigate("/ChatMain", { state: { chatData: response.data } });
+          window.alert("본인과 채팅은 하실 수 없습니다.");
           console.log(response.data.message);
         }
       })
