@@ -7,7 +7,7 @@ import ReportMySearch from "./ReportMySearch.js";
 function ReportMySearchList() {
   const [cookies] = useCookies(["token"]);
   const [reports, setReports] = useState([]);
-
+  const [data, setData] = useState([]);
   const handleReportDelete = (reportId) => {
     const updatedReports = reports.filter((report) => report.id !== reportId);
     setReports(updatedReports);
@@ -28,8 +28,10 @@ function ReportMySearchList() {
       .then((response) => {
         console.log("API 응답 데이터: ", response.data);
         if (response.data.result) {
+          const data = response.data.found;
           const foundArray = response.data.found;
           setReports(foundArray);
+          setData(data);
           setTotalCount(response.data.totalCount);
           console.log("성공적으로 됐");
         } else {
@@ -58,14 +60,26 @@ function ReportMySearchList() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   useEffect(() => {
+    // Calculate the maximum page based on data length and itemsPerPage
+    const maxPage = Math.ceil(data.length / itemsPerPage);
+
     // Ensure currentPage is within a valid range
-    if (currentPage < 1) {
-      setCurrentPage(1);
+    if (currentPage < 1 || currentPage > maxPage) {
+      setCurrentPage((prevPage) => Math.min(Math.max(prevPage, 1), maxPage));
     }
-    if (currentPage > Math.ceil(totalCount / itemsPerPage)) {
-      setCurrentPage(Math.ceil(totalCount / itemsPerPage));
+    console.log(currentPage);
+  }, [currentPage, data.length, itemsPerPage]);
+
+  useEffect(() => {
+    // Calculate the maximum page based on data length and itemsPerPage
+    const maxPage = Math.ceil(data.length / itemsPerPage);
+
+    // Ensure currentPage is within a valid range
+    if (currentPage < 1 || currentPage > maxPage) {
+      setCurrentPage((prevPage) => Math.min(Math.max(prevPage, 1), maxPage));
     }
-  }, [currentPage, totalCount]);
+    console.log(currentPage);
+  }, [currentPage, data.length, itemsPerPage]);
 
   const prevPage = () => {
     setCurrentPage(currentPage - 1);

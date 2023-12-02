@@ -148,7 +148,7 @@ const ChatList = ({ onChatItemClick, setSelectedChatId, newestChatRoom }) => {
             </h2>
             <div className="chat-list-item-box">
               <p id="opponent_id">{`상대방: ${getOtherUserID(chat)}`}</p>
-              <p id="unread_message">{`${check(chat)}`}</p>
+              {check(chat) < 1 ? null : <p id="unread_message">{`${check(chat)}`}</p>}
             </div>
 
             <button

@@ -4,7 +4,7 @@ import io from "socket.io-client";
 import "./ChatDetail.css";
 import axios from "axios";
 
-const ChatDetail = ({ chatRoomId, chat }) => {
+const ChatDetail = ({ chatRoomId, chat, setNewestChatRoom }) => {
   const [cookies] = useCookies(["token", "userid"]);
   const myID = cookies.userId || "";
   const [newMessage, setNewMessage] = useState("");
@@ -121,6 +121,7 @@ const ChatDetail = ({ chatRoomId, chat }) => {
         socket.emit("chat", newMessageData);
         setNewMessage("");
         console.log("data 전송이 완료됨.", newMessageData);
+        setNewestChatRoom(chatRoomId);
       } else {
         console.error("메시지가 비어 있습니다.");
       }

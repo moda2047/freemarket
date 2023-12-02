@@ -26,7 +26,6 @@ const MyInfoMain = (props) => {
   return (
     <>
       <div className="MyInfoMainWrap">
-        <div className="MyInfoHeader"></div>
         <div className="MyInfoMainSidebarContainer">
           <MyInfoSidebar activeTab={activeTab} onTabClick={handleTabClick} />
         </div>
