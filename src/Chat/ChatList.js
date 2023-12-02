@@ -46,7 +46,8 @@ const ChatList = ({ onChatItemClick, setSelectedChatId, newestChatRoom }) => {
     });
 
     return () => {
-      chatListSocket.removeAllListeners();
+      chatListSocket.disconnect();
+      console.log("채팅방 목록 소켓 연결이 해제되었습니다.");
     };
   }, []);
 

@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import _ from "lodash";
 import io from "socket.io-client";
 import "./ChatDetail.css";
 import axios from "axios";
@@ -20,14 +21,19 @@ const ChatDetail = ({ chatRoomId, chat, setNewestChatRoom }) => {
   };
 
   useEffect(() => {
+    if (_.isNull(chatRoomId)) return;
+
     const mailAuthAPI = `http://localhost:8000/chatRoom?chatRoomId=${chatRoomId}`;
     const token = cookies.token;
 
+    console.log("api", mailAuthAPI);
     const newSocket = io(mailAuthAPI, {
       extraHeaders: {
         Authorization: token,
       },
     });
+
+    newSocket.connect();
 
     newSocket.on("connect_error", (error) => {
       console.error("소켓 연결 에러:", error);
@@ -38,7 +44,10 @@ const ChatDetail = ({ chatRoomId, chat, setNewestChatRoom }) => {
       setSocket(newSocket);
     });
 
-    newSocket.emit("chatMessages", { chatRoomId });
+    newSocket.on("newMessage", (newMessage) => {
+      console.log("새로운 메시지 도착:", newMessage);
+      setChatData((prevChatData) => [...prevChatData, newMessage]);
+    });
 
     newSocket.on("chatMessages", (data) => {
       console.log("이전 채팅 메시지들:", data);
@@ -46,8 +55,8 @@ const ChatDetail = ({ chatRoomId, chat, setNewestChatRoom }) => {
     });
 
     return () => {
-      console.log("채팅방 소켓 연결이 해제되었습니다.");
       newSocket.disconnect();
+      console.log("채팅방 소켓 연결이 해제되었습니다.");
     };
   }, [chatRoomId, cookies.token]);
 
@@ -91,6 +100,7 @@ const ChatDetail = ({ chatRoomId, chat, setNewestChatRoom }) => {
         });
     }
   };
+
   const getFormattedDate = () => {
     const now = new Date();
     const year = now.getFullYear();
@@ -102,46 +112,29 @@ const ChatDetail = ({ chatRoomId, chat, setNewestChatRoom }) => {
 
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   };
+
   const handleSendMessage = () => {
-    if (socket) {
-      if (newMessage.trim() !== "") {
-        const newMessageData = {
-          message: newMessage,
-        };
-        const newMessageData2 = {
-          content: newMessage,
-          sender_id: cookies.userid,
-          createdAt: getFormattedDate(),
-          unread: 1,
-        };
+    if (!socket) return console.error("소켓 연결이 이루어지지 않았습니다.");
 
-        // Show the user's message on the screen before sending
-        setChatData((prevChatData) => [...prevChatData, newMessageData2]);
+    if (newMessage.trim() === "")
+      return console.error("메시지가 비어 있습니다.");
 
-        socket.emit("chat", newMessageData);
-        setNewMessage("");
-        console.log("data 전송이 완료됨.", newMessageData);
-        setNewestChatRoom(chatRoomId);
-      } else {
-        console.error("메시지가 비어 있습니다.");
-      }
-    } else {
-      console.error("소켓 연결이 이루어지지 않았습니다.");
-    }
+    const newMessageData = {
+      message: newMessage,
+    };
+
+    // // Show the user's message on the screen before sending
+    // setChatData((prevChatData) => [...prevChatData, newMessageData2]);
+    socket.timeout(100).emit("chat", newMessageData);
+    setNewMessage("");
+    console.log("data 전송이 완료됨.", newMessageData);
+    setNewestChatRoom(chatRoomId);
   };
-
-  useEffect(() => {
-    if (socket) {
-      socket.on("newMessage", (newMessage) => {
-        console.log("새로운 메시지 도착:", newMessage);
-        setChatData((prevChatData) => [...prevChatData, newMessage]);
-      });
-    }
-  }, [socket]);
 
   useEffect(() => {
     scrollToBottom();
   }, [chatData]);
+
   const formatReceivedDate = (isoDate) => {
     const date = new Date(isoDate);
     const formattedDate = date.toLocaleString("en-US", {
