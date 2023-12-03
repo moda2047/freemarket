@@ -166,7 +166,7 @@ function ProductDetail({ props }) {
         }
       })
       .catch((error) => {
-        window.alert("채팅방 생성 중 오류.");
+        window.alert(error);
         console.error("채팅방 생성 중 오류", error);
       });
   };

@@ -12,14 +12,18 @@ function LogoutHeader(props) {
 
   const handleSearch = (e) => {
     const form = {
-      keyword: query
+      keyword: query,
     };
 
-    navigate("/ProductListSearch?Keyword="+`${query}`, {state: form})
+    navigate("/ProductListSearch?Keyword=" + `${query}`, { state: form });
   };
 
   /* 로그인 안했을 시 로그인으로 넘어가도록 해야함 */
-
+  const handleOnKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch(); // Enter 입력이 되면 클릭 이벤트 실행
+    }
+  };
   return (
     <div className="logoutHeader">
       <div className="logoutHeader-top">
@@ -52,6 +56,7 @@ function LogoutHeader(props) {
                 name="query"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                onKeyPress={handleOnKeyPress}
               />
               <button type="submit" onClick={handleSearch}>
                 <img src="./image/search-icon.png" alt="img"></img>

@@ -24,7 +24,11 @@ function LoginHeader() {
 
     navigate("/ProductListSearch?Keyword=" + `${query}`, { state: form });
   };
-
+  const handleOnKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch(); // Enter 입력이 되면 클릭 이벤트 실행
+    }
+  };
   return (
     <div className="loginHeader">
       <div className="loginHeader-top">
@@ -57,6 +61,7 @@ function LoginHeader() {
                 name="query"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                onKeyPress={handleOnKeyPress}
               />
               <button type="submit" onClick={handleSearch}>
                 <img src="./image/search-icon.png" alt="img"></img>
