@@ -47,6 +47,7 @@ const PasswordChange = (props) => {
       .then((response) => {
         if (response.status === 200) {
           // 서버 응답이 성공인 경우
+          window.alert("이메일 인증 코드가 발송되었습니다.");
           console.log("이메일 인증 코드를 성공적으로 받아왔습니다.");
           // 서버에서 받은 인증 코드를 저장
           setResToken(response.data.authNum);
