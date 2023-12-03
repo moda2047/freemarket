@@ -136,8 +136,8 @@ function ProductCreate() {
         }
       })
       .catch((error) => {
-        console.error("오류 :", error);
-        window.alert("오류");
+        window.alert(error.response.data.message);
+        console.error(error.response.data.message);
       });
   };
 
