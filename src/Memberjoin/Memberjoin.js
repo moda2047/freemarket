@@ -90,6 +90,8 @@ const Memberjoin = (props) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
+    setEmailId(emailId + "@kumoh.ac.kr");
+
     const memberJoinAPI = process.env.REACT_APP_API_URL + "/member/enroll";
 
     // 폼 제출 시 호출되는 함수
@@ -128,15 +130,13 @@ const Memberjoin = (props) => {
       return;
     }
 
-    setEmail(emailId + "@kumoh.ac.kr");
-
     axios
       .post(
         memberJoinAPI,
         {
           id: id,
           password: password,
-          email: email,
+          email: emailId,
           name: name,
           mobile: phoneNumber.replace(/-/g, ""),
         },
