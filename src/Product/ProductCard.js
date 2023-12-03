@@ -129,13 +129,13 @@ function ProductCard({ product }) {
           navigate("/ChatMain", { state: { chatData: response.data } });
           console.log(response.data.message);
         } else {
-          window.alert("본인과 채팅은 하실 수 없습니다.");
+          window.alert(response.data.message);
           console.log(response.data.message);
         }
       })
       .catch((error) => {
-        window.alert("채팅방 생성 중 오류.");
-        console.error("채팅방 생성 중 오류", error);
+        window.alert(error.response.data.message);
+        console.error(error.response.data.message);
       });
   };
   return (
