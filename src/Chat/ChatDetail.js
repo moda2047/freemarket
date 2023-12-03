@@ -21,8 +21,6 @@ const ChatDetail = ({ chatRoomId, chat, setNewestChatRoom }) => {
   };
 
   useEffect(() => {
-    if (_.isNull(chatRoomId)) return;
-
     const mailAuthAPI =
       process.env.REACT_APP_API_URL + `/chatRoom?chatRoomId=${chatRoomId}`;
     const token = cookies.token;
@@ -33,8 +31,6 @@ const ChatDetail = ({ chatRoomId, chat, setNewestChatRoom }) => {
         Authorization: token,
       },
     });
-
-    newSocket.connect();
 
     newSocket.on("connect_error", (error) => {
       console.error("소켓 연결 에러:", error);
