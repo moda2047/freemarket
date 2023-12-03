@@ -20,9 +20,50 @@ const PasswordChange = (props) => {
     setConfirmPassword(newConfirmPassword);
     setPasswordMatch(password === newConfirmPassword);
   };
-
+  const [resToken, setResToken] = useState(0);
+  const [tokenMatch, setTokenMatch] = useState(false);
   const handleTokenVerification = () => {
-    //메일 토큰 인증 코드 작성부분
+    if (token.value === resToken.value) {
+      // 입력한 값과 요청시 수신한 값 비교
+      window.alert("인증번호가 일치합니다.");
+      setTokenMatch(true);
+    } else {
+      window.alert("인증번호가 일치하지 않습니다.");
+      setTokenMatch(false);
+    }
+  };
+
+  const handleEmailAuth = () => {
+    // 이메일과 아이디를 입력하지 않았을 경우 예외처리
+    if (!email || !id) {
+      alert("이메일과 아이디를 입력하세요.");
+      return;
+    }
+
+    // 서버로 이메일 인증 요청 보내기
+    fetch(
+      `${process.env.REACT_APP_API_URL}/auth/mailAuthChangePw?id=${id}&emailId=${email}`
+    )
+      .then((response) => {
+        if (response.status === 200) {
+          // 서버 응답이 성공인 경우
+          console.log("이메일 인증 코드를 성공적으로 받아왔습니다.");
+          // 서버에서 받은 인증 코드를 저장
+          setResToken(response.data.authNum);
+          return response.json();
+        } else {
+          console.error("서버 응답이 실패했습니다.");
+          throw new Error("이메일 인증 코드를 받아오는 데 실패했습니다.");
+        }
+      })
+      .then((data) => {
+        // 서버에서 받은 데이터를 처리
+        // 여기서 data에는 서버에서 받은 JSON 데이터가 포함됩니다.
+        console.log("서버에서 받은 데이터:", data);
+      })
+      .catch((error) => {
+        console.error("이메일 인증 코드 요청 중 오류 발생:", error);
+      });
   };
 
   const handleFormSubmit = () => {
@@ -32,7 +73,10 @@ const PasswordChange = (props) => {
       console.log("비밀번호가 일치하지 않습니다.");
       return;
     }
-
+    if (!tokenMatch) {
+      console.log("인증번호 확인을 완료해주세요.");
+      return;
+    }
     // 데이터를 서버로 전송
     fetch(process.env.REACT_APP_API_URL + "/member/changePw", {
       method: "PATCH",
@@ -47,6 +91,7 @@ const PasswordChange = (props) => {
       .then((response) => {
         if (response.status === 200) {
           // 서버 응답이 성공인 경우
+          window.alert("비밀번호 변경이 완료되었습니다.");
           console.log("비밀번호 변경이 완료되었습니다.");
         } else {
           console.error("서버 응답이 실패했습니다.");
@@ -99,11 +144,20 @@ const PasswordChange = (props) => {
                         onChange={(e) => {
                           setEmail(e.target.value);
                         }}
-                        disabled
                       />
                     </td>
                     <td>
-                      <button className="emailAuthBtn">이메일 인증</button>
+                      <input
+                        style={{ float: "left", width: "90px" }}
+                        value="@kumoh.ac.kr"
+                        disabled
+                      />
+                      <button
+                        className="emailAuthBtn"
+                        onClick={handleEmailAuth}
+                      >
+                        이메일 인증
+                      </button>
                     </td>
                   </tr>
                   <tr>
@@ -116,7 +170,6 @@ const PasswordChange = (props) => {
                         placeholder="인증 코드"
                         value={token}
                         onChange={(e) => setToken(e.target.value)}
-                        disabled
                       />
                     </td>
                     <td>
