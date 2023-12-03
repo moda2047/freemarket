@@ -166,7 +166,7 @@ function ProductDetail({ props }) {
         }
       })
       .catch((error) => {
-        window.alert(error);
+        window.alert("채팅방 생성 중 오류.");
         console.error("채팅방 생성 중 오류", error);
       });
   };
@@ -227,8 +227,7 @@ function ProductDetail({ props }) {
                   {" "}
                   <h1>{productInfo.title}</h1>{" "}
                 </td>
-                {cookies.author === 1 ||
-                cookies.userid === productInfo.seller_id ? (
+                {cookies.userid === productInfo.seller_id ? (
                   <td>
                     {" "}
                     <Link
@@ -271,6 +270,15 @@ function ProductDetail({ props }) {
                     {" "}
                     찜 등록{" "}
                   </button>
+                  <Link
+                    id="btn-seller_page"
+                    to={{
+                      pathname: "/OtherUserInfoSearch",
+                      search: productInfo.seller_id,
+                    }}
+                  >
+                    판매자 정보
+                  </Link>
                 </td>
               </tr>
             </table>
