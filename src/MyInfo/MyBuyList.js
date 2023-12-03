@@ -27,6 +27,7 @@ const MyBuyList = () => {
         const totalCount = response.data.totalCount;
         setData(data);
         setTotalCount(totalCount);
+        console.log(data[3].review.review_id === "");
       })
       .catch((error) => {
         console.error("데이터 가져오기 실패:", error);
@@ -107,6 +108,12 @@ const MyBuyList = () => {
                             seller_id: item.seller_id,
                             title: item.product.title,
                             transactionId: item.transaction_id,
+                          }}
+                          onClick={(e) => {
+                            if (item.review && item.review.review_id) {
+                              alert("리뷰 작성을 이미 하셨습니다.");
+                              e.preventDefault();
+                            }
                           }}
                         >
                           리뷰쓰기

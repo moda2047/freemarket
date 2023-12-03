@@ -83,7 +83,7 @@ function ReviewCreate() {
 
       // 응답 확인
       console.log(response.data);
-      alert("리뷰 작성을 완료했습니다.");
+      alert(response.data.message);
       navigate("/MyInfoMain");
     } catch (error) {
       console.error("Error submitting review:", error);

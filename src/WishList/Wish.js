@@ -29,11 +29,6 @@ function Wish({ wishInfo, onDelete }) {
 
       <div class="wish-right">
         <div className="wish-delete close" onClick={handleDeleteClick}></div>
-        <div class="wish-chatting">
-          <Link to="/ChatMain">
-            <button> 채팅하기 </button>{" "}
-          </Link>
-        </div>
       </div>
     </div>
   );
